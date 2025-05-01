@@ -12,7 +12,7 @@ func shake(strength: float = 0.1):
 		shake_value(property, get_random_steps(shake_range), strength)
 
 func get_random_steps(range: Vector2i) -> int:
-	return randi_range(shake_range.x, shake_range.y)
+	return randi_range(range.x, range.y)
 
 func shake_value(property_name: String, step_count: int, vector: float = 1.0):
 	var t = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)

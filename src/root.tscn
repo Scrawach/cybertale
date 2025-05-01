@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=7 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="1_pq8q7"]
+[ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="2_pyidc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -14,7 +15,8 @@ background_mode = 2
 sky = SubResource("Sky_pq8q7")
 tonemap_mode = 2
 
-[sub_resource type="BoxMesh" id="BoxMesh_pq8q7"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_pq8q7"]
+size = Vector2(10, 10)
 
 [node name="Root" type="Node"]
 
@@ -27,9 +29,16 @@ shadow_enabled = true
 
 [node name="World3D" type="Node3D" parent="."]
 
-[node name="Camera Point" parent="World3D" instance=ExtResource("1_pq8q7")]
+[node name="Camera Point" parent="World3D" node_paths=PackedStringArray("target") instance=ExtResource("1_pq8q7")]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+target = NodePath("../Hero")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World3D"]
-mesh = SubResource("BoxMesh_pq8q7")
+[node name="Hero" parent="World3D" node_paths=PackedStringArray("camera") instance=ExtResource("2_pyidc")]
+camera = NodePath("../Camera Point")
+
+[node name="Room" type="Node3D" parent="World3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World3D/Room"]
+mesh = SubResource("PlaneMesh_pq8q7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

@@ -6,7 +6,7 @@ extends Node3D
 @onready var camera: Camera3D = $"Camera Length/Camera3D"
 @onready var shaker: CameraShaker = $"Camera Shaker"
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if target == null:
 		return
 	

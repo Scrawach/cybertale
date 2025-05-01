@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://crlg8ydib8anl"]
+
+[ext_resource type="Script" uid="uid://ps2fuefcsyco" path="res://gameplay/hero/hero.gd" id="1_x1143"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pq8q7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_x1143"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pyidc"]
+radius = 0.4
+
+[node name="Hero" type="CharacterBody3D"]
+script = ExtResource("1_x1143")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_pq8q7")
+debug_color = Color(3.60981e-07, 0.6475, 0.209294, 0.42)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CapsuleMesh_pq8q7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442581, -0.463153)
+mesh = SubResource("BoxMesh_x1143")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_pyidc")
+debug_color = Color(0.903751, 0.306747, 0, 0.42)
+
+[node name="Dash Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
