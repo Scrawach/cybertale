@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://byeax7q50kuds"]
+
+[ext_resource type="Texture2D" uid="uid://j4k0h7ijwbpb" path="res://icon.png" id="1_0nmam"]
+[ext_resource type="Script" uid="uid://cgkgqvj4bimsd" path="res://gameplay/hero/coint_pickup_ui.gd" id="1_66aj5"]
+[ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="2_66aj5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0nmam"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Animation" id="Animation_66aj5"]
+resource_name = "pickup"
+length = 0.333337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/Control/TextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.266663, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.7, 1.4), Vector2(1.1, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fbawj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/Control/TextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fbawj"]
+_data = {
+&"RESET": SubResource("Animation_fbawj"),
+&"pickup": SubResource("Animation_66aj5")
+}
+
+[node name="Coint Pickup UI" type="Node3D"]
+script = ExtResource("1_66aj5")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+double_sided = false
+no_depth_test = true
+texture = SubResource("ViewportTexture_0nmam")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+gui_snap_controls_to_pixels = false
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport"]
+libraries = {
+&"": SubResource("AnimationLibrary_fbawj")
+}
+speed_scale = 2.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.5
+offset_top = -41.5
+offset_right = 110.5
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Control" type="Control" parent="SubViewport/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport/HBoxContainer/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(30, 30)
+texture = ExtResource("1_0nmam")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SubViewport/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_66aj5")
+theme_override_font_sizes/font_size = 60
+text = "9"

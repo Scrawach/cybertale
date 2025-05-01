@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var hitbox: Area3D = $Hitbox
 @onready var dash_timer: Timer = $"Dash Timer"
 @onready var health: Health = $Health
+@onready var inventory: Inventory = $Inventory
 
 @onready var attack_cooldown: Timer = $"Attack Cooldown"
 
@@ -88,6 +89,8 @@ func get_movement_input(relative: Node3D) -> Vector3:
 	input = input.rotated(Vector3.UP, relative.global_rotation.y )
 	return input.normalized()
 
+func pickup(item) -> void:
+	inventory.pickup(1)
 
 func _on_hitbox_area_entered(damage: Damage) -> void:
 	if damage == null:

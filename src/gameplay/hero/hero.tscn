@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://crlg8ydib8anl"]
+[gd_scene load_steps=13 format=3 uid="uid://crlg8ydib8anl"]
 
 [ext_resource type="Script" uid="uid://ps2fuefcsyco" path="res://gameplay/hero/hero.gd" id="1_x1143"]
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="2_yer6i"]
 [ext_resource type="PackedScene" uid="uid://cmhrypiiccgbj" path="res://gameplay/common/health_bar.tscn" id="3_14oge"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="4_ftbyr"]
+[ext_resource type="Script" uid="uid://ckv3rciqqcvnf" path="res://gameplay/hero/inventory.gd" id="5_lkv0r"]
+[ext_resource type="PackedScene" uid="uid://byeax7q50kuds" path="res://gameplay/hero/coint_pickup_ui.tscn" id="6_drp30"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
 
@@ -78,5 +80,12 @@ mesh = SubResource("SphereMesh_ftbyr")
 
 [node name="Attack Cooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("5_lkv0r")
+
+[node name="Coint Pickup UI" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("6_drp30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.657655, 0)
+inventory = NodePath("../Inventory")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

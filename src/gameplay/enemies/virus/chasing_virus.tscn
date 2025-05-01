@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkfe7or2qr1ti"]
+[gd_scene load_steps=13 format=3 uid="uid://bkfe7or2qr1ti"]
 
 [ext_resource type="Script" uid="uid://b47jb5u0e2f1m" path="res://gameplay/enemies/virus/virus.gd" id="1_s1dqi"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="2_0etyu"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="4_hetxe"]
 [ext_resource type="PackedScene" uid="uid://cmhrypiiccgbj" path="res://gameplay/common/health_bar.tscn" id="5_hetxe"]
 [ext_resource type="Script" uid="uid://dkkhphqh8vkxx" path="res://gameplay/common/death.gd" id="6_tkedg"]
+[ext_resource type="Script" uid="uid://cma2e03yqef6p" path="res://gameplay/common/death_drop.gd" id="7_kp1x4"]
+[ext_resource type="PackedScene" uid="uid://digo2wt884cud" path="res://gameplay/items/dropped_item.tscn" id="8_54su0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vvh5c"]
 
@@ -77,6 +79,13 @@ script = ExtResource("6_tkedg")
 health = NodePath("../Health")
 body = NodePath("..")
 metadata/_custom_type_script = "uid://dkkhphqh8vkxx"
+
+[node name="DeathDrop" type="Node" parent="." node_paths=PackedStringArray("health", "parent")]
+script = ExtResource("7_kp1x4")
+health = NodePath("../Health")
+parent = NodePath("..")
+drop_template = ExtResource("8_54su0")
+metadata/_custom_type_script = "uid://cma2e03yqef6p"
 
 [connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
 [connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]

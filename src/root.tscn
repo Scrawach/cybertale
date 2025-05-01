@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=12 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="1_pq8q7"]
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="2_pyidc"]
@@ -26,7 +26,10 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 cell_height = 0.02
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pq8q7"]
-size = Vector2(20, 20)
+size = Vector2(50, 50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jnlp7"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
 [node name="Root" type="Node"]
 
@@ -57,6 +60,11 @@ navigation_mesh = SubResource("NavigationMesh_vvh5c")
 mesh = SubResource("PlaneMesh_pq8q7")
 skeleton = NodePath("../..")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="World3D/Room/NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World3D/Room/NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jnlp7")
+
 [node name="Turret" parent="World3D/Room" instance=ExtResource("3_vvh5c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
 
@@ -72,5 +80,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98831, 0, -6.25756)
 
 [node name="Spikes3" parent="World3D/Room" instance=ExtResource("5_jnlp7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01169, 0, -6.25756)
+
+[node name="Shop" type="Node3D" parent="World3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
