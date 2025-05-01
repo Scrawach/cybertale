@@ -11,12 +11,13 @@ ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 sky_material = SubResource("ProceduralSkyMaterial_vho56")
 
 [sub_resource type="Environment" id="Environment_pyidc"]
-background_mode = 2
+background_mode = 1
+background_color = Color(0.146172, 0.229098, 0.27099, 1)
 sky = SubResource("Sky_pq8q7")
 tonemap_mode = 2
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pq8q7"]
-size = Vector2(10, 10)
+size = Vector2(20, 20)
 
 [node name="Root" type="Node"]
 
@@ -29,12 +30,14 @@ shadow_enabled = true
 
 [node name="World3D" type="Node3D" parent="."]
 
-[node name="Camera Point" parent="World3D" node_paths=PackedStringArray("target") instance=ExtResource("1_pq8q7")]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
-target = NodePath("../Hero")
-
 [node name="Hero" parent="World3D" node_paths=PackedStringArray("camera") instance=ExtResource("2_pyidc")]
 camera = NodePath("../Camera Point")
+movement_speed = 8.0
+dash_speed = 25.0
+
+[node name="Camera Point" parent="World3D" node_paths=PackedStringArray("target") instance=ExtResource("1_pq8q7")]
+transform = Transform3D(0.707107, -0.45452, 0.541675, 0, 0.766045, 0.642788, -0.707107, -0.45452, 0.541675, 0, 0, 0)
+target = NodePath("../Hero")
 
 [node name="Room" type="Node3D" parent="World3D"]
 

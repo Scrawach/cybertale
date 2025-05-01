@@ -25,7 +25,7 @@ mesh = SubResource("CapsuleMesh_pq8q7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442581, -0.463153)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442581, 0.536847)
 mesh = SubResource("BoxMesh_x1143")
 
 [node name="Hitbox" type="Area3D" parent="."]
@@ -38,5 +38,5 @@ shape = SubResource("CapsuleShape3D_pyidc")
 debug_color = Color(0.903751, 0.306747, 0, 0.42)
 
 [node name="Dash Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
