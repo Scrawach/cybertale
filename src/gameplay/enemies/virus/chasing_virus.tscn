@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkfe7or2qr1ti"]
+[gd_scene load_steps=11 format=3 uid="uid://bkfe7or2qr1ti"]
 
 [ext_resource type="Script" uid="uid://b47jb5u0e2f1m" path="res://gameplay/enemies/virus/virus.gd" id="1_s1dqi"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="2_0etyu"]
+[ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="3_tdwn7"]
+[ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="4_hetxe"]
+[ext_resource type="PackedScene" uid="uid://cmhrypiiccgbj" path="res://gameplay/common/health_bar.tscn" id="5_hetxe"]
+[ext_resource type="Script" uid="uid://dkkhphqh8vkxx" path="res://gameplay/common/death.gd" id="6_tkedg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vvh5c"]
 
@@ -10,6 +14,9 @@ radius = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jnlp7"]
 radius = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tkedg"]
+radius = 1.0
 
 [node name="Chasing Virus" type="Node3D"]
 script = ExtResource("1_s1dqi")
@@ -43,6 +50,33 @@ debug_color = Color(0.964706, 0, 0, 1)
 
 [node name="Cooldown Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="HitBox" type="Area3D" parent="." node_paths=PackedStringArray("health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("3_tdwn7")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://piwtt8eoedqa"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("SphereShape3D_tkedg")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_hetxe")
+value = 10
+max_value = 10
+metadata/_custom_type_script = "uid://b8hqs1hbipqv7"
+
+[node name="Health Bar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_hetxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+health = NodePath("../Health")
+
+[node name="Death" type="Node" parent="." node_paths=PackedStringArray("health", "body")]
+script = ExtResource("6_tkedg")
+health = NodePath("../Health")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://dkkhphqh8vkxx"
 
 [connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
 [connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]

@@ -17,7 +17,7 @@ func _on_observer_body_exited(body: Node3D) -> void:
 	target = null
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if target == null:
 		return
 	

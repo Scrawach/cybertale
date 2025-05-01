@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgvvgdk5wett8"]
+[gd_scene load_steps=14 format=3 uid="uid://cgvvgdk5wett8"]
 
 [ext_resource type="Script" uid="uid://c6tu0t66dklqx" path="res://gameplay/enemies/turret/turret.gd" id="1_5sm3u"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="2_4qn16"]
+[ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="3_pah8q"]
+[ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="4_fj17f"]
+[ext_resource type="PackedScene" uid="uid://cmhrypiiccgbj" path="res://gameplay/common/health_bar.tscn" id="5_wvp2x"]
+[ext_resource type="Script" uid="uid://dkkhphqh8vkxx" path="res://gameplay/common/death.gd" id="6_6kv0s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5sm3u"]
 size = Vector3(1.27789, 2.26379, 1.22473)
@@ -19,6 +23,9 @@ size = Vector3(1, 1, 23.9816)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5sm3u"]
 size = Vector3(1, 1, 25)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wvp2x"]
+radius = 1.0
 
 [node name="Turret" type="Node3D"]
 script = ExtResource("1_5sm3u")
@@ -77,6 +84,31 @@ mesh = SubResource("BoxMesh_5sm3u")
 [node name="Cooldown Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_pah8q")
+value = 10
+max_value = 10
+
+[node name="HitBox" type="Area3D" parent="." node_paths=PackedStringArray("health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738309, 0)
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("4_fj17f")
+health = NodePath("../Health")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("SphereShape3D_wvp2x")
+
+[node name="Health Bar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_wvp2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+health = NodePath("../Health")
+
+[node name="Death" type="Node" parent="." node_paths=PackedStringArray("health", "body")]
+script = ExtResource("6_6kv0s")
+health = NodePath("../Health")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://dkkhphqh8vkxx"
 
 [connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
 [connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]

@@ -84,6 +84,8 @@ locale/translations=PackedStringArray("res://localization/content/localization.e
 3d_physics/layer_3="hero_hitbox"
 3d_physics/layer_4="enemy_attack"
 3d_physics/layer_5="enemy_observer"
+3d_physics/layer_6="enemy_hitbox"
+3d_physics/layer_7="hero_attack"
 
 [rendering]
 

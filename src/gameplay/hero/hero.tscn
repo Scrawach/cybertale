@@ -1,6 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://crlg8ydib8anl"]
+[gd_scene load_steps=11 format=3 uid="uid://crlg8ydib8anl"]
 
 [ext_resource type="Script" uid="uid://ps2fuefcsyco" path="res://gameplay/hero/hero.gd" id="1_x1143"]
+[ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="2_yer6i"]
+[ext_resource type="PackedScene" uid="uid://cmhrypiiccgbj" path="res://gameplay/common/health_bar.tscn" id="3_14oge"]
+[ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="4_ftbyr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
 
@@ -11,6 +14,13 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pyidc"]
 radius = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_14oge"]
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ftbyr"]
+radius = 1.0
+height = 2.0
 
 [node name="Hero" type="CharacterBody3D"]
 collision_layer = 2
@@ -40,6 +50,33 @@ debug_color = Color(0.903751, 0.306747, 0, 0.42)
 
 [node name="Dash Timer" type="Timer" parent="."]
 wait_time = 0.25
+one_shot = true
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_yer6i")
+value = 100
+max_value = 100
+
+[node name="Health Bar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_14oge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+health = NodePath("../Health")
+
+[node name="HurtBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("4_ftbyr")
+value = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("SphereShape3D_14oge")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HurtBox"]
+visible = false
+mesh = SubResource("SphereMesh_ftbyr")
+
+[node name="Attack Cooldown" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

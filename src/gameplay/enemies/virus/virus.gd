@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	process_state(current_state, delta)
 
 func process_state(state: State, delta: float) -> void:
-	match current_state:
+	match state:
 		State.Idle:
 			pass
 		State.Walking:
@@ -79,7 +79,7 @@ func _on_observer_body_entered(body: Node3D) -> void:
 	target = body
 	switch_to(State.Chasing)
 
-func _on_observer_body_exited(body: Node3D) -> void:
+func _on_observer_body_exited(_body: Node3D) -> void:
 	if not is_endless_chasing:
 		target = null
 		switch_to(State.Idle)
