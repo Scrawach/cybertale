@@ -61,3 +61,10 @@ func get_movement_input(relative: Node3D) -> Vector3:
 	input.z = Input.get_axis("move_forward", "move_backward")
 	input = input.rotated(Vector3.UP, relative.global_rotation.y )
 	return input.normalized()
+
+func _on_hitbox_area_entered(area: Area3D) -> void:
+	print(area)
+	var damage: Damage = area as Damage
+	
+	if damage:
+		print("Hero take %s damage" % damage.value)

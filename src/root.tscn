@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=10 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="1_pq8q7"]
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="2_pyidc"]
+[ext_resource type="PackedScene" uid="uid://cgvvgdk5wett8" path="res://gameplay/enemies/turret/turret.tscn" id="3_vvh5c"]
+[ext_resource type="PackedScene" uid="uid://bkfe7or2qr1ti" path="res://gameplay/enemies/virus/chasing_virus.tscn" id="4_28aoi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -12,9 +14,15 @@ sky_material = SubResource("ProceduralSkyMaterial_vho56")
 
 [sub_resource type="Environment" id="Environment_pyidc"]
 background_mode = 1
-background_color = Color(0.146172, 0.229098, 0.27099, 1)
+background_color = Color(0.274093, 0.40233, 0.46737, 1)
 sky = SubResource("Sky_pq8q7")
+ambient_light_source = 2
 tonemap_mode = 2
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_vvh5c"]
+vertices = PackedVector3Array(-9.5, 0.04, -9.5, -9.5, 0.04, 9.5, 9.5, 0.04, 9.5, 9.5, 0.04, -9.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+cell_height = 0.02
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pq8q7"]
 size = Vector2(20, 20)
@@ -41,7 +49,18 @@ target = NodePath("../Hero")
 
 [node name="Room" type="Node3D" parent="World3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World3D/Room"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="World3D/Room"]
+navigation_mesh = SubResource("NavigationMesh_vvh5c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World3D/Room/NavigationRegion3D"]
 mesh = SubResource("PlaneMesh_pq8q7")
+skeleton = NodePath("../..")
+
+[node name="Turret" parent="World3D/Room" instance=ExtResource("3_vvh5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
+
+[node name="Chasing Virus" parent="World3D/Room" instance=ExtResource("4_28aoi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.598, 0, 0)
+is_endless_chasing = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

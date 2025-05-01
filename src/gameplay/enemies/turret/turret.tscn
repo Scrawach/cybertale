@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgvvgdk5wett8"]
+
+[ext_resource type="Script" uid="uid://c6tu0t66dklqx" path="res://gameplay/enemies/turret/turret.gd" id="1_5sm3u"]
+[ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="2_4qn16"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5sm3u"]
+size = Vector3(1.27789, 2.26379, 1.22473)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pyidc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vvh5c"]
+radius = 10.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_vvh5c"]
+size = Vector3(0.4, 0.4, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4qn16"]
+size = Vector3(1, 1, 23.9816)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5sm3u"]
+size = Vector3(1, 1, 25)
+
+[node name="Turret" type="Node3D"]
+script = ExtResource("1_5sm3u")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00375366, 0.631897, 0.0088501)
+shape = SubResource("BoxShape3D_5sm3u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_pyidc")
+
+[node name="Observer" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Observer"]
+shape = SubResource("SphereShape3D_vvh5c")
+debug_color = Color(0.952941, 0, 0, 0.996078)
+
+[node name="Gun" type="Node3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14567, 0)
+mesh = SubResource("BoxMesh_pyidc")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14567, 0.525781)
+mesh = SubResource("BoxMesh_vvh5c")
+skeleton = NodePath("../..")
+
+[node name="Fire Point" type="Marker3D" parent="Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18073, 1.74527)
+gizmo_extents = 0.58
+
+[node name="Fire Hurt Box" type="Area3D" parent="Gun/Fire Point"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.614238)
+collision_layer = 8
+collision_mask = 4
+input_ray_pickable = false
+script = ExtResource("2_4qn16")
+value = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gun/Fire Point/Fire Hurt Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.4908)
+shape = SubResource("BoxShape3D_4qn16")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gun/Fire Point/Fire Hurt Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.1598)
+mesh = SubResource("BoxMesh_5sm3u")
+
+[node name="Cooldown Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
+[connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]

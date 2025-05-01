@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkfe7or2qr1ti"]
+
+[ext_resource type="Script" uid="uid://b47jb5u0e2f1m" path="res://gameplay/enemies/virus/virus.gd" id="1_s1dqi"]
+[ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="2_0etyu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vvh5c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_28aoi"]
+radius = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jnlp7"]
+radius = 5.0
+
+[node name="Chasing Virus" type="Node3D"]
+script = ExtResource("1_s1dqi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_vvh5c")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Attack Hurt Box" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+disable_mode = 2
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("2_0etyu")
+value = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attack Hurt Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+shape = SubResource("SphereShape3D_28aoi")
+disabled = true
+
+[node name="Observer" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Observer"]
+shape = SubResource("SphereShape3D_jnlp7")
+debug_color = Color(0.964706, 0, 0, 1)
+
+[node name="Cooldown Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
+[connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]
