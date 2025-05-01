@@ -1,0 +1,44 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="cybertale"
+config/description="Game made by 72 hour for Siberian Game Jam."
+config/tags=PackedStringArray("3d", "gamejam", "sibjam")
+run/main_scene="uid://c2g8sgf4l5mlb"
+config/quit_on_go_back=false
+config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/image="uid://bth8w4rcupw66"
+config/icon="uid://j4k0h7ijwbpb"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
+window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/sibjam_export/plugin.cfg")
+
+[internationalization]
+
+locale/translation_remaps={}
+locale/translations=PackedStringArray("res://localization/content/localization.en.translation", "res://localization/content/localization.ru.translation")
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
