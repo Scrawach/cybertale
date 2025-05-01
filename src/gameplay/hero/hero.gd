@@ -55,7 +55,7 @@ func _attack_process() -> void:
 	$HurtBox/MeshInstance3D.visible = true
 	$HurtBox/CollisionShape3D.disabled = false
 	is_attack_processing = true
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.2).timeout
 	is_attack_processing = false
 	$HurtBox/MeshInstance3D.visible = false
 	$HurtBox/CollisionShape3D.disabled = true
