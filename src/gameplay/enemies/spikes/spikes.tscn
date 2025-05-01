@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5aahq5yu7fuu"]
+
+[ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="1_6ed1q"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_l8v81"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vyht1"]
+size = Vector3(2, 1, 2)
+
+[node name="Spikes" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_l8v81")
+
+[node name="Hurt Box" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_6ed1q")
+value = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurt Box"]
+shape = SubResource("BoxShape3D_vyht1")
+debug_color = Color(0.956863, 0, 0, 1)

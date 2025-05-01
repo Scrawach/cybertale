@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=11 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="1_pq8q7"]
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="2_pyidc"]
 [ext_resource type="PackedScene" uid="uid://cgvvgdk5wett8" path="res://gameplay/enemies/turret/turret.tscn" id="3_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://bkfe7or2qr1ti" path="res://gameplay/enemies/virus/chasing_virus.tscn" id="4_28aoi"]
+[ext_resource type="PackedScene" uid="uid://b5aahq5yu7fuu" path="res://gameplay/enemies/spikes/spikes.tscn" id="5_jnlp7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -62,5 +63,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
 [node name="Chasing Virus" parent="World3D/Room" instance=ExtResource("4_28aoi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.598, 0, 0)
 is_endless_chasing = true
+
+[node name="Spikes" parent="World3D/Room" instance=ExtResource("5_jnlp7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98831, 0, -6.25756)
+
+[node name="Spikes2" parent="World3D/Room" instance=ExtResource("5_jnlp7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98831, 0, -6.25756)
+
+[node name="Spikes3" parent="World3D/Room" instance=ExtResource("5_jnlp7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01169, 0, -6.25756)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
