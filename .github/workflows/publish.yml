@@ -1,0 +1,58 @@
+name: "Publish"
+on: push
+
+env:
+  GODOT_VERSION: 4.4.1
+  EXPORT_NAME: ${{ vars.PROJECT_NAME }}
+  PROJECT_PATH: ${{ vars.PROJECT_PATH }}
+
+jobs:
+  export:
+    strategy:
+      matrix:
+        include:
+          - targetPlatform: windows
+            exportName: Windows Desktop
+            exportFile: $EXPORT_NAME.exe
+            
+          - targetPlatform: linux
+            exportName: Linux
+            exportFile: $EXPORT_NAME.x86_64
+            
+          - targetPlatform: web
+            exportName: Web
+            exportFile: index.html
+
+    runs-on: ubuntu-22.04 
+    name: Publish ${{ matrix.targetPlatform }} build
+    container:
+       image: barichello/godot-ci:4.4.1
+
+    steps:
+       - name: Checkout
+         uses: actions/checkout@v4
+         with:
+           lfs: true
+       
+       - name: Setup
+         run: |
+           mkdir -v -p ~/.local/share/godot/export_templates/
+           mkdir -v -p ~/.config/
+           mv /root/.config/godot ~/.config/godot
+           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+       
+       - name: ${{ matrix.exportName }} Build
+         run: |
+           mkdir -v -p build/${{ matrix.targetPlatform }}
+           EXPORT_DIR="$(readlink -f build)"
+           cd $PROJECT_PATH
+           godot --headless --verbose --export-release "${{ matrix.exportName }}" "$EXPORT_DIR/${{ matrix.targetPlatform }}/${{ matrix.exportFile }}"
+
+       - name: Publish on Itch
+         uses: manleydev/butler-publish-itchio-action@master
+         env:
+           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+           CHANNEL: ${{ matrix.targetPlatform }}
+           ITCH_GAME: ${{ vars.ITCH_PROJECT }}
+           ITCH_USER: ${{ vars.ITCH_USERNAME }}
+           PACKAGE: build/${{ matrix.targetPlatform }}
