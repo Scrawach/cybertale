@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="4_ftbyr"]
 [ext_resource type="Script" uid="uid://ckv3rciqqcvnf" path="res://gameplay/hero/inventory.gd" id="5_lkv0r"]
 [ext_resource type="PackedScene" uid="uid://byeax7q50kuds" path="res://gameplay/hero/coint_pickup_ui.tscn" id="6_drp30"]
-[ext_resource type="PackedScene" uid="uid://cje1y7u1oubc5" path="res://gameplay/hero/blocking_sword.blend" id="7_ygv0y"]
+[ext_resource type="PackedScene" uid="uid://dlm44l7nqss2b" path="res://gameplay/hero/blocking_sword.glb" id="7_ygv0y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
 

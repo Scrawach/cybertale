@@ -22,19 +22,21 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("attack") and attack_cooldown.is_stopped():
+		_attack_process()
+	
+	if is_attack_processing:
+		return
+	
 	if Input.is_action_just_pressed("dash") and not is_dash:
 		_start_dash()
 	
 	if not is_dash:
-		if Input.is_action_just_pressed("attack") and attack_cooldown.is_stopped():
-			_attack_process()
-			
 		_movement_process(delta)
 	else:
 		_dash_process(delta)
 	
-	if not is_attack_processing:
-		_rotation_process(delta)
+	_rotation_process(delta)
 
 func _rotation_process(delta: float) -> void:
 	if not Vector2(velocity.z, velocity.x).is_zero_approx():
