@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=11 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
+[ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box.tscn" id="3_28aoi"]
 [ext_resource type="Script" uid="uid://d35nxihjtikcy" path="res://localization/language_option.gd" id="11_gd4vy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
@@ -12,14 +13,24 @@ ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 sky_material = SubResource("ProceduralSkyMaterial_vho56")
 
 [sub_resource type="Environment" id="Environment_pyidc"]
+background_mode = 1
 sky = SubResource("Sky_pq8q7")
+ambient_light_source = 2
+ambient_light_color = Color(0.217697, 0.283275, 0.364416, 1)
 tonemap_mode = 2
 glow_enabled = true
+glow_intensity = 1.0
+glow_bloom = 0.1
 fog_light_color = Color(0.053457, 0.129716, 0.163795, 1)
 fog_density = 0.03
 
 [sub_resource type="BoxMesh" id="BoxMesh_pq8q7"]
 size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vvh5c"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.1053, 0.12012, 0.13, 1)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pq8q7"]
 data = PackedVector3Array(-25, 0.5, 25, 25, 0.5, 25, -25, -0.5, 25, 25, 0.5, 25, 25, -0.5, 25, -25, -0.5, 25, 25, 0.5, -25, -25, 0.5, -25, 25, -0.5, -25, -25, 0.5, -25, -25, -0.5, -25, 25, -0.5, -25, 25, 0.5, 25, 25, 0.5, -25, 25, -0.5, 25, 25, 0.5, -25, 25, -0.5, -25, 25, -0.5, 25, -25, 0.5, -25, -25, 0.5, 25, -25, -0.5, -25, -25, 0.5, 25, -25, -0.5, 25, -25, -0.5, -25, 25, 0.5, 25, -25, 0.5, 25, 25, 0.5, -25, -25, 0.5, 25, -25, 0.5, -25, 25, 0.5, -25, -25, -0.5, 25, 25, -0.5, 25, -25, -0.5, -25, 25, -0.5, 25, 25, -0.5, -25, -25, -0.5, -25)
@@ -53,6 +64,7 @@ sky_mode = 1
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World3D/Test Scene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_pq8q7")
+surface_material_override/0 = SubResource("StandardMaterial3D_vvh5c")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="World3D/Test Scene/MeshInstance3D"]
 
@@ -64,6 +76,24 @@ camera = NodePath("../Camera Point")
 
 [node name="Camera Point" parent="World3D/Test Scene" node_paths=PackedStringArray("target") instance=ExtResource("2_28aoi")]
 target = NodePath("../Hero")
+
+[node name="Box" parent="World3D/Test Scene" instance=ExtResource("3_28aoi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -5)
+
+[node name="Box2" parent="World3D/Test Scene" instance=ExtResource("3_28aoi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="Box3" parent="World3D/Test Scene" instance=ExtResource("3_28aoi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5)
+
+[node name="Box4" parent="World3D/Test Scene" instance=ExtResource("3_28aoi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="Box5" parent="World3D/Test Scene" instance=ExtResource("3_28aoi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="Box6" parent="World3D/Test Scene" instance=ExtResource("3_28aoi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -8)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

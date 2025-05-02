@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://crlg8ydib8anl"]
+[gd_scene load_steps=27 format=3 uid="uid://crlg8ydib8anl"]
 
 [ext_resource type="Script" uid="uid://ps2fuefcsyco" path="res://gameplay/hero/hero.gd" id="1_x1143"]
+[ext_resource type="PackedScene" uid="uid://dqpbotjwi8ltd" path="res://gameplay/hero/hit/hit_vfx.tscn" id="2_btuvy"]
 [ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="2_ryoj4"]
 [ext_resource type="PackedScene" uid="uid://dgreagijn6w2o" path="res://gameplay/hero/models/hero_base.tscn" id="2_smhnq"]
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="2_yer6i"]
@@ -14,6 +15,9 @@
 [ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="9_60bh5"]
 [ext_resource type="Script" uid="uid://2vovnlvv2qkn" path="res://gameplay/hero/hero_stats.gd" id="11_6kq8y"]
 [ext_resource type="PackedScene" uid="uid://0xk5oow351fp" path="res://gameplay/hero/slash/slash_vfx.tscn" id="14_hrca2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hrca2"]
+albedo_color = Color(0.3388, 0.39952, 0.44, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
 
@@ -66,7 +70,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HurtBox/CollisionShape3D:disabled")
+tracks/3/path = NodePath("HurtBox/Hurt Collision:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -78,54 +82,6 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_7k05w"]
 resource_name = "attack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.865584, 1, 0), Vector3(-0.865584, 1, 0), Vector3(-0.786832, 1, 0.849549)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 1.5708, 0), Vector3(-1.0472, 2.61799, 1.5708)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("HurtBox/CollisionShape3D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
 
 [sub_resource type="Animation" id="Animation_ygv0y"]
 resource_name = "idle"
@@ -169,7 +125,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HurtBox/CollisionShape3D:disabled")
+tracks/3/path = NodePath("HurtBox/Hurt Collision:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -196,6 +152,7 @@ height = 2.0
 [node name="Hero" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_x1143")
+hit_effect = ExtResource("2_btuvy")
 
 [node name="hero-base" parent="." instance=ExtResource("2_smhnq")]
 
@@ -205,6 +162,9 @@ bones/3/position = Vector3(0.111599, 0.476484, -5.46298e-09)
 bones/3/rotation = Quaternion(2.86247e-06, -9.25278e-09, 0.999048, -0.0436191)
 bones/4/position = Vector3(-0.111599, 0.476484, -5.46298e-09)
 bones/4/rotation = Quaternion(-2.86247e-06, -9.25278e-09, 0.999048, 0.0436191)
+
+[node name="Hero Bot Model" parent="hero-base/Hero Bot/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_hrca2")
 
 [node name="AnimationPlayer" parent="hero-base" index="1"]
 speed_scale = 1.2
@@ -273,13 +233,14 @@ autoplay = "idle"
 speed_scale = 5.0
 
 [node name="HurtBox" type="Area3D" parent="Weapon"]
-transform = Transform3D(-0.433013, 0.5, 0.75, 0.866025, 0, 0.5, 0.25, 0.866025, -0.433013, -0.22787, 0.756642, 0.131561)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0.999996)
 collision_layer = 64
 collision_mask = 32
 script = ExtResource("4_ftbyr")
 value = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Weapon/HurtBox"]
+[node name="Hurt Collision" type="CollisionShape3D" parent="Weapon/HurtBox"]
+unique_name_in_owner = true
 shape = SubResource("SphereShape3D_14oge")
 disabled = true
 

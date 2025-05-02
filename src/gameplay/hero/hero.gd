@@ -13,7 +13,6 @@ const GRAVITY: float = 9.81
 @onready var effects: Array[ShopItemResource]
 
 @onready var attack_cooldown: Timer = $"Attack Cooldown"
-@onready var weapon_animation: AnimationPlayer = %"Weapon Animation Player"
 
 @onready var body_animation: AnimationPlayer = $"hero-base/AnimationPlayer"
 @onready var base_animation_scale: float = 1.2
@@ -21,6 +20,9 @@ const GRAVITY: float = 9.81
 @onready var slashes: Array[SlashVFX] = [
 	$"Slashes/Slash VFX", $"Slashes/Slash VFX2", $"Slashes/Slash VFX3"
 ]
+
+@export var hit_effect: PackedScene
+@onready var hurt_collider: CollisionShape3D = %"Hurt Collision"
 
 var previous_slash_index: int = 0
 var is_dash: bool = false
@@ -78,19 +80,19 @@ func _movement_process(delta: float) -> void:
 	move_and_slide()
 
 func _alt_attack_process() -> void:
-	weapon_animation.play("attack")
 	attack_cooldown.start()
 	is_attack_processing = true
-	
+	hurt_collider.set_deferred("disabled", false)
 	var slash = slashes[previous_slash_index]
 	previous_slash_index += 1
 	previous_slash_index %= slashes.size()
 	slash.visible = true
 	slash.play()
 	await get_tree().create_timer(0.3).timeout
+	hurt_collider.set_deferred("disabled", true)
+	
 	slash.visible = false
 	is_attack_processing = false
-	weapon_animation.play("idle")
 
 func _attack_process() -> void:
 	rotate_to_cursor()
@@ -136,4 +138,8 @@ func pickup(item) -> void:
 
 
 func _on_hurt_box_area_entered(area: Area3D) -> void:
+	var hit = hit_effect.instantiate()
+	owner.add_child(hit)
+	hit.position = area.global_position
+	hit.position.y = hurt_collider.global_position.y
 	health.heal(stats.vampire_strength * stats.damage)

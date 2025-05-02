@@ -36,7 +36,7 @@ source = 5
 texture = SubResource("GradientTexture1D_negbt")
 
 [sub_resource type="Gradient" id="Gradient_negbt"]
-offsets = PackedFloat32Array(0.155172, 0.597701, 1)
+offsets = PackedFloat32Array(0.169014, 0.413146, 0.892019)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ighkc"]
@@ -220,6 +220,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-45.4757, 304.246)
 modes/cull = 2
 modes/diffuse = 3
 modes/specular = 1
