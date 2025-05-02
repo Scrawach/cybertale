@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dolepn0oqhymo"]
+[gd_scene load_steps=15 format=3 uid="uid://dolepn0oqhymo"]
 
 [ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="1_i2yv3"]
 [ext_resource type="Script" uid="uid://c22exopbnidld" path="res://gameplay/enemies/boss/boss.gd" id="1_sjs6l"]
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="2_sjs6l"]
 [ext_resource type="Script" uid="uid://bq2skqf4slwo" path="res://gameplay/enemies/boss/stages/boss_chasing.gd" id="4_sahvm"]
 [ext_resource type="Script" uid="uid://v8wapx6ixbrh" path="res://gameplay/enemies/boss/stages/boss_bombs.gd" id="5_jgtq3"]
+[ext_resource type="PackedScene" uid="uid://tvgmq41j3lhy" path="res://gameplay/enemies/boss/bombs/boss_bomb.tscn" id="6_gq7ic"]
 [ext_resource type="Script" uid="uid://davywyg5lnttl" path="res://gameplay/enemies/boss/stages/boss_waiting.gd" id="6_s2xka"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="7_s2xka"]
 
@@ -19,6 +20,15 @@ radius = 2.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_s2xka"]
 radius = 6.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_gq7ic"]
+radius = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j0e7c"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0, 0, 0.278431)
 
 [node name="Boss" type="CharacterBody3D"]
 script = ExtResource("1_sjs6l")
@@ -55,16 +65,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2)
 
 [node name="Behaviour" type="Node" parent="."]
 
-[node name="Chasing" type="Node" parent="Behaviour" node_paths=PackedStringArray("boss", "nav_agent", "collision")]
+[node name="Chasing" type="Node" parent="Behaviour" node_paths=PackedStringArray("boss", "nav_agent", "collision", "attack_area")]
 unique_name_in_owner = true
 script = ExtResource("4_sahvm")
 boss = NodePath("../..")
 nav_agent = NodePath("../../NavigationAgent3D")
 collision = NodePath("../../Attack HurtBox/CollisionShape3D")
+attack_area = NodePath("../../Attack HurtBox/Attack Range Area")
 
-[node name="Bombs" type="Node" parent="Behaviour"]
+[node name="Bombs" type="Node" parent="Behaviour" node_paths=PackedStringArray("boss", "fire_point")]
 unique_name_in_owner = true
 script = ExtResource("5_jgtq3")
+boss = NodePath("../..")
+bomb_template = ExtResource("6_gq7ic")
+fire_point = NodePath("../../Fire Point")
 
 [node name="Waiting" type="Node" parent="Behaviour" node_paths=PackedStringArray("boss")]
 unique_name_in_owner = true
@@ -85,3 +99,8 @@ value = 10
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Attack HurtBox"]
 shape = SubResource("SphereShape3D_s2xka")
 disabled = true
+
+[node name="Attack Range Area" type="MeshInstance3D" parent="Attack HurtBox"]
+visible = false
+mesh = SubResource("SphereMesh_gq7ic")
+surface_material_override/0 = SubResource("StandardMaterial3D_j0e7c")

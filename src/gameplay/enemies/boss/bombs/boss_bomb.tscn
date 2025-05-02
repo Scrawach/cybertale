@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://tvgmq41j3lhy"]
+
+[ext_resource type="Script" uid="uid://csnnrto52vxn" path="res://gameplay/enemies/boss/bombs/boss_bomb.gd" id="1_54ktg"]
+[ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="2_qtv4i"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_54ktg"]
+friction = 0.7
+bounce = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_gd4vy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_54ktg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c8tlq"]
+radius = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_qtv4i"]
+radius = 3.0
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtv4i"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0, 0, 0.262745)
+
+[sub_resource type="SphereMesh" id="SphereMesh_c8tlq"]
+radius = 3.0
+height = 6.0
+
+[node name="Boss Bomb" type="RigidBody3D"]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_54ktg")
+lock_rotation = true
+constant_force = Vector3(0, -25, 0)
+script = ExtResource("1_54ktg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_gd4vy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_54ktg")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("2_qtv4i")
+value = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_c8tlq")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+visible = false
+mesh = SubResource("SphereMesh_qtv4i")
+surface_material_override/0 = SubResource("StandardMaterial3D_qtv4i")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Area3D"]
+visible = false
+mesh = SubResource("SphereMesh_c8tlq")
+surface_material_override/0 = SubResource("StandardMaterial3D_qtv4i")
+
+[node name="Boom Timer" type="Timer" parent="."]
+one_shot = true

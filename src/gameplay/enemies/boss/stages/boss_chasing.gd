@@ -6,7 +6,7 @@ extends BossStage
 @export var attack_range: float = 5.0
 @export var nav_agent: NavigationAgent3D
 @export var collision: CollisionShape3D
-
+@export var attack_area: Node3D
 
 var is_movement: bool = true
 
@@ -28,10 +28,12 @@ func stop() -> void:
 
 func start_attack() -> void:
 	is_movement = false
+	attack_area.visible = true
 	await get_tree().create_timer(1.0).timeout
 	await get_tree().create_timer(0.1).timeout
 	collision.disabled = false
 	await get_tree().create_timer(0.1).timeout
+	attack_area.visible = false
 	collision.disabled = true
 	boss.switch_to(BossWaiting)
 	is_movement = true
