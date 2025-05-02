@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://gbxjv8xjs2b1"]
+
+[ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="1_7rpqw"]
+[ext_resource type="Script" uid="uid://dh156tg8jvery" path="res://gameplay/enemies/floating/floating_sphere.gd" id="1_fkqck"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_huihk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tw3kd"]
+
+[node name="Floating Sphere" type="Node3D"]
+script = ExtResource("1_fkqck")
+
+[node name="View" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="View"]
+mesh = SubResource("SphereMesh_huihk")
+
+[node name="Hurt Box" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_7rpqw")
+value = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurt Box"]
+shape = SubResource("SphereShape3D_tw3kd")
+
+[connection signal="area_entered" from="Hurt Box" to="." method="_on_hurt_box_area_entered"]

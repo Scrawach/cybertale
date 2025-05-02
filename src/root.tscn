@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d0763q65dmpb7" path="res://gameplay/enemies/virus/ranged_virus.tscn" id="5_vyht1"]
 [ext_resource type="PackedScene" uid="uid://b8w8vh6038ft0" path="res://gameplay/shop/shop.tscn" id="6_l8v81"]
 [ext_resource type="PackedScene" uid="uid://dolepn0oqhymo" path="res://gameplay/enemies/boss/boss.tscn" id="7_huihk"]
-[ext_resource type="PackedScene" uid="uid://dsk1kogc4v1iw" path="res://gameplay/enemies/virus/projectiles/enemy_projectile.tscn" id="8_bf3um"]
+[ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="9_tw3kd"]
 [ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box.tscn" id="10_tw3kd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
@@ -93,12 +93,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01169, 0, -6.25756)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
 hero = NodePath("../../Hero")
 
+[node name="Box" parent="World3D/Room" instance=ExtResource("10_tw3kd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Floating Sphere" parent="World3D/Room" instance=ExtResource("9_tw3kd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
 [node name="Shop" parent="World3D" instance=ExtResource("6_l8v81")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
-
-[node name="Enemy Projectile" parent="World3D" instance=ExtResource("8_bf3um")]
-
-[node name="Box" parent="World3D" instance=ExtResource("10_tw3kd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
