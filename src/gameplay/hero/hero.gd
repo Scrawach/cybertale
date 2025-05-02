@@ -143,3 +143,4 @@ func _on_hurt_box_area_entered(area: Area3D) -> void:
 	hit.position = area.global_position
 	hit.position.y = hurt_collider.global_position.y
 	health.heal(stats.vampire_strength * stats.damage)
+	camera.shake(0.05)

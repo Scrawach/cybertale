@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://crlg8ydib8anl"]
+[gd_scene load_steps=30 format=3 uid="uid://crlg8ydib8anl"]
 
 [ext_resource type="Script" uid="uid://ps2fuefcsyco" path="res://gameplay/hero/hero.gd" id="1_x1143"]
 [ext_resource type="PackedScene" uid="uid://dqpbotjwi8ltd" path="res://gameplay/hero/hit/hit_vfx.tscn" id="2_btuvy"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="2_yer6i"]
 [ext_resource type="PackedScene" uid="uid://cmhrypiiccgbj" path="res://gameplay/common/health_bar.tscn" id="3_14oge"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="4_ftbyr"]
+[ext_resource type="PackedScene" uid="uid://bwo4iras5spq2" path="res://gameplay/hero/lifecube/lifecube.glb" id="4_hcw0p"]
 [ext_resource type="Script" uid="uid://ckv3rciqqcvnf" path="res://gameplay/hero/inventory.gd" id="5_lkv0r"]
 [ext_resource type="PackedScene" uid="uid://byeax7q50kuds" path="res://gameplay/hero/coint_pickup_ui.tscn" id="6_drp30"]
 [ext_resource type="PackedScene" uid="uid://dlm44l7nqss2b" path="res://gameplay/hero/blocking_sword.glb" id="7_ygv0y"]
@@ -18,6 +19,17 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hrca2"]
 albedo_color = Color(0.3388, 0.39952, 0.44, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hcw0p"]
+emission_enabled = true
+emission = Color(0, 0.866667, 1, 1)
+emission_energy_multiplier = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lj3ds"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0, 0.381833, 0.79, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
 
@@ -156,15 +168,20 @@ hit_effect = ExtResource("2_btuvy")
 
 [node name="hero-base" parent="." instance=ExtResource("2_smhnq")]
 
-[node name="Skeleton3D" parent="hero-base/Hero Bot" index="0"]
-bones/2/position = Vector3(5.96046e-08, 0.55388, 7.44187e-08)
-bones/3/position = Vector3(0.111599, 0.476484, -5.46298e-09)
-bones/3/rotation = Quaternion(2.86247e-06, -9.25278e-09, 0.999048, -0.0436191)
-bones/4/position = Vector3(-0.111599, 0.476484, -5.46298e-09)
-bones/4/rotation = Quaternion(-2.86247e-06, -9.25278e-09, 0.999048, 0.0436191)
-
 [node name="Hero Bot Model" parent="hero-base/Hero Bot/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_hrca2")
+surface_material_override/1 = SubResource("StandardMaterial3D_hcw0p")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="hero-base/Hero Bot/Skeleton3D" index="1"]
+transform = Transform3D(1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0.517144, 0)
+bone_name = "body"
+bone_idx = 1
+
+[node name="lifecube" parent="hero-base/Hero Bot/Skeleton3D/BoneAttachment3D" instance=ExtResource("4_hcw0p")]
+transform = Transform3D(0.07, -5.15866e-09, 8.17284e-10, 5.15866e-09, 0.0665721, -0.021637, 8.17284e-10, 0.021637, 0.0665721, 3.32948e-08, 0.237528, -0.138139)
+
+[node name="Cube" parent="hero-base/Hero Bot/Skeleton3D/BoneAttachment3D/lifecube" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lj3ds")
 
 [node name="AnimationPlayer" parent="hero-base" index="1"]
 speed_scale = 1.2
@@ -204,7 +221,7 @@ value = 100
 max_value = 100
 
 [node name="Health Bar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_14oge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.27989, 0)
 health = NodePath("../Health")
 
 [node name="Attack Cooldown" type="Timer" parent="."]
@@ -215,7 +232,7 @@ one_shot = true
 script = ExtResource("5_lkv0r")
 
 [node name="Coint Pickup UI" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("6_drp30")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.657655, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.937543, 0)
 inventory = NodePath("../Inventory")
 
 [node name="Weapon" type="Node3D" parent="."]
@@ -316,3 +333,4 @@ visible = false
 [connection signal="area_entered" from="Weapon/HurtBox" to="." method="_on_hurt_box_area_entered"]
 
 [editable path="hero-base"]
+[editable path="hero-base/Hero Bot/Skeleton3D/BoneAttachment3D/lifecube"]

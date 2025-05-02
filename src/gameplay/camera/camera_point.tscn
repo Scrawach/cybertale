@@ -20,7 +20,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 
 [node name="Camera3D" type="Camera3D" parent="Camera Length"]
 projection = 1
-size = 15.0
+size = 12.0
 
 [node name="Camera Shaker" type="Node" parent="." node_paths=PackedStringArray("camera")]
 script = ExtResource("1_nh48w")
