@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=3 uid="uid://0xk5oow351fp"]
+
+[ext_resource type="Script" uid="uid://ddk8ry4scsl66" path="res://gameplay/hero/slash/slash_vfx.gd" id="1_6udk2"]
+[ext_resource type="ArrayMesh" uid="uid://brm7l7s0o53q0" path="res://gameplay/hero/slash/slash.res" id="1_83njn"]
+[ext_resource type="Shader" uid="uid://cm7r7au4jmcrp" path="res://gameplay/hero/slash/slash_vfx.tres" id="2_tb024"]
+
+[sub_resource type="Gradient" id="Gradient_tb024"]
+offsets = PackedFloat32Array(0, 0.327869, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6udk2"]
+gradient = SubResource("Gradient_tb024")
+
+[sub_resource type="Gradient" id="Gradient_6udk2"]
+offsets = PackedFloat32Array(0.614754, 0.860656, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_juyww"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_6udk2")
+fill_from = Vector2(0.516129, 1)
+fill_to = Vector2(0.510753, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c0w5g"]
+render_priority = 0
+shader = ExtResource("2_tb024")
+shader_parameter/Color = Color(0, 1.2, 2.4, 1)
+shader_parameter/Progress = -1.035
+shader_parameter/Main_Gradient = SubResource("GradientTexture1D_6udk2")
+shader_parameter/Outer_Progress = 0.0
+shader_parameter/Outer_Gradient = SubResource("GradientTexture2D_juyww")
+
+[sub_resource type="Animation" id="Animation_6udk2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slash Mesh:surface_material_override/0:shader_parameter/Outer_Progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slash Mesh:surface_material_override/0:shader_parameter/Progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.035]
+}
+
+[sub_resource type="Animation" id="Animation_tb024"]
+resource_name = "slash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slash Mesh:surface_material_override/0:shader_parameter/Outer_Progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.234201),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.03, -0.535, 0.07]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slash Mesh:surface_material_override/0:shader_parameter/Progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.234201),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-1.035, -0.1, 1.01]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_juyww"]
+_data = {
+&"RESET": SubResource("Animation_6udk2"),
+&"slash": SubResource("Animation_tb024")
+}
+
+[node name="Slash VFX" type="Node3D"]
+script = ExtResource("1_6udk2")
+
+[node name="Slash Mesh" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+gi_mode = 0
+mesh = ExtResource("1_83njn")
+surface_material_override/0 = SubResource("ShaderMaterial_c0w5g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_juyww")
+}

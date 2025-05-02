@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://crlg8ydib8anl"]
+[gd_scene load_steps=25 format=3 uid="uid://crlg8ydib8anl"]
 
 [ext_resource type="Script" uid="uid://ps2fuefcsyco" path="res://gameplay/hero/hero.gd" id="1_x1143"]
 [ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="2_ryoj4"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://clqb565wykfwe" path="res://gameplay/hero/hud/hero_hud.gd" id="8_60bh5"]
 [ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="9_60bh5"]
 [ext_resource type="Script" uid="uid://2vovnlvv2qkn" path="res://gameplay/hero/hero_stats.gd" id="11_6kq8y"]
+[ext_resource type="PackedScene" uid="uid://0xk5oow351fp" path="res://gameplay/hero/slash/slash_vfx.tscn" id="14_hrca2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
 
@@ -261,6 +262,7 @@ inventory = NodePath("../Inventory")
 transform = Transform3D(-3.61999e-06, 0, 1, 0, 1, 0, -1, 0, -3.61999e-06, -0.865584, 1, 0)
 
 [node name="blocking_sword" parent="Weapon" instance=ExtResource("7_ygv0y")]
+visible = false
 
 [node name="Weapon Animation Player" type="AnimationPlayer" parent="Weapon"]
 unique_name_in_owner = true
@@ -328,13 +330,27 @@ text = "100"
 [node name="HeroStats" type="Node" parent="." node_paths=PackedStringArray("health_node", "hero_node", "weapon_damage")]
 script = ExtResource("11_6kq8y")
 health = 100
-movement_speed = 16.0
+movement_speed = 8.0
 damage = 5
 dash_length = 0.25
 health_node = NodePath("../Health")
 hero_node = NodePath("..")
 weapon_damage = NodePath("../Weapon/HurtBox")
 metadata/_custom_type_script = "uid://2vovnlvv2qkn"
+
+[node name="Slashes" type="Node3D" parent="."]
+
+[node name="Slash VFX" parent="Slashes" instance=ExtResource("14_hrca2")]
+transform = Transform3D(1.70344, 0, 1.048, 0, 2, 0, -1.048, 0, 1.70344, -0.196116, 1, 0.112441)
+visible = false
+
+[node name="Slash VFX2" parent="Slashes" instance=ExtResource("14_hrca2")]
+transform = Transform3D(-1.43034, -1.33127, -0.426431, 1.27578, -1.49256, 0.38035, -0.57141, 4.52534e-08, 1.91664, 0.046867, 1, 0.121352)
+visible = false
+
+[node name="Slash VFX3" parent="Slashes" instance=ExtResource("14_hrca2")]
+transform = Transform3D(0.705125, -1.85973, 0.21022, 1.78221, 0.735795, 0.531335, -0.57141, 6.74942e-08, 1.91664, 0.046867, 1, 0.121352)
+visible = false
 
 [connection signal="area_entered" from="Weapon/HurtBox" to="." method="_on_hurt_box_area_entered"]
 

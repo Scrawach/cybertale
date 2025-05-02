@@ -18,6 +18,11 @@ const GRAVITY: float = 9.81
 @onready var body_animation: AnimationPlayer = $"hero-base/AnimationPlayer"
 @onready var base_animation_scale: float = 1.2
 
+@onready var slashes: Array[SlashVFX] = [
+	$"Slashes/Slash VFX", $"Slashes/Slash VFX2", $"Slashes/Slash VFX3"
+]
+
+var previous_slash_index: int = 0
 var is_dash: bool = false
 var direction_angle: float
 var is_attack_processing: bool
@@ -76,7 +81,14 @@ func _alt_attack_process() -> void:
 	weapon_animation.play("attack")
 	attack_cooldown.start()
 	is_attack_processing = true
-	await get_tree().create_timer(0.2).timeout
+	
+	var slash = slashes[previous_slash_index]
+	previous_slash_index += 1
+	previous_slash_index %= slashes.size()
+	slash.visible = true
+	slash.play()
+	await get_tree().create_timer(0.3).timeout
+	slash.visible = false
 	is_attack_processing = false
 	weapon_animation.play("idle")
 
