@@ -17,6 +17,9 @@ func _ready() -> void:
 func initialize() -> void:
 	var view: Node3D = item.view.instantiate()
 	item_view.add_child(view)
+	setup_tooltips()
+
+func setup_tooltips() -> void:
 	tooltip.setup(item.get_tooltip_text())
 	price_tooltip.setup(str(item.price))
 	buy_tooltip.setup(tr("BUY_INTERACT_KEY"))
@@ -40,10 +43,16 @@ func try_purchase() -> bool:
 	collision.disabled = true
 	return true
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and buy_tooltip != null:
+		setup_tooltips()
+
 func _on_area_3d_body_entered(body: Hero) -> void:
 	target = body
 	tooltip.visible = true
-	buy_tooltip.visible = true
+	
+	if body.inventory.has_enough_coins(item.price):
+		buy_tooltip.visible = true
 
 func _on_area_3d_body_exited(body: Hero) -> void:
 	if body != target:
