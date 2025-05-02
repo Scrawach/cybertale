@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://digo2wt884cud"]
+[gd_scene load_steps=11 format=3 uid="uid://digo2wt884cud"]
 
 [ext_resource type="Script" uid="uid://cbkj157q2uhyb" path="res://gameplay/items/dropped_item.gd" id="1_7ujtk"]
+[ext_resource type="PackedScene" uid="uid://csx5vj5iglrqi" path="res://gameplay/items/models/coin.glb" id="2_2mchq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jnlp7"]
 friction = 0.15
@@ -10,6 +11,13 @@ bounce = 0.6
 
 [sub_resource type="BoxMesh" id="BoxMesh_jnlp7"]
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mchq"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.246446, 0.434817, 0.945043, 1)
+emission_enabled = true
+emission = Color(0, 0.772549, 1, 1)
 
 [sub_resource type="Animation" id="Animation_vyht1"]
 length = 0.001
@@ -66,8 +74,14 @@ shape = SubResource("BoxShape3D_l8v81")
 [node name="View" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="View"]
+visible = false
 mesh = SubResource("BoxMesh_jnlp7")
 skeleton = NodePath("../..")
+
+[node name="coin" parent="View" instance=ExtResource("2_2mchq")]
+
+[node name="Coin" parent="View/coin" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2mchq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -85,3 +99,5 @@ shape = SubResource("SphereShape3D_xiuui")
 disabled = true
 
 [connection signal="body_entered" from="Pickup Area" to="." method="_on_pickup_area_body_entered"]
+
+[editable path="View/coin"]
