@@ -22,7 +22,6 @@ func _input(event: InputEvent) -> void:
 func interact() -> void:
 	if try_purchase():
 		item_view.visible = false
-		print(item_view.visible)
 	else:
 		print("not enouth coins!")
 

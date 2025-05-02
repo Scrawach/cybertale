@@ -9,7 +9,6 @@ signal died()
 
 func take_damage(strength: int) -> void:
 	value = max(0, value - strength)
-	print(value)
 	changed.emit(self)
 	
 	if value == 0:
