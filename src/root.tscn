@@ -18,7 +18,6 @@ sky = SubResource("Sky_pq8q7")
 ambient_light_source = 2
 ambient_light_color = Color(0.217697, 0.283275, 0.364416, 1)
 tonemap_mode = 2
-glow_enabled = true
 glow_intensity = 1.0
 glow_bloom = 0.1
 fog_light_color = Color(0.053457, 0.129716, 0.163795, 1)
