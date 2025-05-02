@@ -1,13 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxa4qw700f0gr"]
+[gd_scene load_steps=13 format=3 uid="uid://dxa4qw700f0gr"]
 
 [ext_resource type="Script" uid="uid://b7uqeyrplobpb" path="res://gameplay/shop/shop_item_place.gd" id="1_7p1km"]
 [ext_resource type="Script" uid="uid://bvbf52vy74pv0" path="res://gameplay/environment/smooth_floating_3d.gd" id="1_bf30i"]
 [ext_resource type="Resource" uid="uid://b6dp8xgrngxi4" path="res://gameplay/shop/items/health/health_item.tres" id="2_td7wb"]
+[ext_resource type="PackedScene" uid="uid://dkhmedqrk7kva" path="res://gameplay/environment/world_space_tooltip.tscn" id="4_xwcky"]
+[ext_resource type="Script" uid="uid://cpc86jueox6qo" path="res://gameplay/environment/world_space_tooltip.gd" id="5_t8gki"]
+[ext_resource type="Texture2D" uid="uid://j4k0h7ijwbpb" path="res://icon.png" id="6_clngh"]
+[ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="7_xtaa6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vyht1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bf3um"]
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_t8gki"]
+viewport_path = NodePath("Item/Price Tooltip/SubViewport")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7p1km"]
 radius = 1.5
@@ -32,6 +39,69 @@ mesh = SubResource("BoxMesh_bf3um")
 script = ExtResource("1_bf30i")
 target = NodePath("..")
 metadata/_custom_type_script = "uid://bvbf52vy74pv0"
+
+[node name="WorldSpaceTooltip" parent="Item" instance=ExtResource("4_xwcky")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+
+[node name="Buy Tooltip" parent="Item" instance=ExtResource("4_xwcky")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
+
+[node name="Price Tooltip" type="Node3D" parent="Item"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("5_t8gki")
+
+[node name="Sprite3D" type="Sprite3D" parent="Item/Price Tooltip"]
+billboard = 1
+no_depth_test = true
+texture = SubResource("ViewportTexture_t8gki")
+
+[node name="SubViewport" type="SubViewport" parent="Item/Price Tooltip"]
+transparent_bg = true
+handle_input_locally = false
+gui_snap_controls_to_pixels = false
+
+[node name="Control" type="Control" parent="Item/Price Tooltip/SubViewport"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Item/Price Tooltip/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Item/Price Tooltip/SubViewport/Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Item/Price Tooltip/SubViewport/Control/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("6_clngh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Item/Price Tooltip/SubViewport/Control/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("7_xtaa6")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 40
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 16

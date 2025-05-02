@@ -1,2 +1,4 @@
 key,en,ru
 LANGUAGE_NAME,English,Русский
+HEALTH_ITEM_TOOLTIP_KEY,"Restore %s health","Восстанавливает %s здоровья"
+BUY_INTERACT_KEY,"[E] - buy","[E] - купить"

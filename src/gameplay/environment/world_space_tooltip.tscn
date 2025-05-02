@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkhmedqrk7kva"]
+
+[ext_resource type="Script" uid="uid://cpc86jueox6qo" path="res://gameplay/environment/world_space_tooltip.gd" id="1_gabi1"]
+[ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="3_h8cqn"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h8cqn"]
+viewport_path = NodePath("SubViewport")
+
+[node name="WorldSpaceTooltip" type="Node3D"]
+script = ExtResource("1_gabi1")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+no_depth_test = true
+texture = SubResource("ViewportTexture_h8cqn")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+gui_snap_controls_to_pixels = false
+
+[node name="Control" type="Control" parent="SubViewport"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Label" type="Label" parent="SubViewport/Control/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme = ExtResource("3_h8cqn")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 40
+text = "EMPTY_TEXT_KEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

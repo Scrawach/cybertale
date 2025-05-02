@@ -5,3 +5,6 @@ extends ShopItemResource
 
 func apply(target: Hero) -> void:
 	target.health.heal(strength)
+
+func get_tooltip_text() -> String:
+	return tr(tooltip) % strength

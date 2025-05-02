@@ -5,6 +5,9 @@ extends Node3D
 
 @onready var item_view: Node3D = $Item
 @onready var collision: CollisionShape3D = %CollisionShape3D
+@onready var tooltip: WorldSpaceTooltip = $Item/WorldSpaceTooltip
+@onready var price_tooltip: WorldSpaceTooltip = $"Item/Price Tooltip"
+@onready var buy_tooltip: WorldSpaceTooltip = $"Item/Buy Tooltip"
 
 var target: Hero
 
@@ -14,6 +17,9 @@ func _ready() -> void:
 func initialize() -> void:
 	var view: Node3D = item.view.instantiate()
 	item_view.add_child(view)
+	tooltip.setup(item.get_tooltip_text())
+	price_tooltip.setup(str(item.price))
+	buy_tooltip.setup(tr("BUY_INTERACT_KEY"))
 
 func _input(event: InputEvent) -> void:
 	if target != null and event.is_action_pressed("interact"):
@@ -36,9 +42,13 @@ func try_purchase() -> bool:
 
 func _on_area_3d_body_entered(body: Hero) -> void:
 	target = body
+	tooltip.visible = true
+	buy_tooltip.visible = true
 
 func _on_area_3d_body_exited(body: Hero) -> void:
 	if body != target:
 		return
-	
+		
+	buy_tooltip.visible = false
+	tooltip.visible = false
 	target = null
