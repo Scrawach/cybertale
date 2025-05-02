@@ -25,6 +25,8 @@ config/icon="uid://j4k0h7ijwbpb"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/window_width_override=1000
+window/size/window_height_override=700
 window/stretch/mode="viewport"
 
 [editor_plugins]
@@ -89,6 +91,10 @@ locale/translations=PackedStringArray("res://localization/content/localization.e
 3d_physics/layer_6="enemy_hitbox"
 3d_physics/layer_7="hero_attack"
 3d_physics/layer_8="item"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 

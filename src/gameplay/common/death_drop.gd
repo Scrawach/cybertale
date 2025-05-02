@@ -20,7 +20,7 @@ func _on_died() -> void:
 	for index in count_of_drop:
 		var drop_instance: RigidBody3D = drop_template.instantiate()
 		parent.get_parent().add_child(drop_instance)
-		drop_instance.global_position = parent.global_position
+		drop_instance.global_position = parent.global_position + Vector3.UP
 		bodies.append(drop_instance)
 	
 	drop(bodies)
