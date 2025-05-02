@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://d0763q65dmpb7"]
+
+[ext_resource type="Script" uid="uid://b47jb5u0e2f1m" path="res://gameplay/enemies/virus/virus.gd" id="1_jlusn"]
+[ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="2_f5ikr"]
+[ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="3_75w2o"]
+[ext_resource type="PackedScene" uid="uid://cmhrypiiccgbj" path="res://gameplay/common/health_bar.tscn" id="4_xgjyd"]
+[ext_resource type="Script" uid="uid://dkkhphqh8vkxx" path="res://gameplay/common/death.gd" id="5_nqbhc"]
+[ext_resource type="Script" uid="uid://cma2e03yqef6p" path="res://gameplay/common/death_drop.gd" id="6_2bl11"]
+[ext_resource type="PackedScene" uid="uid://digo2wt884cud" path="res://gameplay/items/dropped_item.tscn" id="7_tdamw"]
+[ext_resource type="Script" uid="uid://bfh5lon8d1ljv" path="res://gameplay/enemies/virus/attacks/enemy_range_attack.gd" id="8_mpgtu"]
+[ext_resource type="PackedScene" uid="uid://dsk1kogc4v1iw" path="res://gameplay/enemies/virus/projectiles/enemy_projectile.tscn" id="9_f5ikr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vvh5c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jlusn"]
+radius = 10.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tkedg"]
+radius = 1.0
+
+[node name="Ranged Virus" type="Node3D" node_paths=PackedStringArray("enemy_attack")]
+script = ExtResource("1_jlusn")
+attack_range = 8.0
+enemy_attack = NodePath("EnemyRangeAttack")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_vvh5c")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Observer" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Observer"]
+shape = SubResource("SphereShape3D_jlusn")
+debug_color = Color(0.964706, 0, 0, 1)
+
+[node name="HitBox" type="Area3D" parent="." node_paths=PackedStringArray("health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("2_f5ikr")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://piwtt8eoedqa"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("SphereShape3D_tkedg")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_75w2o")
+value = 10
+max_value = 10
+metadata/_custom_type_script = "uid://b8hqs1hbipqv7"
+
+[node name="Health Bar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_xgjyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+health = NodePath("../Health")
+
+[node name="Death" type="Node" parent="." node_paths=PackedStringArray("health", "body")]
+script = ExtResource("5_nqbhc")
+health = NodePath("../Health")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://dkkhphqh8vkxx"
+
+[node name="DeathDrop" type="Node" parent="." node_paths=PackedStringArray("health", "parent")]
+script = ExtResource("6_2bl11")
+health = NodePath("../Health")
+parent = NodePath("..")
+drop_template = ExtResource("7_tdamw")
+metadata/_custom_type_script = "uid://cma2e03yqef6p"
+
+[node name="EnemyRangeAttack" type="Node" parent="." node_paths=PackedStringArray("body", "fire_point")]
+script = ExtResource("8_mpgtu")
+body = NodePath("..")
+projectile_template = ExtResource("9_f5ikr")
+fire_point = NodePath("../Fire Point")
+metadata/_custom_type_script = "uid://bfh5lon8d1ljv"
+
+[node name="Cooldown Timer" type="Timer" parent="EnemyRangeAttack"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Fire Point" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+
+[connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
+[connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]

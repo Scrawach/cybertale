@@ -12,5 +12,5 @@ func _ready() -> void:
 	initial_position = target.position
 
 func _physics_process(delta: float) -> void:
-	var phase: float = Time.get_ticks_msec() * delta * speed + target.global_position.x
+	var phase: float = Time.get_ticks_msec() * delta * speed + target.global_position.z
 	target.position = initial_position + amplitude * Vector3.UP * sin(phase)

@@ -59,10 +59,12 @@ func _attack_process() -> void:
 
 func rotate_to_cursor() -> void:
 	var view_point: Vector3 = camera.get_mouse_position_in_world_3d()
-	view_point.y = 0
 	var view_direction: Vector3 = -1 * (view_point - global_position)
 	look_at(global_position + view_direction)
+	
+	rotation.x = 0
 	direction_angle = rotation_degrees.y
+	rotation.z = 0
 
 func _start_dash() -> void:
 	is_dash = true

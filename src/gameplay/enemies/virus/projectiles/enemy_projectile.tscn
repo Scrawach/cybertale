@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsk1kogc4v1iw"]
+
+[ext_resource type="Script" uid="uid://dixwqidc431b7" path="res://gameplay/enemies/virus/projectiles/enemy_projectile.gd" id="1_0lxh8"]
+[ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="2_4pso5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vyht1"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0lxh8"]
+
+[node name="Enemy Projectile" type="Node3D"]
+script = ExtResource("1_0lxh8")
+
+[node name="View" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="View"]
+mesh = SubResource("BoxMesh_vyht1")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 68
+script = ExtResource("2_4pso5")
+value = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_0lxh8")
+
+[node name="LifeTime Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="timeout" from="LifeTime Timer" to="." method="_on_life_time_timer_timeout"]

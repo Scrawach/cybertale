@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bkfe7or2qr1ti"]
+[gd_scene load_steps=14 format=3 uid="uid://bkfe7or2qr1ti"]
 
 [ext_resource type="Script" uid="uid://b47jb5u0e2f1m" path="res://gameplay/enemies/virus/virus.gd" id="1_s1dqi"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="2_0etyu"]
@@ -8,11 +8,9 @@
 [ext_resource type="Script" uid="uid://dkkhphqh8vkxx" path="res://gameplay/common/death.gd" id="6_tkedg"]
 [ext_resource type="Script" uid="uid://cma2e03yqef6p" path="res://gameplay/common/death_drop.gd" id="7_kp1x4"]
 [ext_resource type="PackedScene" uid="uid://digo2wt884cud" path="res://gameplay/items/dropped_item.tscn" id="8_54su0"]
+[ext_resource type="Script" uid="uid://dk4s5v6knj8ch" path="res://gameplay/enemies/virus/attacks/enemy_melee_attack.gd" id="9_wbyrl"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vvh5c"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_28aoi"]
-radius = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jnlp7"]
 radius = 5.0
@@ -20,27 +18,19 @@ radius = 5.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_tkedg"]
 radius = 1.0
 
-[node name="Chasing Virus" type="Node3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_28aoi"]
+radius = 2.0
+
+[node name="Chasing Virus" type="Node3D" node_paths=PackedStringArray("enemy_attack")]
 script = ExtResource("1_s1dqi")
+attack_range = 1.5
+enemy_attack = NodePath("Enemy Attack")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("BoxMesh_vvh5c")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-
-[node name="Attack Hurt Box" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
-disable_mode = 2
-collision_layer = 8
-collision_mask = 4
-script = ExtResource("2_0etyu")
-value = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Attack Hurt Box"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-shape = SubResource("SphereShape3D_28aoi")
-disabled = true
 
 [node name="Observer" type="Area3D" parent="."]
 collision_layer = 16
@@ -49,9 +39,6 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Observer"]
 shape = SubResource("SphereShape3D_jnlp7")
 debug_color = Color(0.964706, 0, 0, 1)
-
-[node name="Cooldown Timer" type="Timer" parent="."]
-one_shot = true
 
 [node name="HitBox" type="Area3D" parent="." node_paths=PackedStringArray("health")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -86,6 +73,28 @@ health = NodePath("../Health")
 parent = NodePath("..")
 drop_template = ExtResource("8_54su0")
 metadata/_custom_type_script = "uid://cma2e03yqef6p"
+
+[node name="Attack Hurt Box" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+disable_mode = 2
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("2_0etyu")
+value = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attack Hurt Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+shape = SubResource("SphereShape3D_28aoi")
+disabled = true
+
+[node name="Enemy Attack" type="Node" parent="." node_paths=PackedStringArray("body", "collision")]
+script = ExtResource("9_wbyrl")
+body = NodePath("..")
+collision = NodePath("../Attack Hurt Box/CollisionShape3D")
+metadata/_custom_type_script = "uid://dk4s5v6knj8ch"
+
+[node name="Cooldown Timer" type="Timer" parent="Enemy Attack"]
+one_shot = true
 
 [connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
 [connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]

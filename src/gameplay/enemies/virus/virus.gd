@@ -4,9 +4,9 @@ extends Node3D
 @export var movement_speed: float = 5.0
 @export var attack_range: float = 1.25
 @export var is_endless_chasing: bool = false
+@export var enemy_attack: EnemyAttack
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var cooldown_timer: Timer = $"Cooldown Timer"
 
 var target: Node3D
 
@@ -44,23 +44,13 @@ func switch_to(state: State) -> void:
 		State.Chasing:
 			pass
 		State.Attack:
-			$"Attack Hurt Box/CollisionShape3D".disabled = false
-			await get_tree().create_timer(0.1).timeout
-			$"Attack Hurt Box/CollisionShape3D".disabled = true
-			
-			cooldown_timer.start()
-			
-			
-			if target != null:
-				switch_to(State.Chasing)
-			else:
-				switch_to(State.Idle)
+			await enemy_attack.start()
 
 func _process_chase(delta: float) -> void:
 	set_target_position(target.global_position)
 	var target_is_nearest: bool = global_position.distance_to(target.global_position) < attack_range
 	
-	if target_is_nearest and cooldown_timer.is_stopped():
+	if target_is_nearest and enemy_attack.can_attack():
 		switch_to(State.Attack)
 	elif not target_is_nearest:
 		_process_movement(delta)
