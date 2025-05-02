@@ -5,7 +5,8 @@ extends Node
 @export var parent: Node3D
 
 @export var drop_template: PackedScene
-@export var count_of_drop: int = 10
+@export var min_drop_count: int = 5
+@export var max_drop_count: int = 10
 
 @export var vertical_strength: float = 15
 @export var horizontal_strength: float = 4
@@ -15,6 +16,7 @@ func _ready() -> void:
 
 func _on_died() -> void:
 	var bodies: Array[RigidBody3D]
+	var count_of_drop: int = randi_range(min_drop_count, max_drop_count)
 	for index in count_of_drop:
 		var drop_instance: RigidBody3D = drop_template.instantiate()
 		parent.get_parent().add_child(drop_instance)
