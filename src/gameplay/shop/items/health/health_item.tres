@@ -7,6 +7,6 @@
 script = ExtResource("1_r8e0s")
 strength = 10
 view = ExtResource("2_cdfgs")
-price = 5
+price = 30
 tooltip = "HEALTH_ITEM_TOOLTIP_KEY"
 metadata/_custom_type_script = "uid://btsky0k62qlr3"

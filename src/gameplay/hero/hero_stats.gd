@@ -5,6 +5,7 @@ extends Node
 @export var movement_speed: float
 @export var damage: int
 @export var dash_length: float
+@export var vampire_strength: float
 
 @export var health_node: Health
 @export var hero_node: Hero

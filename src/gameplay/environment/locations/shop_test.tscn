@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6vuijlsbb5k8"]
+
+[ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_65yo6"]
+[ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_2olty"]
+[ext_resource type="PackedScene" uid="uid://b8w8vh6038ft0" path="res://gameplay/shop/shop.tscn" id="3_djho3"]
+
+[node name="Shop Test" type="Node3D"]
+
+[node name="Hero" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_65yo6")]
+camera = NodePath("../Camera Point")
+
+[node name="Camera Point" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_2olty")]
+transform = Transform3D(0.707107, -0.45452, 0.541675, 0, 0.766045, 0.642788, -0.707107, -0.45452, 0.541675, 0, 0, 0)
+target = NodePath("../Hero")
+
+[node name="Shop" parent="." node_paths=PackedStringArray("hero") instance=ExtResource("3_djho3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+hero = NodePath("../Hero")

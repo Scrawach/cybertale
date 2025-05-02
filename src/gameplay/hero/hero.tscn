@@ -321,3 +321,5 @@ health_node = NodePath("../Health")
 hero_node = NodePath("..")
 weapon_damage = NodePath("../Weapon/HurtBox")
 metadata/_custom_type_script = "uid://2vovnlvv2qkn"
+
+[connection signal="area_entered" from="Weapon/HurtBox" to="." method="_on_hurt_box_area_entered"]

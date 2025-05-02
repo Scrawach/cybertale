@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3 uid="uid://cxk7nail56hw0"]
+
+[ext_resource type="PackedScene" uid="uid://cgvvgdk5wett8" path="res://gameplay/enemies/turret/turret.tscn" id="1_1y3lx"]
+[ext_resource type="PackedScene" uid="uid://bkfe7or2qr1ti" path="res://gameplay/enemies/virus/chasing_virus.tscn" id="2_lq4xi"]
+[ext_resource type="PackedScene" uid="uid://d0763q65dmpb7" path="res://gameplay/enemies/virus/ranged_virus.tscn" id="3_ps470"]
+[ext_resource type="PackedScene" uid="uid://b5aahq5yu7fuu" path="res://gameplay/enemies/spikes/spikes.tscn" id="4_nv1s3"]
+[ext_resource type="PackedScene" uid="uid://dolepn0oqhymo" path="res://gameplay/enemies/boss/boss.tscn" id="5_nglla"]
+[ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box.tscn" id="6_y7p1g"]
+[ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="7_q5ows"]
+[ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="8_djcon"]
+[ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="9_q0yas"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_djcon"]
+vertices = PackedVector3Array(-24.5, 0.04, -24.5, -24.5, 0.04, 24.5, 24.5, 0.04, 24.5, 24.5, 0.04, -24.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+cell_height = 0.02
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pq8q7"]
+size = Vector2(50, 50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jnlp7"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[node name="Room" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_djcon")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_pq8q7")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jnlp7")
+
+[node name="Turret" parent="." instance=ExtResource("1_1y3lx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
+
+[node name="Chasing Virus" parent="." instance=ExtResource("2_lq4xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.598, 0, 0)
+is_endless_chasing = true
+
+[node name="Ranged Virus" parent="." instance=ExtResource("3_ps470")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.598, 0, 6)
+
+[node name="Spikes" parent="." instance=ExtResource("4_nv1s3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98831, 0, -6.25756)
+
+[node name="Spikes2" parent="." instance=ExtResource("4_nv1s3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98831, 0, -6.25756)
+
+[node name="Spikes3" parent="." instance=ExtResource("4_nv1s3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01169, 0, -6.25756)
+
+[node name="Boss" parent="." node_paths=PackedStringArray("hero") instance=ExtResource("5_nglla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+hero = NodePath("../Hero")
+
+[node name="Box" parent="." instance=ExtResource("6_y7p1g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Floating Sphere" parent="." instance=ExtResource("7_q5ows")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Hero" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("8_djcon")]
+camera = NodePath("../Camera Point")
+
+[node name="Camera Point" parent="." node_paths=PackedStringArray("target") instance=ExtResource("9_q0yas")]
+target = NodePath("../Hero")

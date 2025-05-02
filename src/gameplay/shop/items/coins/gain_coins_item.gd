@@ -1,11 +1,12 @@
-class_name ShopItemResource
-extends Resource
+class_name GainMaxHealthItem
+extends ShopItemResource
 
-@export var view: PackedScene
-@export var price: int
-@export var tooltip: String
+@export var strength: int
+
+var hero: Hero
 
 func apply(target: Hero) -> void:
+	hero = target
 	pass
 
 func before_room() -> void:
@@ -15,4 +16,4 @@ func after_room() -> void:
 	pass
 
 func get_tooltip_text() -> String:
-	return ""
+	return tr(tooltip) % strength

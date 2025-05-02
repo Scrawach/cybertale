@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var health: Health = $Health
 @onready var inventory: Inventory = $Inventory
 @onready var stats: HeroStats = $HeroStats
+@onready var effects: Array[ShopItemResource]
 
 @onready var attack_cooldown: Timer = $"Attack Cooldown"
 @onready var weapon_animation: AnimationPlayer = %"Weapon Animation Player"
@@ -99,3 +100,7 @@ func get_movement_input(relative: Node3D) -> Vector3:
 
 func pickup(item) -> void:
 	inventory.pickup(1)
+
+
+func _on_hurt_box_area_entered(area: Area3D) -> void:
+	health.heal(stats.vampire_strength * stats.damage)

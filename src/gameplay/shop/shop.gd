@@ -2,6 +2,7 @@ class_name Shop
 extends Node3D
 
 @export var hero: Hero
+@export var available_items: Array[ShopItemResource]
 
 func _ready() -> void:
 	initialize(hero)
@@ -10,6 +11,8 @@ func initialize(hero: Hero) -> void:
 	hero.inventory.coins_changed.connect(_on_coins_changed)
 	for child in get_children():
 		if child is ShopItemPlace:
+			var random_item_index: int = randf_range(0, available_items.size() - 1)
+			child.item = available_items[random_item_index]
 			child.initialize()
 			child.paint_price(hero.inventory.value)
 
