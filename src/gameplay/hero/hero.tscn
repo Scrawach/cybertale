@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://crlg8ydib8anl"]
+[gd_scene load_steps=23 format=3 uid="uid://crlg8ydib8anl"]
 
 [ext_resource type="Script" uid="uid://ps2fuefcsyco" path="res://gameplay/hero/hero.gd" id="1_x1143"]
+[ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="2_ryoj4"]
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="2_yer6i"]
 [ext_resource type="PackedScene" uid="uid://cmhrypiiccgbj" path="res://gameplay/common/health_bar.tscn" id="3_14oge"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="4_ftbyr"]
@@ -10,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://j4k0h7ijwbpb" path="res://icon.png" id="8_7k05w"]
 [ext_resource type="Script" uid="uid://clqb565wykfwe" path="res://gameplay/hero/hud/hero_hud.gd" id="8_60bh5"]
 [ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="9_60bh5"]
+[ext_resource type="Script" uid="uid://2vovnlvv2qkn" path="res://gameplay/hero/hero_stats.gd" id="11_6kq8y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
 
@@ -206,9 +208,11 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442581, 0.536847)
 mesh = SubResource("BoxMesh_x1143")
 
-[node name="Hitbox" type="Area3D" parent="."]
+[node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 4
 collision_mask = 8
+script = ExtResource("2_ryoj4")
+health = NodePath("../Health")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -307,4 +311,13 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 56
 text = "100"
 
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[node name="HeroStats" type="Node" parent="." node_paths=PackedStringArray("health_node", "hero_node", "weapon_damage")]
+script = ExtResource("11_6kq8y")
+health = 100
+movement_speed = 8.0
+damage = 5
+dash_length = 0.25
+health_node = NodePath("../Health")
+hero_node = NodePath("..")
+weapon_damage = NodePath("../Weapon/HurtBox")
+metadata/_custom_type_script = "uid://2vovnlvv2qkn"

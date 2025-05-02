@@ -50,8 +50,6 @@ shadow_enabled = true
 
 [node name="Hero" parent="World3D" node_paths=PackedStringArray("camera") instance=ExtResource("2_pyidc")]
 camera = NodePath("../Camera Point")
-movement_speed = 8.0
-dash_speed = 25.0
 
 [node name="Camera Point" parent="World3D" node_paths=PackedStringArray("target") instance=ExtResource("1_pq8q7")]
 transform = Transform3D(0.707107, -0.45452, 0.541675, 0, 0.766045, 0.642788, -0.707107, -0.45452, 0.541675, 0, 0, 0)

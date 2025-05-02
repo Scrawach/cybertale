@@ -7,6 +7,15 @@ signal died()
 @export var value: int
 @export var max_value: int
 
+func initialize(new_value: int) -> void:
+	value = new_value
+	max_value = new_value
+	changed.emit(self)
+
+func increase_max_value(increase: int) -> void:
+	max_value += increase
+	changed.emit(self)
+
 func take_damage(strength: int) -> void:
 	value = max(0, value - strength)
 	changed.emit(self)
