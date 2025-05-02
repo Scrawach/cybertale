@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MovementItem" load_steps=3 format=3 uid="uid://b8enbt4wpgc81"]
+
+[ext_resource type="Script" uid="uid://bnywdht7ce0s5" path="res://gameplay/shop/items/movement/movement_item.gd" id="1_3d61n"]
+[ext_resource type="PackedScene" uid="uid://7oc32glq1cdy" path="res://gameplay/shop/items/health/health_item_view.tscn" id="2_3c5g8"]
+
+[resource]
+script = ExtResource("1_3d61n")
+strength = 3
+view = ExtResource("2_3c5g8")
+price = 100
+tooltip = "MOVEMENT_ITEM_KEY"
+metadata/_custom_type_script = "uid://bnywdht7ce0s5"

@@ -1,4 +1,4 @@
-class_name GainCoinsItem
+class_name GainMaxHealthItem
 extends ShopItemResource
 
 @export var strength: int

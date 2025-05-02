@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_w3w1g")
-strength = 1
+strength = 5
 view = ExtResource("2_gsptn")
-price = 10
+price = 50
 tooltip = "HEAL_AFTER_ROOM_KEY"
 metadata/_custom_type_script = "uid://bgjwp8uwvpe61"

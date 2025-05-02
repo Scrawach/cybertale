@@ -1,6 +1,8 @@
 class_name Hero
 extends CharacterBody3D
 
+const GRAVITY: float = 9.81
+
 @export var camera: CameraPoint
 
 @onready var hitbox: Area3D = $Hitbox
@@ -13,6 +15,9 @@ extends CharacterBody3D
 @onready var attack_cooldown: Timer = $"Attack Cooldown"
 @onready var weapon_animation: AnimationPlayer = %"Weapon Animation Player"
 
+@onready var body_animation: AnimationPlayer = $"hero-base/AnimationPlayer"
+@onready var base_animation_scale: float = 1.2
+
 var is_dash: bool = false
 var direction_angle: float
 var is_attack_processing: bool
@@ -21,6 +26,8 @@ func _ready() -> void:
 	dash_timer.timeout.connect(_on_dash_timeout)
 
 func _physics_process(delta: float) -> void:
+	body_animation.speed_scale = stats.movement_speed / 8 * base_animation_scale
+	
 	if Input.is_action_just_pressed("attack") and attack_cooldown.is_stopped():
 		_attack_process()
 	
@@ -28,6 +35,7 @@ func _physics_process(delta: float) -> void:
 		_alt_attack_process()
 	
 	if is_attack_processing:
+		body_animation.play("Idle")
 		return
 	
 	if Input.is_action_just_pressed("dash") and not is_dash:
@@ -39,6 +47,7 @@ func _physics_process(delta: float) -> void:
 		_dash_process(delta)
 	
 	_rotation_process(delta)
+	_animation_process()
 
 func _rotation_process(delta: float) -> void:
 	if not Vector2(velocity.z, velocity.x).is_zero_approx():
@@ -46,9 +55,21 @@ func _rotation_process(delta: float) -> void:
 
 	rotation.y = lerp_angle(rotation.y, direction_angle, delta * 10)
 
-func _movement_process(_delta: float) -> void:
+func _animation_process() -> void:
+	if is_dash:
+		body_animation.play("Dash")
+		return
+	
+	if velocity.length_squared() > 0.2:
+		body_animation.play("FastRun")
+	else:
+		body_animation.play("Idle")
+
+func _movement_process(delta: float) -> void:
 	var movement_input = get_movement_input(camera.camera)
-	velocity = movement_input * stats.movement_speed
+	var movement = movement_input * stats.movement_speed
+	movement.y -= GRAVITY
+	velocity = movement
 	move_and_slide()
 
 func _alt_attack_process() -> void:

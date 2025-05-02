@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://crlg8ydib8anl"]
+[gd_scene load_steps=24 format=3 uid="uid://crlg8ydib8anl"]
 
 [ext_resource type="Script" uid="uid://ps2fuefcsyco" path="res://gameplay/hero/hero.gd" id="1_x1143"]
 [ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="2_ryoj4"]
+[ext_resource type="PackedScene" uid="uid://dgreagijn6w2o" path="res://gameplay/hero/models/hero_base.tscn" id="2_smhnq"]
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="2_yer6i"]
 [ext_resource type="PackedScene" uid="uid://cmhrypiiccgbj" path="res://gameplay/common/health_bar.tscn" id="3_14oge"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="4_ftbyr"]
@@ -195,8 +196,21 @@ height = 2.0
 collision_layer = 2
 script = ExtResource("1_x1143")
 
+[node name="hero-base" parent="." instance=ExtResource("2_smhnq")]
+
+[node name="Skeleton3D" parent="hero-base/Hero Bot" index="0"]
+bones/2/position = Vector3(5.96046e-08, 0.55388, 7.44187e-08)
+bones/3/position = Vector3(0.111599, 0.476484, -5.46298e-09)
+bones/3/rotation = Quaternion(2.86247e-06, -9.25278e-09, 0.999048, -0.0436191)
+bones/4/position = Vector3(-0.111599, 0.476484, -5.46298e-09)
+bones/4/rotation = Quaternion(-2.86247e-06, -9.25278e-09, 0.999048, 0.0436191)
+
+[node name="AnimationPlayer" parent="hero-base" index="1"]
+speed_scale = 1.2
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_pq8q7")
 debug_color = Color(3.60981e-07, 0.6475, 0.209294, 0.42)
 
@@ -314,7 +328,7 @@ text = "100"
 [node name="HeroStats" type="Node" parent="." node_paths=PackedStringArray("health_node", "hero_node", "weapon_damage")]
 script = ExtResource("11_6kq8y")
 health = 100
-movement_speed = 8.0
+movement_speed = 16.0
 damage = 5
 dash_length = 0.25
 health_node = NodePath("../Health")
@@ -323,3 +337,5 @@ weapon_damage = NodePath("../Weapon/HurtBox")
 metadata/_custom_type_script = "uid://2vovnlvv2qkn"
 
 [connection signal="area_entered" from="Weapon/HurtBox" to="." method="_on_hurt_box_area_entered"]
+
+[editable path="hero-base"]

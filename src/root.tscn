@@ -11,11 +11,10 @@ ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 sky_material = SubResource("ProceduralSkyMaterial_vho56")
 
 [sub_resource type="Environment" id="Environment_pyidc"]
-background_mode = 1
-background_color = Color(0.274093, 0.40233, 0.46737, 1)
 sky = SubResource("Sky_pq8q7")
-ambient_light_source = 2
 tonemap_mode = 2
+fog_light_color = Color(0.053457, 0.129716, 0.163795, 1)
+fog_density = 0.03
 
 [node name="Root" type="Node"]
 
@@ -24,11 +23,24 @@ environment = SubResource("Environment_pyidc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_specular = 0.871
 shadow_enabled = true
+directional_shadow_split_1 = 0.01
+sky_mode = 1
 
 [node name="World3D" type="Node3D" parent="."]
 
-[node name="Fight Room" parent="World3D" instance=ExtResource("1_pyidc")]
+[node name="Base Room" type="Node3D" parent="World3D"]
+
+[node name="Shop Room" type="Node3D" parent="World3D"]
+
+[node name="Boss Room" type="Node3D" parent="World3D"]
+
+[node name="Dungeon Generator" type="Node3D" parent="World3D"]
+
+[node name="Startup Room" type="Node3D" parent="World3D/Dungeon Generator"]
+
+[node name="Room" parent="World3D" instance=ExtResource("1_pyidc")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

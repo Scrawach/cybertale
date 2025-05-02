@@ -20,7 +20,7 @@ func get_dash_speed() -> float:
 
 func upgrade_health(value: int) -> void:
 	health += value
-	health_node.max_value = health
+	health_node.increase_max_value(health)
 
 func upgrade_damage(value: int) -> void:
 	damage += value
@@ -28,4 +28,3 @@ func upgrade_damage(value: int) -> void:
 
 func upgrade_movement_speed(value: float) -> void:
 	movement_speed += value
-	hero_node.movement_speed = movement_speed

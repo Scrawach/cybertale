@@ -51,7 +51,7 @@ visible = false
 initial_text = "BUY_INTERACT_KEY"
 
 [node name="Price Tooltip" type="Node3D" parent="Item"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 script = ExtResource("5_t8gki")
 
 [node name="Sprite3D" type="Sprite3D" parent="Item/Price Tooltip"]

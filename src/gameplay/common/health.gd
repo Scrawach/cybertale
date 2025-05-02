@@ -14,6 +14,7 @@ func initialize(new_value: int) -> void:
 
 func increase_max_value(increase: int) -> void:
 	max_value += increase
+	heal(increase)
 	changed.emit(self)
 
 func take_damage(strength: int) -> void:

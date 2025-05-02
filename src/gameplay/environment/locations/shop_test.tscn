@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6vuijlsbb5k8"]
+[gd_scene load_steps=11 format=3 uid="uid://b6vuijlsbb5k8"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_65yo6"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_2olty"]
 [ext_resource type="PackedScene" uid="uid://b8w8vh6038ft0" path="res://gameplay/shop/shop.tscn" id="3_djho3"]
+[ext_resource type="Script" uid="uid://dvkhhia37u4by" path="res://gameplay/shop/shop_item_resource.gd" id="4_delrr"]
+[ext_resource type="Resource" uid="uid://dwufohfi7gct" path="res://gameplay/shop/items/gain_max_health/gain_max_health.tres" id="5_4qujr"]
+[ext_resource type="Resource" uid="uid://ban234da1wur1" path="res://gameplay/shop/items/coins/gain_coins.tres" id="6_4pymb"]
+[ext_resource type="Resource" uid="uid://b6dp8xgrngxi4" path="res://gameplay/shop/items/health/health_item.tres" id="7_po3ml"]
+[ext_resource type="Resource" uid="uid://1kbf02drqvd5" path="res://gameplay/shop/items/heal_after_room/heal_after_room.tres" id="8_crqs5"]
+[ext_resource type="Resource" uid="uid://bkpaphlj0v3px" path="res://gameplay/shop/items/attack/attack_item.tres" id="9_xe6yp"]
+[ext_resource type="Resource" uid="uid://b8enbt4wpgc81" path="res://gameplay/shop/items/movement/movement_item.tres" id="10_satfk"]
 
 [node name="Shop Test" type="Node3D"]
 
@@ -16,3 +23,4 @@ target = NodePath("../Hero")
 [node name="Shop" parent="." node_paths=PackedStringArray("hero") instance=ExtResource("3_djho3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 hero = NodePath("../Hero")
+available_items = Array[ExtResource("4_delrr")]([ExtResource("5_4qujr"), ExtResource("6_4pymb"), ExtResource("7_po3ml"), ExtResource("8_crqs5"), ExtResource("9_xe6yp"), ExtResource("10_satfk")])
