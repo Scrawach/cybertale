@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HealthShopItemResource" load_steps=3 format=3 uid="uid://b6dp8xgrngxi4"]
+
+[ext_resource type="Script" uid="uid://btsky0k62qlr3" path="res://gameplay/shop/items/health/health_shop_item_resource.gd" id="1_4qful"]
+[ext_resource type="PackedScene" uid="uid://7oc32glq1cdy" path="res://gameplay/shop/items/health/health_item_view.tscn" id="2_8un0e"]
+
+[resource]
+script = ExtResource("1_4qful")
+strength = 10
+view = ExtResource("2_8un0e")
+price = 5
+metadata/_custom_type_script = "uid://btsky0k62qlr3"

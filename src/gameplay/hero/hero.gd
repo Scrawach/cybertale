@@ -11,6 +11,7 @@ extends CharacterBody3D
 @onready var inventory: Inventory = $Inventory
 
 @onready var attack_cooldown: Timer = $"Attack Cooldown"
+@onready var weapon_animation: AnimationPlayer = %"Weapon Animation Player"
 
 var is_dash: bool = false
 var direction_angle: float
@@ -47,19 +48,21 @@ func _movement_process(_delta: float) -> void:
 	move_and_slide()
 
 func _attack_process() -> void:
-	var view_point: Vector3 = camera.get_mouse_position_in_world_3d()
-	var view_direction: Vector3 = -1 * (view_point - global_position)
-	look_at(global_position + view_direction)
-	direction_angle = rotation_degrees.y
+	rotate_to_cursor()
 	
+	weapon_animation.play("attack")
 	attack_cooldown.start()
-	$HurtBox/MeshInstance3D.visible = true
-	$HurtBox/CollisionShape3D.disabled = false
 	is_attack_processing = true
 	await get_tree().create_timer(0.2).timeout
 	is_attack_processing = false
-	$HurtBox/MeshInstance3D.visible = false
-	$HurtBox/CollisionShape3D.disabled = true
+	weapon_animation.play("idle")
+
+func rotate_to_cursor() -> void:
+	var view_point: Vector3 = camera.get_mouse_position_in_world_3d()
+	view_point.y = 0
+	var view_direction: Vector3 = -1 * (view_point - global_position)
+	look_at(global_position + view_direction)
+	direction_angle = rotation_degrees.y
 
 func _start_dash() -> void:
 	is_dash = true

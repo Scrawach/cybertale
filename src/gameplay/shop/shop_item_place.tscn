@@ -1,24 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxa4qw700f0gr"]
+[gd_scene load_steps=8 format=3 uid="uid://dxa4qw700f0gr"]
 
+[ext_resource type="Script" uid="uid://b7uqeyrplobpb" path="res://gameplay/shop/shop_item_place.gd" id="1_7p1km"]
 [ext_resource type="Script" uid="uid://bvbf52vy74pv0" path="res://gameplay/environment/smooth_floating_3d.gd" id="1_bf30i"]
+[ext_resource type="Resource" uid="uid://b6dp8xgrngxi4" path="res://gameplay/shop/items/health/health_item.tres" id="2_td7wb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vyht1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bf3um"]
 size = Vector3(0.5, 0.5, 0.5)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_7p1km"]
+radius = 1.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_td7wb"]
+
 [node name="Shop Item Place" type="Node3D"]
+script = ExtResource("1_7p1km")
+item = ExtResource("2_td7wb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_vyht1")
 
 [node name="Item" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Item"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03248, 0)
+visible = false
 mesh = SubResource("BoxMesh_bf3um")
 
 [node name="SmoothFloating3D" type="Node" parent="Item" node_paths=PackedStringArray("target")]
 script = ExtResource("1_bf30i")
 target = NodePath("..")
 metadata/_custom_type_script = "uid://bvbf52vy74pv0"
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_7p1km")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_td7wb")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

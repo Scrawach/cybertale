@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://crlg8ydib8anl"]
+[gd_scene load_steps=18 format=3 uid="uid://crlg8ydib8anl"]
 
 [ext_resource type="Script" uid="uid://ps2fuefcsyco" path="res://gameplay/hero/hero.gd" id="1_x1143"]
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="2_yer6i"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="4_ftbyr"]
 [ext_resource type="Script" uid="uid://ckv3rciqqcvnf" path="res://gameplay/hero/inventory.gd" id="5_lkv0r"]
 [ext_resource type="PackedScene" uid="uid://byeax7q50kuds" path="res://gameplay/hero/coint_pickup_ui.tscn" id="6_drp30"]
+[ext_resource type="PackedScene" uid="uid://cje1y7u1oubc5" path="res://gameplay/hero/blocking_sword.blend" id="7_ygv0y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
 
@@ -16,6 +17,155 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pyidc"]
 radius = 0.4
+
+[sub_resource type="Animation" id="Animation_ygv0y"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.865584, 1, 0), Vector3(-0.866, 1.2, 0), Vector3(-0.865584, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(0, 1.5708, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_favdm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.865584, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtBox/CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7k05w"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.865584, 1, 0), Vector3(-0.865584, 1, 0), Vector3(-0.786832, 1, 0.849549)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(-1.0472, 2.61799, 1.5708)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtBox/CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_60bh5"]
+_data = {
+&"RESET": SubResource("Animation_favdm"),
+&"attack": SubResource("Animation_7k05w"),
+&"idle": SubResource("Animation_ygv0y")
+}
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_14oge"]
 radius = 1.0
@@ -63,21 +213,6 @@ max_value = 100
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 health = NodePath("../Health")
 
-[node name="HurtBox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
-collision_layer = 64
-collision_mask = 32
-script = ExtResource("4_ftbyr")
-value = 5
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
-shape = SubResource("SphereShape3D_14oge")
-disabled = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="HurtBox"]
-visible = false
-mesh = SubResource("SphereMesh_ftbyr")
-
 [node name="Attack Cooldown" type="Timer" parent="."]
 one_shot = true
 
@@ -87,5 +222,32 @@ script = ExtResource("5_lkv0r")
 [node name="Coint Pickup UI" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("6_drp30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.657655, 0)
 inventory = NodePath("../Inventory")
+
+[node name="Weapon" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.865584, 1, 0)
+
+[node name="blocking_sword" parent="Weapon" instance=ExtResource("7_ygv0y")]
+
+[node name="Weapon Animation Player" type="AnimationPlayer" parent="Weapon"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_60bh5")
+}
+autoplay = "idle"
+speed_scale = 5.0
+
+[node name="HurtBox" type="Area3D" parent="Weapon"]
+transform = Transform3D(-0.433013, 0.5, 0.75, 0.866025, 0, 0.5, 0.25, 0.866025, -0.433013, -0.22787, 0.756642, 0.131561)
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("4_ftbyr")
+value = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Weapon/HurtBox"]
+shape = SubResource("SphereShape3D_14oge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Weapon/HurtBox"]
+visible = false
+mesh = SubResource("SphereMesh_ftbyr")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
