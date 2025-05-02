@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://gbxjv8xjs2b1"]
+[gd_scene load_steps=8 format=3 uid="uid://gbxjv8xjs2b1"]
 
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="1_7rpqw"]
 [ext_resource type="Script" uid="uid://dh156tg8jvery" path="res://gameplay/enemies/floating/floating_sphere.gd" id="1_fkqck"]
@@ -6,6 +6,43 @@
 [sub_resource type="SphereMesh" id="SphereMesh_huihk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tw3kd"]
+
+[sub_resource type="Animation" id="Animation_fkqck"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("View:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p6557"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("View:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fm5bg"]
+_data = {
+&"RESET": SubResource("Animation_p6557"),
+&"idle": SubResource("Animation_fkqck")
+}
 
 [node name="Floating Sphere" type="Node3D"]
 script = ExtResource("1_fkqck")
@@ -16,14 +53,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="View"]
 mesh = SubResource("SphereMesh_huihk")
 
-[node name="Hurt Box" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="Hurt Box" type="Area3D" parent="View"]
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("1_7rpqw")
 value = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurt Box"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="View/Hurt Box"]
 shape = SubResource("SphereShape3D_tw3kd")
 
-[connection signal="area_entered" from="Hurt Box" to="." method="_on_hurt_box_area_entered"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fm5bg")
+}
+autoplay = "idle"
+speed_scale = 0.5
+
+[connection signal="area_entered" from="View/Hurt Box" to="." method="_on_hurt_box_area_entered"]
