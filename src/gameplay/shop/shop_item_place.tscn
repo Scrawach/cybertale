@@ -24,6 +24,7 @@ radius = 1.5
 [node name="Shop Item Place" type="Node3D"]
 script = ExtResource("1_7p1km")
 item = ExtResource("2_td7wb")
+not_enough_label_color = Color(0.625575, 1.43189e-06, 5.77569e-07, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_vyht1")
@@ -47,6 +48,7 @@ visible = false
 [node name="Buy Tooltip" parent="Item" instance=ExtResource("4_xwcky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 visible = false
+initial_text = "BUY_INTERACT_KEY"
 
 [node name="Price Tooltip" type="Node3D" parent="Item"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

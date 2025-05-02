@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dolepn0oqhymo"]
+[gd_scene load_steps=19 format=3 uid="uid://dolepn0oqhymo"]
 
 [ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="1_i2yv3"]
 [ext_resource type="Script" uid="uid://c22exopbnidld" path="res://gameplay/enemies/boss/boss.gd" id="1_sjs6l"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://tvgmq41j3lhy" path="res://gameplay/enemies/boss/bombs/boss_bomb.tscn" id="6_gq7ic"]
 [ext_resource type="Script" uid="uid://davywyg5lnttl" path="res://gameplay/enemies/boss/stages/boss_waiting.gd" id="6_s2xka"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="7_s2xka"]
+[ext_resource type="Script" uid="uid://ku7uo0oubavo" path="res://gameplay/enemies/boss/hud/boss_hud.gd" id="9_j0e7c"]
+[ext_resource type="Script" uid="uid://dkkhphqh8vkxx" path="res://gameplay/common/death.gd" id="10_2q0ix"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gd4vy"]
 radius = 2.5
@@ -22,13 +24,19 @@ radius = 2.5
 radius = 6.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_gq7ic"]
-radius = 3.0
+radius = 6.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j0e7c"]
 transparency = 1
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(1, 0, 0, 0.278431)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0e7c"]
+bg_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2q0ix"]
+bg_color = Color(0.964706, 0, 0, 1)
 
 [node name="Boss" type="CharacterBody3D"]
 script = ExtResource("1_sjs6l")
@@ -104,3 +112,34 @@ disabled = true
 visible = false
 mesh = SubResource("SphereMesh_gq7ic")
 surface_material_override/0 = SubResource("StandardMaterial3D_j0e7c")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" node_paths=PackedStringArray("health")]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -77.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 50
+script = ExtResource("9_j0e7c")
+health = NodePath("../../Health")
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_j0e7c")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2q0ix")
+max_value = 200.0
+value = 100.0
+show_percentage = false
+
+[node name="Death" type="Node" parent="." node_paths=PackedStringArray("health", "body")]
+script = ExtResource("10_2q0ix")
+health = NodePath("../Health")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://dkkhphqh8vkxx"

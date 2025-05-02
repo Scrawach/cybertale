@@ -3,26 +3,31 @@ extends Node3D
 
 @export var item: ShopItemResource
 
+@export var not_enough_label_color: Color
+
 @onready var item_view: Node3D = $Item
 @onready var collision: CollisionShape3D = %CollisionShape3D
 @onready var tooltip: WorldSpaceTooltip = $Item/WorldSpaceTooltip
 @onready var price_tooltip: WorldSpaceTooltip = $"Item/Price Tooltip"
+@onready var price_label: Label = %Label
 @onready var buy_tooltip: WorldSpaceTooltip = $"Item/Buy Tooltip"
 
 var target: Hero
-
-func _ready() -> void:
-	initialize()
 
 func initialize() -> void:
 	var view: Node3D = item.view.instantiate()
 	item_view.add_child(view)
 	setup_tooltips()
 
+func paint_price(coins: int) -> void:
+	if item.price > coins:
+		price_label.self_modulate = not_enough_label_color
+	else:
+		price_label.self_modulate = Color.WHITE
+
 func setup_tooltips() -> void:
 	tooltip.setup(item.get_tooltip_text())
 	price_tooltip.setup(str(item.price))
-	buy_tooltip.setup(tr("BUY_INTERACT_KEY"))
 
 func _input(event: InputEvent) -> void:
 	if target != null and event.is_action_pressed("interact"):

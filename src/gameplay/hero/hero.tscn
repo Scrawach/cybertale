@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://crlg8ydib8anl"]
+[gd_scene load_steps=21 format=3 uid="uid://crlg8ydib8anl"]
 
 [ext_resource type="Script" uid="uid://ps2fuefcsyco" path="res://gameplay/hero/hero.gd" id="1_x1143"]
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="2_yer6i"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" uid="uid://ckv3rciqqcvnf" path="res://gameplay/hero/inventory.gd" id="5_lkv0r"]
 [ext_resource type="PackedScene" uid="uid://byeax7q50kuds" path="res://gameplay/hero/coint_pickup_ui.tscn" id="6_drp30"]
 [ext_resource type="PackedScene" uid="uid://dlm44l7nqss2b" path="res://gameplay/hero/blocking_sword.glb" id="7_ygv0y"]
+[ext_resource type="Texture2D" uid="uid://j4k0h7ijwbpb" path="res://icon.png" id="8_7k05w"]
+[ext_resource type="Script" uid="uid://clqb565wykfwe" path="res://gameplay/hero/hud/hero_hud.gd" id="8_60bh5"]
+[ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="9_60bh5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
 
@@ -263,5 +266,45 @@ disabled = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Weapon/HurtBox"]
 visible = false
 mesh = SubResource("SphereMesh_ftbyr")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hero HUD" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("inventory")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("8_60bh5")
+inventory = NodePath("../../Inventory")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Hero HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Hero HUD/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Hero HUD/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("8_7k05w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/Hero HUD/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("9_60bh5")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 56
+text = "100"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

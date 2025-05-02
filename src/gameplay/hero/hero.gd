@@ -25,6 +25,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and attack_cooldown.is_stopped():
 		_attack_process()
 	
+	if Input.is_action_just_pressed("alt_attack") and attack_cooldown.is_stopped():
+		_alt_attack_process()
+	
 	if is_attack_processing:
 		return
 	
@@ -49,15 +52,17 @@ func _movement_process(_delta: float) -> void:
 	velocity = movement_input * movement_speed
 	move_and_slide()
 
-func _attack_process() -> void:
-	rotate_to_cursor()
-	
+func _alt_attack_process() -> void:
 	weapon_animation.play("attack")
 	attack_cooldown.start()
 	is_attack_processing = true
 	await get_tree().create_timer(0.2).timeout
 	is_attack_processing = false
 	weapon_animation.play("idle")
+
+func _attack_process() -> void:
+	rotate_to_cursor()
+	_alt_attack_process()
 
 func rotate_to_cursor() -> void:
 	var view_point: Vector3 = camera.get_mouse_position_in_world_3d()

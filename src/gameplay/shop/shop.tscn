@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8w8vh6038ft0"]
+[gd_scene load_steps=3 format=3 uid="uid://b8w8vh6038ft0"]
 
 [ext_resource type="PackedScene" uid="uid://dxa4qw700f0gr" path="res://gameplay/shop/shop_item_place.tscn" id="1_4byi3"]
+[ext_resource type="Script" uid="uid://dv7l3q1w4kjre" path="res://gameplay/shop/shop.gd" id="1_ufn31"]
 
 [node name="Shop" type="Node3D"]
+script = ExtResource("1_ufn31")
 
 [node name="Shop Item Place" parent="." instance=ExtResource("1_4byi3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
