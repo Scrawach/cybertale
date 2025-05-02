@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3 uid="uid://dolepn0oqhymo"]
+
+[ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="1_i2yv3"]
+[ext_resource type="Script" uid="uid://c22exopbnidld" path="res://gameplay/enemies/boss/boss.gd" id="1_sjs6l"]
+[ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="2_sjs6l"]
+[ext_resource type="Script" uid="uid://bq2skqf4slwo" path="res://gameplay/enemies/boss/stages/boss_chasing.gd" id="4_sahvm"]
+[ext_resource type="Script" uid="uid://v8wapx6ixbrh" path="res://gameplay/enemies/boss/stages/boss_bombs.gd" id="5_jgtq3"]
+[ext_resource type="Script" uid="uid://davywyg5lnttl" path="res://gameplay/enemies/boss/stages/boss_waiting.gd" id="6_s2xka"]
+[ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="7_s2xka"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gd4vy"]
+radius = 2.5
+
+[sub_resource type="PrismMesh" id="PrismMesh_bf3um"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tw3kd"]
+radius = 2.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s2xka"]
+radius = 6.0
+
+[node name="Boss" type="CharacterBody3D"]
+script = ExtResource("1_sjs6l")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_gd4vy")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="View" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="View"]
+mesh = SubResource("PrismMesh_bf3um")
+
+[node name="HitBox" type="Area3D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("1_i2yv3")
+health = NodePath("../Health")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("SphereShape3D_tw3kd")
+debug_color = Color(0.968627, 0.0352941, 0, 1)
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_sjs6l")
+value = 150
+max_value = 150
+metadata/_custom_type_script = "uid://b8hqs1hbipqv7"
+
+[node name="Fire Point" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2)
+
+[node name="Behaviour" type="Node" parent="."]
+
+[node name="Chasing" type="Node" parent="Behaviour" node_paths=PackedStringArray("boss", "nav_agent", "collision")]
+unique_name_in_owner = true
+script = ExtResource("4_sahvm")
+boss = NodePath("../..")
+nav_agent = NodePath("../../NavigationAgent3D")
+collision = NodePath("../../Attack HurtBox/CollisionShape3D")
+
+[node name="Bombs" type="Node" parent="Behaviour"]
+unique_name_in_owner = true
+script = ExtResource("5_jgtq3")
+
+[node name="Waiting" type="Node" parent="Behaviour" node_paths=PackedStringArray("boss")]
+unique_name_in_owner = true
+script = ExtResource("6_s2xka")
+boss = NodePath("../..")
+min_time = 2.0
+max_time = 4.0
+
+[node name="Timer" type="Timer" parent="Behaviour/Waiting"]
+one_shot = true
+
+[node name="Attack HurtBox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("7_s2xka")
+value = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attack HurtBox"]
+shape = SubResource("SphereShape3D_s2xka")
+disabled = true

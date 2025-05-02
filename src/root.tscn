@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=16 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="1_pq8q7"]
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="2_pyidc"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b5aahq5yu7fuu" path="res://gameplay/enemies/spikes/spikes.tscn" id="5_jnlp7"]
 [ext_resource type="PackedScene" uid="uid://d0763q65dmpb7" path="res://gameplay/enemies/virus/ranged_virus.tscn" id="5_vyht1"]
 [ext_resource type="PackedScene" uid="uid://b8w8vh6038ft0" path="res://gameplay/shop/shop.tscn" id="6_l8v81"]
+[ext_resource type="PackedScene" uid="uid://dolepn0oqhymo" path="res://gameplay/enemies/boss/boss.tscn" id="7_huihk"]
 [ext_resource type="PackedScene" uid="uid://dsk1kogc4v1iw" path="res://gameplay/enemies/virus/projectiles/enemy_projectile.tscn" id="8_bf3um"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
@@ -86,6 +87,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98831, 0, -6.25756)
 
 [node name="Spikes3" parent="World3D/Room" instance=ExtResource("5_jnlp7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01169, 0, -6.25756)
+
+[node name="Boss" parent="World3D/Room" node_paths=PackedStringArray("hero") instance=ExtResource("7_huihk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+hero = NodePath("../../Hero")
 
 [node name="Shop" parent="World3D" instance=ExtResource("6_l8v81")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
