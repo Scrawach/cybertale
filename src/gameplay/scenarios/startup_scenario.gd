@@ -28,5 +28,5 @@ func execute() -> void:
 	gameplay_world.start(hero)
 
 func wait_complete(room: ScenarioRoom) -> Hero:
-	var result = await room.door.teleported
+	var result = await room.door.used
 	return result[0] as Hero

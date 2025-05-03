@@ -6,3 +6,6 @@ extends Node3D
 
 func start() -> void:
 	pass 
+
+func stop() -> void:
+	pass

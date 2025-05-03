@@ -1,6 +1,9 @@
-[gd_scene load_steps=18 format=4 uid="uid://bidvxu0rv31ay"]
+[gd_scene load_steps=21 format=4 uid="uid://bidvxu0rv31ay"]
 
 [ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="1_3bpu3"]
+[ext_resource type="Script" uid="uid://cost74er78pu0" path="res://gameplay/environment/rooms/specific/fight_room.gd" id="1_cpm4f"]
+[ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="2_uymcj"]
+[ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="3_rcd7p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2kfs"]
 resource_name = "Stone"
@@ -249,7 +252,15 @@ resource_local_to_scene = true
 vertices = PackedVector3Array(-0.173222, 0, 0.4, 0.4, 0, -0.4, 0.4, 0, 0.4, -0.173222, 0, -0.4, -0.173222, 0, -1.20726, 0.4, 0, -2.01453, 0.4, 0, -1.20726, -0.173222, 0, -2.01453, 0.925253, 0, -0.803632, 1.45051, 0, -0.4, 0.925253, 0, -0.4, 1.45051, 0, -0.803632, -0.440404, 0, -1.20726, -0.440404, 0, -2.01453, -0.440404, 0, 0.4, -0.440404, 0, -0.4, 0.925253, 0, -2.01453, 1.45051, 0, -2.82261, 1.45051, 0, -2.01453, 0.925253, 0, -2.82261, -0.440404, 0, -0.803632, -0.173222, 0, -0.803632, 1.45051, 0, -1.20726, 0.925253, 0, -1.20726, 0.4, 0, -0.803632, 2.17778, 0, -0.4, 2.17778, 0, -0.803632, -0.173222, 0, 1.20808, 0.4, 0, 1.20808, 0.4, 0, -2.82261, 2.17778, 0, -1.20726)
 polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(0, 3, 1), PackedInt32Array(4, 5, 6), PackedInt32Array(4, 7, 5), PackedInt32Array(8, 9, 10), PackedInt32Array(8, 11, 9), PackedInt32Array(12, 7, 4), PackedInt32Array(12, 13, 7), PackedInt32Array(14, 3, 0), PackedInt32Array(14, 15, 3), PackedInt32Array(16, 17, 18), PackedInt32Array(16, 19, 17), PackedInt32Array(20, 4, 21), PackedInt32Array(20, 12, 4), PackedInt32Array(16, 22, 23), PackedInt32Array(16, 18, 22), PackedInt32Array(21, 6, 24), PackedInt32Array(21, 4, 6), PackedInt32Array(11, 25, 9), PackedInt32Array(11, 26, 25), PackedInt32Array(2, 27, 0), PackedInt32Array(2, 28, 27), PackedInt32Array(5, 23, 6), PackedInt32Array(5, 16, 23), PackedInt32Array(5, 19, 16), PackedInt32Array(5, 29, 19), PackedInt32Array(24, 10, 1), PackedInt32Array(24, 8, 10), PackedInt32Array(6, 8, 24), PackedInt32Array(6, 23, 8), PackedInt32Array(22, 26, 11), PackedInt32Array(22, 30, 26), PackedInt32Array(3, 24, 1), PackedInt32Array(3, 21, 24), PackedInt32Array(15, 21, 3), PackedInt32Array(15, 20, 21), PackedInt32Array(23, 11, 8), PackedInt32Array(23, 22, 11)]
 
-[node name="Fight Room" type="Node3D"]
+[node name="Fight Room" type="Node3D" node_paths=PackedStringArray("doors", "region", "door", "player_spawn")]
+script = ExtResource("1_cpm4f")
+doors = [NodePath("Next Room Door"), NodePath("Next Room Door2")]
+want_to_spawn = 6
+region = NodePath("fight_location_0/@NavigationRegion3D@322756")
+spawn_targets = Array[PackedScene]([ExtResource("2_uymcj")])
+spawn_vfx = ExtResource("3_rcd7p")
+door = NodePath("Next Room Door")
+player_spawn = NodePath("Marker3D")
 
 [node name="fight_location_0" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -265,7 +276,7 @@ mesh = SubResource("ArrayMesh_gs5wt")
 skeleton = NodePath("")
 
 [node name="Cube_015" type="MeshInstance3D" parent="fight_location_0"]
-transform = Transform3D(0.970374, 0, 0.241608, 0, 1, 0, -0.241608, 0, 0.970374, -7.8575, -15.2764, -6.39079)
+transform = Transform3D(0.970374, 0, 0.241608, 0, 1, 0, -0.241608, 0, 0.970374, -7.8575, -41.4389, -6.39079)
 mesh = SubResource("ArrayMesh_yvrvs")
 skeleton = NodePath("")
 
@@ -275,7 +286,7 @@ mesh = SubResource("ArrayMesh_anx1u")
 skeleton = NodePath("")
 
 [node name="Cube_001" type="MeshInstance3D" parent="fight_location_0"]
-transform = Transform3D(0.876531, 0, 0.218242, 0, 1, 0, -0.218242, 0, 0.876531, -7.8575, -4.87641, -6.39079)
+transform = Transform3D(0.876531, 0, 0.218242, 0, 1, 0, -0.218242, 0, 0.876531, -7.8575, -11.7632, -6.39079)
 mesh = SubResource("ArrayMesh_yvrvs")
 skeleton = NodePath("")
 
@@ -447,6 +458,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -1)
 
 [node name="Next Room Door" parent="." instance=ExtResource("1_3bpu3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -21)
+is_disable = true
 
 [node name="Next Room Door2" parent="." instance=ExtResource("1_3bpu3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -27, 0, -9)
+is_disable = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="Enemies" type="Node3D" parent="."]

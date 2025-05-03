@@ -1,21 +1,18 @@
 class_name NextRoomDoor
 extends Node3D
 
-@export var next_room: Room
+signal used(hero: Hero, door: NextRoomDoor)
+
+@export var next_room: String
 @export var is_disable: bool
 
 @onready var collision: CollisionShape3D = $"Teleport Area/CollisionShape3D"
 @onready var view: Node3D = $View
 @onready var animation: AnimationPlayer = $AnimationPlayer
 
-signal teleported(body: Hero, next_room: Room)
-
 func _ready() -> void:
 	if is_disable:
 		disable()
-
-func _on_teleport_area_body_entered(body: Hero) -> void:
-	teleported.emit(body, next_room)
 
 func disable() -> void:
 	collision.disabled = true
@@ -28,3 +25,6 @@ func enable() -> void:
 	view.visible = true
 	await get_tree().create_timer(1.0).timeout
 	collision.disabled = false
+
+func _on_teleport_area_body_entered(body: Hero) -> void:
+	used.emit(body, self)

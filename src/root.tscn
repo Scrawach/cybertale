@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=29 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
@@ -7,7 +7,8 @@
 [ext_resource type="Script" uid="uid://dl7u5fm8mkbej" path="res://gameplay/environment/gameplay_world.gd" id="7_sq7yr"]
 [ext_resource type="PackedScene" uid="uid://c6i783kul21w6" path="res://gameplay/environment/rooms/specific/startup_room.tscn" id="7_tw3kd"]
 [ext_resource type="Script" uid="uid://b66uyqqqv4agm" path="res://gameplay/meta/loading.gd" id="8_qt76e"]
-[ext_resource type="Script" uid="uid://bnsvvsyn1huo" path="res://gameplay/environment/game_progress/smart_progress_bar.gd" id="8_r3r3k"]
+[ext_resource type="PackedScene" uid="uid://bidvxu0rv31ay" path="res://gameplay/environment/rooms/specific/fight_room.tscn" id="8_r3r3k"]
+[ext_resource type="Script" uid="uid://bnsvvsyn1huo" path="res://gameplay/environment/game_progress/smart_progress_bar.gd" id="9_50g4q"]
 [ext_resource type="PackedScene" uid="uid://sc6ch0vywry6" path="res://gameplay/environment/game_progress/room_icon.tscn" id="9_blcw0"]
 [ext_resource type="PackedScene" uid="uid://cwjehs5bqr6yj" path="res://gameplay/environment/rooms/specific/training_fight_room.tscn" id="9_gd4vy"]
 [ext_resource type="PackedScene" uid="uid://c07q6t30ebyah" path="res://gameplay/environment/rooms/specific/bridge_room.tscn" id="9_huihk"]
@@ -122,6 +123,7 @@ want_to_spawn = 3
 
 [node name="Gameplay World" type="Node3D" parent="World3D"]
 script = ExtResource("7_sq7yr")
+fighting_room_template = ExtResource("8_r3r3k")
 
 [node name="Game Progress" type="CanvasLayer" parent="World3D/Gameplay World"]
 
@@ -143,7 +145,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_blcw0")
 theme_override_styles/fill = SubResource("StyleBoxFlat_50g4q")
 max_value = 6.0
 show_percentage = false
-script = ExtResource("8_r3r3k")
+script = ExtResource("9_50g4q")
 room_icon = ExtResource("9_blcw0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
