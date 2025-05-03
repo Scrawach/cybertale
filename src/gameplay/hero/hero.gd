@@ -106,11 +106,13 @@ func rotate_to_cursor() -> void:
 	rotation.y = direction_angle
 
 func _start_dash() -> void:
+	camera.add_size(2)
 	is_dash = true
 	hitbox.monitoring = false
 	dash_timer.start(stats.dash_length)
 
 func _end_dash() -> void:
+	camera.reset_size()
 	is_dash = false
 	hitbox.monitoring = true
 	dash_timer.stop()

@@ -6,6 +6,12 @@ extends Node3D
 @onready var camera: Camera3D = $"Camera Length/Camera3D"
 @onready var shaker: CameraShaker = $"Camera Shaker"
 
+var base_size: float
+var tween: Tween
+
+func _ready() -> void:
+	base_size = camera.size
+
 func _physics_process(_delta: float) -> void:
 	if target == null:
 		return
@@ -14,6 +20,21 @@ func _physics_process(_delta: float) -> void:
 
 func shake(strength: float = 0.1):
 	shaker.shake(strength)
+
+func add_size(value: float) -> void:
+	if tween:
+		tween.kill()
+	
+	tween = create_tween()
+	tween.tween_property(camera, "size", base_size + value, 0.3)
+
+func reset_size() -> void:
+	if tween:
+		tween.kill()
+	
+	tween = create_tween()
+	tween.tween_property(camera, "size", base_size, 0.3)
+
 
 func get_mouse_position_in_world_3d() -> Vector3:
 	var plane = Plane(Vector3(0, 1, 0), 0)
