@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=12 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
 [ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box.tscn" id="3_28aoi"]
+[ext_resource type="PackedScene" uid="uid://dqpbotjwi8ltd" path="res://gameplay/hero/hit/hit_vfx.tscn" id="5_jnlp7"]
 [ext_resource type="Script" uid="uid://d35nxihjtikcy" path="res://localization/language_option.gd" id="11_gd4vy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
@@ -103,3 +104,7 @@ offset_right = 32.0
 offset_bottom = 20.0
 script = ExtResource("11_gd4vy")
 metadata/_custom_type_script = "uid://d35nxihjtikcy"
+
+[node name="Particles Warming" type="Node3D" parent="."]
+
+[node name="Hit VFX" parent="Particles Warming" instance=ExtResource("5_jnlp7")]
