@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=23 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
 [ext_resource type="PackedScene" uid="uid://dqpbotjwi8ltd" path="res://gameplay/hero/hit/hit_vfx.tscn" id="5_jnlp7"]
 [ext_resource type="Script" uid="uid://sy1okakhrrii" path="res://gameplay/scenarios/startup_scenario.gd" id="7_gd4vy"]
 [ext_resource type="PackedScene" uid="uid://c6i783kul21w6" path="res://gameplay/environment/rooms/specific/startup_room.tscn" id="7_tw3kd"]
+[ext_resource type="Script" uid="uid://b66uyqqqv4agm" path="res://gameplay/meta/loading.gd" id="8_qt76e"]
 [ext_resource type="PackedScene" uid="uid://cwjehs5bqr6yj" path="res://gameplay/environment/rooms/specific/training_fight_room.tscn" id="9_gd4vy"]
 [ext_resource type="PackedScene" uid="uid://c07q6t30ebyah" path="res://gameplay/environment/rooms/specific/bridge_room.tscn" id="9_huihk"]
 [ext_resource type="PackedScene" uid="uid://0xk5oow351fp" path="res://gameplay/hero/slash/slash_vfx.tscn" id="9_tw3kd"]
@@ -114,14 +115,15 @@ offset_bottom = 20.0
 script = ExtResource("11_gd4vy")
 metadata/_custom_type_script = "uid://d35nxihjtikcy"
 
-[node name="Loading Screen" type="TextureRect" parent="CanvasLayer"]
-visible = false
+[node name="Loading Screen" type="TextureRect" parent="CanvasLayer" node_paths=PackedStringArray("artifacts")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_huihk")
+script = ExtResource("8_qt76e")
+artifacts = NodePath("../../Shaders Precompilation")
 
 [node name="Label" type="Label" parent="CanvasLayer/Loading Screen"]
 layout_mode = 1
@@ -139,6 +141,7 @@ grow_vertical = 2
 text = "LOADING"
 
 [node name="Shaders Precompilation" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -1)
 
 [node name="Hit VFX" parent="Shaders Precompilation" instance=ExtResource("5_jnlp7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
