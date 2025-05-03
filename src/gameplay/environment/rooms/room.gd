@@ -5,6 +5,8 @@ signal teleport_player_to(body: Hero, target: Room)
 
 @export var hero_marker: Marker3D
 
+@onready var nav_region = $NavigationRegion3D
+
 var doors: Array[NextRoomDoor]
 
 func _ready() -> void:
@@ -20,7 +22,7 @@ func enable() -> void:
 	pass
 
 func disable() -> void:
-	pass
+	nav_region.enabled = false
 
 func open_doors() -> void:
 	for door in doors:

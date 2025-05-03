@@ -11,10 +11,10 @@
 [ext_resource type="Script" uid="uid://ckv3rciqqcvnf" path="res://gameplay/hero/inventory.gd" id="5_lkv0r"]
 [ext_resource type="PackedScene" uid="uid://byeax7q50kuds" path="res://gameplay/hero/coint_pickup_ui.tscn" id="6_drp30"]
 [ext_resource type="PackedScene" uid="uid://dlm44l7nqss2b" path="res://gameplay/hero/blocking_sword.glb" id="7_ygv0y"]
-[ext_resource type="Texture2D" uid="uid://j4k0h7ijwbpb" path="res://icon.png" id="8_7k05w"]
 [ext_resource type="Script" uid="uid://clqb565wykfwe" path="res://gameplay/hero/hud/hero_hud.gd" id="8_60bh5"]
 [ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="9_60bh5"]
 [ext_resource type="Script" uid="uid://2vovnlvv2qkn" path="res://gameplay/hero/hero_stats.gd" id="11_6kq8y"]
+[ext_resource type="Texture2D" uid="uid://m7vcjsans2o3" path="res://gameplay/items/coin_icon.png" id="13_boq6a"]
 [ext_resource type="PackedScene" uid="uid://0xk5oow351fp" path="res://gameplay/hero/slash/slash_vfx.tscn" id="14_hrca2"]
 [ext_resource type="ArrayMesh" uid="uid://d3si88bul1c2f" path="res://gameplay/hero/models/dash.res" id="17_dxtfw"]
 [ext_resource type="Shader" uid="uid://bfisk5hogwidb" path="res://gameplay/hero/dash/dash_shader.tres" id="18_boq6a"]
@@ -310,12 +310,12 @@ theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Hero HUD/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 10
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Hero HUD/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-texture = ExtResource("8_7k05w")
+texture = ExtResource("13_boq6a")
 expand_mode = 1
 stretch_mode = 5
 

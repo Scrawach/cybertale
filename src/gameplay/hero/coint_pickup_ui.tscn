@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://byeax7q50kuds"]
+[gd_scene load_steps=9 format=3 uid="uid://byeax7q50kuds"]
 
-[ext_resource type="Texture2D" uid="uid://j4k0h7ijwbpb" path="res://icon.png" id="1_0nmam"]
 [ext_resource type="Script" uid="uid://cgkgqvj4bimsd" path="res://gameplay/hero/coint_pickup_ui.gd" id="1_66aj5"]
 [ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="2_66aj5"]
+[ext_resource type="Texture2D" uid="uid://m7vcjsans2o3" path="res://gameplay/items/coin_icon.png" id="2_fbawj"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0nmam"]
 viewport_path = NodePath("SubViewport")
@@ -44,11 +44,7 @@ _data = {
 &"pickup": SubResource("Animation_66aj5")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_66aj5"]
-bg_color = Color(0, 0, 0, 0)
-shadow_size = 5
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_66aj5"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oqe6a"]
 
 [node name="Coint Pickup UI" type="Node3D"]
 script = ExtResource("1_66aj5")
@@ -94,7 +90,7 @@ offset_right = 24.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_66aj5")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oqe6a")
 
 [node name="MarginContainer" type="MarginContainer" parent="SubViewport/Control/PanelContainer"]
 layout_mode = 2
@@ -107,16 +103,27 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 alignment = 1
 
-[node name="Control" type="PanelContainer" parent="SubViewport/Control/PanelContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(20, 20)
+[node name="Control" type="Control" parent="SubViewport/Control/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_66aj5")
 
 [node name="TextureRect" type="TextureRect" parent="SubViewport/Control/PanelContainer/MarginContainer/HBoxContainer/Control"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-texture = ExtResource("1_0nmam")
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(18, 18)
+texture = ExtResource("2_fbawj")
 expand_mode = 1
 stretch_mode = 5
 
@@ -126,6 +133,6 @@ layout_mode = 2
 theme = ExtResource("2_66aj5")
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 24
-text = "9"
+text = "999"
 
 [node name="Awaiting" type="Timer" parent="."]

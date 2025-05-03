@@ -61,9 +61,8 @@ sky_mode = 1
 
 [node name="Boss Room" type="Node3D" parent="World3D"]
 
-[node name="Dungeon Generator" type="Node3D" parent="World3D" node_paths=PackedStringArray("current_room")]
+[node name="Dungeon Generator" type="Node3D" parent="World3D"]
 script = ExtResource("1_vyht1")
-current_room = NodePath("Startup Room")
 
 [node name="Startup Room" type="Node3D" parent="World3D/Dungeon Generator" node_paths=PackedStringArray("hero_marker")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, 0)
