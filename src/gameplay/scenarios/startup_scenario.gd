@@ -12,10 +12,11 @@ func _ready() -> void:
 
 func execute() -> void:
 	hero.show_health_bar(false)
+	hero.set_hud_active(false)
 	var hero = await wait_complete(startup_room)
 	startup_room.queue_free()
 	hero.global_position = bridge_room.player_spawn.global_position
-	
+	hero.set_hud_active(true)
 	hero = await wait_complete(bridge_room)
 	bridge_room.queue_free()
 	hero.global_position = training_room.player_spawn.global_position

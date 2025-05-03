@@ -311,7 +311,6 @@ theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Hero HUD/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Hero HUD/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
@@ -324,7 +323,7 @@ stretch_mode = 5
 layout_mode = 2
 theme = ExtResource("9_60bh5")
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 36
 text = "100"
 
 [node name="HeroStats" type="Node" parent="." node_paths=PackedStringArray("health_node", "hero_node", "weapon_damage")]

@@ -86,6 +86,12 @@ func _movement_process(delta: float) -> void:
 func show_health_bar(is_active: bool) -> void:
 	$"Health Bar".visible = is_active
 
+func set_hud_active(is_active: bool) -> void:
+	$CanvasLayer.visible = is_active
+
+func set_input_active(is_active: bool) -> void:
+	pass
+
 func _alt_attack_process() -> void:
 	attack_cooldown.start()
 	is_attack_processing = true
