@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=22 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
@@ -11,6 +11,9 @@
 [ext_resource type="ArrayMesh" uid="uid://d3si88bul1c2f" path="res://gameplay/hero/models/dash.res" id="10_gd4vy"]
 [ext_resource type="Script" uid="uid://d35nxihjtikcy" path="res://localization/language_option.gd" id="11_gd4vy"]
 [ext_resource type="Shader" uid="uid://bfisk5hogwidb" path="res://gameplay/hero/dash/dash_shader.tres" id="11_qw60f"]
+[ext_resource type="PackedScene" uid="uid://digo2wt884cud" path="res://gameplay/items/dropped_item.tscn" id="12_qw60f"]
+[ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="13_qwhpj"]
+[ext_resource type="Material" uid="uid://d0s0pt5lh6p77" path="res://gameplay/enemies/floating/floating_sphere.tres" id="14_qt76e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -52,6 +55,8 @@ fill_to = Vector2(0.529915, 0)
 render_priority = 0
 shader = ExtResource("11_qw60f")
 shader_parameter/Color = Color(0, 0.772549, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_sq7yr"]
 
 [node name="Root" type="Node"]
 
@@ -148,6 +153,14 @@ unique_name_in_owner = true
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.803463, -1.12076)
 mesh = ExtResource("10_gd4vy")
 surface_material_override/0 = SubResource("ShaderMaterial_fu4y0")
+
+[node name="Dropped Item" parent="Shaders Precompilation" instance=ExtResource("12_qw60f")]
+
+[node name="Spawn VFX" parent="Shaders Precompilation" instance=ExtResource("13_qwhpj")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Shaders Precompilation"]
+mesh = SubResource("QuadMesh_sq7yr")
+surface_material_override/0 = ExtResource("14_qt76e")
 
 [editable path="World3D/Camera Point"]
 [editable path="Shaders Precompilation/Slash VFX"]
