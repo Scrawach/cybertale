@@ -13,6 +13,7 @@ color_ramp = SubResource("Gradient_hdwi5")
 noise = SubResource("FastNoiseLite_kwmpl")
 
 [resource]
+resource_local_to_scene = true
 diffuse_mode = 3
 specular_mode = 1
 vertex_color_use_as_albedo = true
