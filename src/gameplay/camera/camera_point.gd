@@ -6,6 +6,8 @@ extends Node3D
 @onready var camera: Camera3D = $"Camera Length/Camera3D"
 @onready var shaker: CameraShaker = $"Camera Shaker"
 
+@onready var vignette: ColorRect = %Vignette
+
 var base_size: float
 var tween: Tween
 
@@ -27,6 +29,20 @@ func add_size(value: float) -> void:
 	
 	tween = create_tween()
 	tween.tween_property(camera, "size", base_size + value, 0.3)
+
+func play_take_damage() -> void:
+	pass
+
+func play_low_health() -> void:
+	print("low health!")
+	pass
+
+func reset_low_health() -> void:
+	print("no low health")
+	pass
+
+func reset_vignette() -> void:
+	pass
 
 func reset_size() -> void:
 	if tween:

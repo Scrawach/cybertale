@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://crlg8ydib8anl"]
+[gd_scene load_steps=34 format=3 uid="uid://crlg8ydib8anl"]
 
 [ext_resource type="Script" uid="uid://ps2fuefcsyco" path="res://gameplay/hero/hero.gd" id="1_x1143"]
 [ext_resource type="PackedScene" uid="uid://dqpbotjwi8ltd" path="res://gameplay/hero/hit/hit_vfx.tscn" id="2_btuvy"]
@@ -16,6 +16,9 @@
 [ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="9_60bh5"]
 [ext_resource type="Script" uid="uid://2vovnlvv2qkn" path="res://gameplay/hero/hero_stats.gd" id="11_6kq8y"]
 [ext_resource type="PackedScene" uid="uid://0xk5oow351fp" path="res://gameplay/hero/slash/slash_vfx.tscn" id="14_hrca2"]
+[ext_resource type="ArrayMesh" uid="uid://d3si88bul1c2f" path="res://gameplay/hero/models/dash.res" id="17_dxtfw"]
+[ext_resource type="Shader" uid="uid://bfisk5hogwidb" path="res://gameplay/hero/dash/dash_shader.tres" id="18_boq6a"]
+[ext_resource type="Script" uid="uid://nc055dqkewfk" path="res://gameplay/hero/low_health.gd" id="19_boq6a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hrca2"]
 albedo_color = Color(0.3388, 0.39952, 0.44, 1)
@@ -156,25 +159,42 @@ _data = {
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_14oge"]
-radius = 1.0
+radius = 1.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_ftbyr"]
 radius = 1.0
 height = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fu4y0"]
+render_priority = 0
+shader = ExtResource("18_boq6a")
+shader_parameter/Color = Color(0, 0.772549, 1, 1)
 
 [node name="Hero" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_x1143")
 hit_effect = ExtResource("2_btuvy")
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
 [node name="hero-base" parent="." instance=ExtResource("2_smhnq")]
+
+[node name="Skeleton3D" parent="hero-base/Hero Bot" index="0"]
+bones/1/position = Vector3(0, 0.492913, 0.1)
+bones/1/rotation = Quaternion(-0.0436194, 1.19096e-07, -5.19984e-09, 0.999048)
+bones/2/position = Vector3(8.66122e-08, 0.526913, -0.0943766)
+bones/2/rotation = Quaternion(-0.241037, 1.84295e-07, 5.34966e-08, 0.970516)
+bones/3/position = Vector3(0.111599, 0.459054, -0.104578)
+bones/3/rotation = Quaternion(-0.0166896, -0.382319, 0.923, -0.0403)
+bones/4/position = Vector3(-0.111599, 0.459054, -0.104578)
+bones/4/rotation = Quaternion(0.0166896, -0.382319, 0.923, 0.0403)
 
 [node name="Hero Bot Model" parent="hero-base/Hero Bot/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_hrca2")
 surface_material_override/1 = SubResource("StandardMaterial3D_hcw0p")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="hero-base/Hero Bot/Skeleton3D" index="1"]
-transform = Transform3D(1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0.517144, 0)
+transform = Transform3D(1, -8.88178e-16, 2.38419e-07, -2.07796e-08, 0.996195, 0.0871558, -2.37511e-07, -0.0871558, 0.996195, 0, 0.492913, 0.1)
 bone_name = "body"
 bone_idx = 1
 
@@ -218,7 +238,7 @@ one_shot = true
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_yer6i")
-value = 100
+value = 40
 max_value = 100
 
 [node name="Health Bar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_14oge")]
@@ -308,7 +328,7 @@ text = "100"
 
 [node name="HeroStats" type="Node" parent="." node_paths=PackedStringArray("health_node", "hero_node", "weapon_damage")]
 script = ExtResource("11_6kq8y")
-health = 100
+health = 50
 movement_speed = 8.0
 damage = 5
 dash_length = 0.25
@@ -330,6 +350,20 @@ visible = false
 [node name="Slash VFX3" parent="Slashes" instance=ExtResource("14_hrca2")]
 transform = Transform3D(0.705125, -1.85973, 0.21022, 1.78221, 0.735795, 0.531335, -0.57141, 6.74942e-08, 1.91664, 0.046867, 1, 0.121352)
 visible = false
+
+[node name="Dash VFX" type="Node3D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="Dash Trail" type="MeshInstance3D" parent="Dash VFX"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.803463, -1.12076)
+mesh = ExtResource("17_dxtfw")
+surface_material_override/0 = SubResource("ShaderMaterial_fu4y0")
+
+[node name="Low Health" type="Node" parent="." node_paths=PackedStringArray("health", "hero")]
+script = ExtResource("19_boq6a")
+health = NodePath("../Health")
+hero = NodePath("..")
 
 [connection signal="area_entered" from="Weapon/HurtBox" to="." method="_on_hurt_box_area_entered"]
 

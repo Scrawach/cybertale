@@ -41,6 +41,7 @@ shake_range = Vector2i(5, 8)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Vignette" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_qt5t4")
 anchors_preset = 15
 anchor_right = 1.0

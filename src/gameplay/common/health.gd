@@ -2,6 +2,7 @@ class_name Health
 extends Node
 
 signal changed(health: Health)
+signal damage_taken()
 signal died()
 
 @export var value: int
@@ -19,6 +20,7 @@ func increase_max_value(increase: int) -> void:
 
 func take_damage(strength: int) -> void:
 	value = max(0, value - strength)
+	damage_taken.emit()
 	changed.emit(self)
 	
 	if value == 0:

@@ -24,6 +24,9 @@ const GRAVITY: float = 9.81
 @export var hit_effect: PackedScene
 @onready var hurt_collider: CollisionShape3D = %"Hurt Collision"
 
+@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var dash_vfx: Node3D = %"Dash VFX"
+
 var previous_slash_index: int = 0
 var is_dash: bool = false
 var direction_angle: float
@@ -35,18 +38,19 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	body_animation.speed_scale = stats.movement_speed / 8 * base_animation_scale
 	
-	if Input.is_action_just_pressed("attack") and attack_cooldown.is_stopped():
-		_attack_process()
+	if not is_dash:
+		if Input.is_action_just_pressed("attack") and attack_cooldown.is_stopped():
+			_attack_process()
+		
+		if Input.is_action_just_pressed("alt_attack") and attack_cooldown.is_stopped():
+			_alt_attack_process()
+		
+		if is_attack_processing:
+			body_animation.play("Idle")
+			return
 	
-	if Input.is_action_just_pressed("alt_attack") and attack_cooldown.is_stopped():
-		_alt_attack_process()
-	
-	if is_attack_processing:
-		body_animation.play("Idle")
-		return
-	
-	if Input.is_action_just_pressed("dash") and not is_dash:
-		_start_dash()
+		if Input.is_action_just_pressed("dash"):
+			_start_dash()
 	
 	if not is_dash:
 		_movement_process(delta)
@@ -74,6 +78,11 @@ func _animation_process() -> void:
 
 func _movement_process(delta: float) -> void:
 	var movement_input = get_movement_input(camera.camera)
+	nav_agent.target_position = global_position + movement_input
+	
+	if not nav_agent.is_target_reachable():
+		return
+	
 	var movement = movement_input * stats.movement_speed
 	movement.y -= GRAVITY
 	velocity = movement
@@ -111,18 +120,24 @@ func _start_dash() -> void:
 	is_dash = true
 	hitbox.monitoring = false
 	dash_timer.start(stats.dash_length)
+	dash_vfx.visible = true
 
 func _end_dash() -> void:
 	camera.reset_size()
 	is_dash = false
 	hitbox.monitoring = true
 	dash_timer.stop()
+	dash_vfx.visible = false
 
 func _on_dash_timeout() -> void:
 	_end_dash()
 
 func _dash_process(_delta: float) -> void:
 	var direction: Vector3 = Vector3.BACK.rotated(Vector3.UP, direction_angle).normalized()
+	nav_agent.target_position = global_position + direction
+	if not nav_agent.is_target_reachable():
+		return
+	
 	velocity = direction * stats.get_dash_speed() 
 	move_and_slide()
 
