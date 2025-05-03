@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=30 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c6i783kul21w6" path="res://gameplay/environment/rooms/specific/startup_room.tscn" id="7_tw3kd"]
 [ext_resource type="Script" uid="uid://b66uyqqqv4agm" path="res://gameplay/meta/loading.gd" id="8_qt76e"]
 [ext_resource type="PackedScene" uid="uid://bidvxu0rv31ay" path="res://gameplay/environment/rooms/specific/fight_room.tscn" id="8_r3r3k"]
+[ext_resource type="PackedScene" uid="uid://2ofopwmam6h5" path="res://gameplay/environment/rooms/specific/boss_room.tscn" id="9_3dlgs"]
 [ext_resource type="Script" uid="uid://bnsvvsyn1huo" path="res://gameplay/environment/game_progress/smart_progress_bar.gd" id="9_50g4q"]
 [ext_resource type="PackedScene" uid="uid://sc6ch0vywry6" path="res://gameplay/environment/game_progress/room_icon.tscn" id="9_blcw0"]
 [ext_resource type="PackedScene" uid="uid://cwjehs5bqr6yj" path="res://gameplay/environment/rooms/specific/training_fight_room.tscn" id="9_gd4vy"]
@@ -123,7 +124,9 @@ want_to_spawn = 3
 
 [node name="Gameplay World" type="Node3D" parent="World3D"]
 script = ExtResource("7_sq7yr")
+number_of_rooms = 1
 fighting_room_template = ExtResource("8_r3r3k")
+boss_room_template = ExtResource("9_3dlgs")
 
 [node name="Game Progress" type="CanvasLayer" parent="World3D/Gameplay World"]
 

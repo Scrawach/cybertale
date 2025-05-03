@@ -6,7 +6,8 @@ extends ProgressBar
 var room_icons: Array[RoomIcon]
 
 func setup_path(count_of_rooms: int) -> void:
-	var offset: int = size.x / (count_of_rooms + 1)
+	max_value = count_of_rooms + 1
+	var offset: int = size.x / max_value
 	var acc = offset
 	
 	for i in count_of_rooms:
