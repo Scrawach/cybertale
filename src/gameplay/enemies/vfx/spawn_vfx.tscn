@@ -1,0 +1,69 @@
+[gd_scene load_steps=14 format=3 uid="uid://n8lure5qjhvg"]
+
+[ext_resource type="Script" uid="uid://rsi6gtf7onoo" path="res://gameplay/enemies/vfx/spawn_vfx.gd" id="1_u22ph"]
+[ext_resource type="Shader" uid="uid://3kevny1howhf" path="res://gameplay/enemies/vfx/smoke_shader.tres" id="2_8gej4"]
+[ext_resource type="ArrayMesh" uid="uid://cjkxdc8fup3y" path="res://gameplay/enemies/vfx/smoke.res" id="3_0nt8a"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qw60f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eji0w"]
+noise = SubResource("FastNoiseLite_qw60f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qw60f"]
+render_priority = 0
+shader = ExtResource("2_8gej4")
+shader_parameter/Offset = Vector2(0, 0)
+shader_parameter/Texture2DParameter = SubResource("NoiseTexture2D_eji0w")
+
+[sub_resource type="Curve" id="Curve_tw3kd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gd4vy"]
+curve = SubResource("Curve_tw3kd")
+
+[sub_resource type="Gradient" id="Gradient_qwhpj"]
+offsets = PackedFloat32Array(0, 0.656357)
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qt76e"]
+gradient = SubResource("Gradient_qwhpj")
+
+[sub_resource type="Curve" id="Curve_sq7yr"]
+_data = [Vector2(0, 0.76962), 0.0, 0.0, 0, 0, Vector2(0.984227, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r3r3k"]
+curve = SubResource("Curve_sq7yr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eji0w"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.2
+angle_min = -180.0
+angle_max = 180.0
+gravity = Vector3(0, 10, 0)
+scale_min = 0.5
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_r3r3k")
+color_ramp = SubResource("GradientTexture1D_qt76e")
+alpha_curve = SubResource("CurveTexture_gd4vy")
+
+[node name="Spawn VFX" type="Node3D" node_paths=PackedStringArray("particles")]
+script = ExtResource("1_u22ph")
+play_on_ready = true
+lifetime = 1.0
+particles = [NodePath("GPUParticles3D")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_qw60f")
+emitting = false
+amount = 10
+lifetime = 0.35
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_eji0w")
+draw_pass_1 = ExtResource("3_0nt8a")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

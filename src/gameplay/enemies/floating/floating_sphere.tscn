@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://gbxjv8xjs2b1"]
+[gd_scene load_steps=19 format=3 uid="uid://gbxjv8xjs2b1"]
 
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="1_7rpqw"]
 [ext_resource type="Script" uid="uid://dh156tg8jvery" path="res://gameplay/enemies/floating/floating_sphere.gd" id="1_fkqck"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="3_p6557"]
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="4_fm5bg"]
 [ext_resource type="Script" uid="uid://dkkhphqh8vkxx" path="res://gameplay/common/death.gd" id="5_kt0c0"]
+[ext_resource type="Script" uid="uid://drjcewanqax5h" path="res://gameplay/enemies/floating/damage_labels.gd" id="7_lak1f"]
+[ext_resource type="Script" uid="uid://c27j7p36ppclx" path="res://gameplay/common/death_vfx.gd" id="8_lak1f"]
+[ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="9_ax7eg"]
 
 [sub_resource type="Gradient" id="Gradient_hdwi5"]
 offsets = PackedFloat32Array(0, 0.990099)
@@ -139,8 +142,8 @@ speed_scale = 0.2
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_fm5bg")
-value = 1
-max_value = 1
+value = 10
+max_value = 10
 metadata/_custom_type_script = "uid://b8hqs1hbipqv7"
 
 [node name="Death" type="Node" parent="." node_paths=PackedStringArray("health", "body")]
@@ -148,6 +151,19 @@ script = ExtResource("5_kt0c0")
 health = NodePath("../Health")
 body = NodePath("..")
 metadata/_custom_type_script = "uid://dkkhphqh8vkxx"
+
+[node name="Damage Labels" type="Node" parent="." node_paths=PackedStringArray("health", "parent", "spawn_point")]
+script = ExtResource("7_lak1f")
+health = NodePath("../Health")
+parent = NodePath("..")
+spawn_point = NodePath("../View")
+
+[node name="Death VFX" type="Node" parent="." node_paths=PackedStringArray("health", "parent", "spawn_point")]
+script = ExtResource("8_lak1f")
+health = NodePath("../Health")
+parent = NodePath("..")
+spawn_point = NodePath("../View")
+scene = ExtResource("9_ax7eg")
 
 [connection signal="area_entered" from="View/Hurt Box" to="." method="_on_hurt_box_area_entered"]
 

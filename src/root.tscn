@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=17 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="Script" uid="uid://bj6p5luck5lnf" path="res://gameplay/environment/rooms/room.gd" id="1_l8v81"]
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="3_vyht1"]
 [ext_resource type="PackedScene" uid="uid://1juwwfcjfgxo" path="res://gameplay/environment/rooms/specific/fighting_training_room.tscn" id="4_bf3um"]
 [ext_resource type="PackedScene" uid="uid://dqpbotjwi8ltd" path="res://gameplay/hero/hit/hit_vfx.tscn" id="5_jnlp7"]
+[ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="6_l8v81"]
 [ext_resource type="Script" uid="uid://d35nxihjtikcy" path="res://localization/language_option.gd" id="11_gd4vy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
@@ -1205,3 +1206,6 @@ metadata/_custom_type_script = "uid://d35nxihjtikcy"
 [node name="Particles Warming" type="Node3D" parent="."]
 
 [node name="Hit VFX" parent="Particles Warming" instance=ExtResource("5_jnlp7")]
+
+[node name="Floating Sphere" parent="." instance=ExtResource("6_l8v81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.55013, 0, -2.08368)

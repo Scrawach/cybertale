@@ -194,7 +194,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_hrca2")
 surface_material_override/1 = SubResource("StandardMaterial3D_hcw0p")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="hero-base/Hero Bot/Skeleton3D" index="1"]
-transform = Transform3D(1, -8.88178e-16, 2.38419e-07, -2.07796e-08, 0.996195, 0.0871558, -2.37511e-07, -0.0871558, 0.996195, 0, 0.492913, 0.1)
+transform = Transform3D(1, -1.24345e-14, 2.38419e-07, -2.07796e-08, 0.996195, 0.0871558, -2.37512e-07, -0.0871558, 0.996195, 0, 0.492913, 0.1)
 bone_name = "body"
 bone_idx = 1
 

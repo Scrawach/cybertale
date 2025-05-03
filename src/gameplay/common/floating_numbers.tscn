@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://b17auggug8xrv"]
+
+[ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="1_5n43b"]
+[ext_resource type="Script" uid="uid://s31co2k61f06" path="res://gameplay/common/floating_numbers.gd" id="1_uqs0f"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5n43b"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Floating Numbers" type="Node3D"]
+script = ExtResource("1_uqs0f")
+negative_number_color = Color(1, 0, 0.0166664, 1)
+positive_number_color = Color(0.178857, 0.633796, 0.305974, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+no_depth_test = true
+texture = SubResource("ViewportTexture_5n43b")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+gui_snap_controls_to_pixels = false
+size = Vector2i(150, 100)
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="SubViewport/Control"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_5n43b")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 40
+text = "-10"
+horizontal_alignment = 1
+vertical_alignment = 1
