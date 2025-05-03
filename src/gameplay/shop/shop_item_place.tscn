@@ -5,10 +5,9 @@
 [ext_resource type="Resource" uid="uid://b6dp8xgrngxi4" path="res://gameplay/shop/items/health/health_item.tres" id="2_td7wb"]
 [ext_resource type="PackedScene" uid="uid://dkhmedqrk7kva" path="res://gameplay/environment/world_space_tooltip.tscn" id="4_xwcky"]
 [ext_resource type="Script" uid="uid://cpc86jueox6qo" path="res://gameplay/environment/world_space_tooltip.gd" id="5_t8gki"]
-[ext_resource type="Texture2D" uid="uid://j4k0h7ijwbpb" path="res://icon.png" id="6_clngh"]
+[ext_resource type="Texture2D" uid="uid://m7vcjsans2o3" path="res://gameplay/items/coin_icon.png" id="6_clngh"]
 [ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="7_xtaa6"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_vyht1"]
+[ext_resource type="PackedScene" uid="uid://dif2kgcovpkqm" path="res://gameplay/shop/models/shop_plate.glb" id="8_clngh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bf3um"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -20,20 +19,17 @@ viewport_path = NodePath("Item/Price Tooltip/SubViewport")
 radius = 1.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_td7wb"]
+size = Vector3(1.5, 1.5, 1.5)
 
 [node name="Shop Item Place" type="Node3D"]
 script = ExtResource("1_7p1km")
 item = ExtResource("2_td7wb")
-not_enough_label_color = Color(0.625575, 1.43189e-06, 5.77569e-07, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_vyht1")
+not_enough_label_color = Color(1, 0, 0, 1)
 
 [node name="Item" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87678, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Item"]
-visible = false
 mesh = SubResource("BoxMesh_bf3um")
 
 [node name="SmoothFloating3D" type="Node" parent="Item" node_paths=PackedStringArray("target")]
@@ -85,7 +81,6 @@ theme_override_constants/margin_bottom = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Item/Price Tooltip/SubViewport/Control/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Item/Price Tooltip/SubViewport/Control/MarginContainer/HBoxContainer"]
@@ -114,9 +109,12 @@ unique_name_in_owner = true
 shape = SubResource("SphereShape3D_7p1km")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_td7wb")
+
+[node name="shop_plate" parent="." instance=ExtResource("8_clngh")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

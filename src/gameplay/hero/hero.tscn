@@ -21,19 +21,22 @@
 [ext_resource type="Script" uid="uid://nc055dqkewfk" path="res://gameplay/hero/low_health.gd" id="19_boq6a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hrca2"]
-albedo_color = Color(0.3388, 0.39952, 0.44, 1)
+albedo_color = Color(0.2584, 0.323253, 0.38, 1)
+metallic_specular = 0.0
+roughness = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hcw0p"]
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(0.00317316, 0.26188, 0.971476, 1)
 emission_enabled = true
-emission = Color(0, 0.866667, 1, 1)
-emission_energy_multiplier = 1.2
+emission = Color(0, 0.550488, 0.633331, 1)
+emission_energy_multiplier = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lj3ds"]
 vertex_color_use_as_albedo = true
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(0, 0.671095, 0.95961, 1)
 emission_enabled = true
-emission = Color(0, 0.381833, 0.79, 1)
+emission = Color(0, 0.357334, 0.742613, 1)
+emission_energy_multiplier = 3.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
 

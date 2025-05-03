@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://026ts4o6j5dg"]
+
+[ext_resource type="Script" uid="uid://tcp8jcuh0gha" path="res://gameplay/environment/rooms/specific/shop_room.gd" id="1_0xorv"]
+[ext_resource type="PackedScene" uid="uid://pui3a1ev5hik" path="res://gameplay/environment/rooms/specific/models/shop_location.glb" id="1_l30wa"]
+[ext_resource type="PackedScene" uid="uid://b8w8vh6038ft0" path="res://gameplay/shop/shop.tscn" id="2_l30wa"]
+[ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="4_ycejs"]
+
+[node name="Shop Room" type="Node3D"]
+script = ExtResource("1_0xorv")
+
+[node name="shop_location" parent="." instance=ExtResource("1_l30wa")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3, 0, 0)
+
+[node name="room" parent="shop_location" index="29"]
+mesh = null
+
+[node name="Shop" parent="." instance=ExtResource("2_l30wa")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 0, -2.6601)
+
+[node name="Next Room Door" parent="." instance=ExtResource("4_ycejs")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -23.2593, 0, 0.217337)
+
+[editable path="shop_location"]

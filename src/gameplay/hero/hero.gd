@@ -83,6 +83,9 @@ func _movement_process(delta: float) -> void:
 	velocity = movement
 	move_and_slide()
 
+func show_health_bar(is_active: bool) -> void:
+	$"Health Bar".visible = is_active
+
 func _alt_attack_process() -> void:
 	attack_cooldown.start()
 	is_attack_processing = true

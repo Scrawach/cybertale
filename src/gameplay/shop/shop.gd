@@ -4,9 +4,6 @@ extends Node3D
 @export var hero: Hero
 @export var available_items: Array[ShopItemResource]
 
-func _ready() -> void:
-	initialize(hero)
-
 func initialize(hero: Hero) -> void:
 	hero.inventory.coins_changed.connect(_on_coins_changed)
 	for child in get_children():
