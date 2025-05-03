@@ -94,6 +94,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -8)
 [node name="Floating Sphere" parent="World3D/Test Scene" instance=ExtResource("6_l8v81")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.15171, 0.419112, -0.0757315)
 
+[node name="Floating Sphere2" parent="World3D/Test Scene" instance=ExtResource("6_l8v81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15171, 0.419112, 3.92427)
+
+[node name="Floating Sphere3" parent="World3D/Test Scene" instance=ExtResource("6_l8v81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.84829, 0.419112, 0.924268)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Menu" type="Control" parent="CanvasLayer"]
