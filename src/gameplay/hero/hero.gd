@@ -78,7 +78,7 @@ func _animation_process() -> void:
 
 func _movement_process(delta: float) -> void:
 	var movement_input = get_movement_input(camera.camera)
-	nav_agent.target_position = global_position + movement_input
+	nav_agent.target_position = global_position + movement_input * 2
 	
 	if not nav_agent.is_target_reachable():
 		return
@@ -134,7 +134,7 @@ func _on_dash_timeout() -> void:
 
 func _dash_process(_delta: float) -> void:
 	var direction: Vector3 = Vector3.BACK.rotated(Vector3.UP, direction_angle).normalized()
-	nav_agent.target_position = global_position + direction
+	nav_agent.target_position = global_position + direction * 2
 	if not nav_agent.is_target_reachable():
 		return
 	
