@@ -106,6 +106,7 @@ func rotate_to_cursor() -> void:
 	rotation.y = direction_angle
 
 func _start_dash() -> void:
+	camera.shake(0.05)
 	camera.add_size(2)
 	is_dash = true
 	hitbox.monitoring = false
@@ -145,4 +146,4 @@ func _on_hurt_box_area_entered(area: Area3D) -> void:
 	hit.position = area.global_position
 	hit.position.y = hurt_collider.global_position.y
 	health.heal(stats.vampire_strength * stats.damage)
-	camera.shake(0.05)
+	camera.shake(0.03)

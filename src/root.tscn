@@ -79,9 +79,6 @@ camera = NodePath("../Camera Point")
 [node name="Camera Point" parent="World3D/Test Scene" node_paths=PackedStringArray("target") instance=ExtResource("2_28aoi")]
 target = NodePath("../Hero")
 
-[node name="Camera3D" parent="World3D/Test Scene/Camera Point/Camera Length" index="0"]
-fov = 34.0
-
 [node name="Box" parent="World3D/Test Scene" instance=ExtResource("3_28aoi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -5)
 
@@ -121,5 +118,3 @@ metadata/_custom_type_script = "uid://d35nxihjtikcy"
 [node name="Particles Warming" type="Node3D" parent="."]
 
 [node name="Hit VFX" parent="Particles Warming" instance=ExtResource("5_jnlp7")]
-
-[editable path="World3D/Test Scene/Camera Point"]
