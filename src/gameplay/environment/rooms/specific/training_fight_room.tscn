@@ -351,6 +351,7 @@ shape = SubResource("ConcavePolygonShape3D_t2srn")
 [node name="@NavigationRegion3D@182517" type="NavigationRegion3D" parent="first_fight_location"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.144512, 0, -10.1659)
 navigation_mesh = SubResource("NavigationMesh_xp2iv")
+enabled = false
 
 [node name="Next Room Door" parent="." instance=ExtResource("3_mbu3v")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.3201, 0, 0)

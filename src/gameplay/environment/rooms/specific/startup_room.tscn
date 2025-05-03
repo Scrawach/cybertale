@@ -12,7 +12,7 @@ player_spawn = NodePath("Marker3D")
 [node name="locations" parent="." instance=ExtResource("2_iwr0q")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="room" parent="locations" index="18"]
+[node name="room" parent="locations" index="17"]
 mesh = null
 
 [node name="Next Room Door" parent="." instance=ExtResource("3_v7gkj")]

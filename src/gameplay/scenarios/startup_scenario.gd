@@ -4,6 +4,7 @@ extends Node
 @export var startup_room: ScenarioRoom
 @export var bridge_room: ScenarioRoom
 @export var training_room: ScenarioRoom
+@export var training_room2: ScenarioRoom
 
 func _ready() -> void:
 	execute()
@@ -20,6 +21,9 @@ func execute() -> void:
 	training_room.start()
 	hero = await wait_complete(training_room)
 	training_room.queue_free()
+	
+	training_room2.start()
+	hero.global_position = training_room2.player_spawn.global_position
 	print("COMPLETED!")
 
 func wait_complete(room: ScenarioRoom) -> Hero:

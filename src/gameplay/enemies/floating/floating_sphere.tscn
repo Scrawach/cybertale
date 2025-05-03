@@ -207,6 +207,4 @@ metadata/_custom_type_script = "uid://cma2e03yqef6p"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
-[connection signal="area_entered" from="View/Hurt Box" to="." method="_on_hurt_box_area_entered"]
-
 [editable path="View/floating_sphere"]

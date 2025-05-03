@@ -12,13 +12,16 @@ extends ScenarioRoom
 var spawned: int
 
 func start() -> void:
+	region.enabled = true
 	timer.timeout.connect(_on_timeout)
-	await get_tree().physics_frame
+	await get_tree().create_timer(0.1).timeout
 	for i in want_to_spawn:
 		spawn_random_enemy_at_random_point()
+		await get_tree().create_timer(0.4).timeout
 		spawned += 1
-		await get_tree().create_timer(0.5).timeout
-		
+
+func stop() -> void:
+	region.enabled = false
 
 func spawn_random_enemy_at_random_point() -> void:
 	var random_point: Vector3 = NavigationServer3D.map_get_random_point(region.get_navigation_map(), 1, true)

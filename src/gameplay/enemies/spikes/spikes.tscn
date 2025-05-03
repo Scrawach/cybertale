@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5aahq5yu7fuu"]
+[gd_scene load_steps=9 format=3 uid="uid://b5aahq5yu7fuu"]
 
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="1_6ed1q"]
+[ext_resource type="Script" uid="uid://clpsqofqw6m8t" path="res://gameplay/enemies/spikes/spikes.gd" id="1_ulxh8"]
+[ext_resource type="PackedScene" uid="uid://bcug73wjho8pd" path="res://gameplay/enemies/spikes/models/spikes.glb" id="2_fpp6b"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_l8v81"]
 size = Vector3(2, 1, 2)
@@ -8,17 +10,70 @@ size = Vector3(2, 1, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_vyht1"]
 size = Vector3(2, 1, 2)
 
+[sub_resource type="Animation" id="Animation_xpjd6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spikes:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.655042, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qfapa"]
+resource_name = "attack"
+length = 0.26667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spikes:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.131628, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.655042, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -0.655042, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7blyd"]
+_data = {
+&"RESET": SubResource("Animation_xpjd6"),
+&"attack": SubResource("Animation_qfapa")
+}
+
 [node name="Spikes" type="Node3D"]
+script = ExtResource("1_ulxh8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_l8v81")
 
 [node name="Hurt Box" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("1_6ed1q")
-value = 1
+value = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurt Box"]
 shape = SubResource("BoxShape3D_vyht1")
 debug_color = Color(0.956863, 0, 0, 1)
+
+[node name="spikes" parent="." instance=ExtResource("2_fpp6b")]
+
+[node name="Spikes" parent="spikes" index="1"]
+transform = Transform3D(0.233239, 0, 0, 0, 0.194366, 0, 0, 0, 0.233239, 0, -0.655042, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="spikes"]
+libraries = {
+&"": SubResource("AnimationLibrary_7blyd")
+}
+
+[connection signal="area_entered" from="Hurt Box" to="." method="_on_hurt_box_area_entered"]
+
+[editable path="spikes"]

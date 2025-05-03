@@ -30,6 +30,3 @@ func _process_movement(delta: float) -> void:
 	direction.y = 0
 	
 	global_position += direction.normalized() * movement_speed * delta
-
-func _on_hurt_box_area_entered(area: Area3D) -> void:
-	queue_free()

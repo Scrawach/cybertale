@@ -31,8 +31,9 @@ var is_dash: bool = false
 var direction_angle: float
 var is_attack_processing: bool
 
-func _ready() -> void:
+func _ready() -> void:	
 	dash_timer.timeout.connect(_on_dash_timeout)
+	health.damage_taken.connect(_on_damage_taken)
 
 func _physics_process(delta: float) -> void:
 	body_animation.speed_scale = stats.movement_speed / 8 * base_animation_scale
@@ -102,7 +103,7 @@ func _attack_process() -> void:
 	_alt_attack_process()
 
 func rotate_to_cursor() -> void:
-	var view_point: Vector3 = camera.get_mouse_position_in_world_3d()
+	var view_point: Vector3 = camera.get_mouse_position_in_world_3d()	
 	var view_direction: Vector3 = (view_point - global_position)
 	var angle = Vector2(view_direction.z, view_direction.x).angle()
 	direction_angle = angle
@@ -152,3 +153,6 @@ func _on_hurt_box_area_entered(area: Area3D) -> void:
 	hit.position.y = hurt_collider.global_position.y
 	health.heal(stats.vampire_strength * stats.damage)
 	camera.shake(0.03)
+
+func _on_damage_taken(value: int) -> void:
+	camera.play_take_damage()
