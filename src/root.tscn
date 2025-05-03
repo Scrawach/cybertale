@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=18 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
@@ -7,7 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://c6i783kul21w6" path="res://gameplay/environment/rooms/specific/startup_room.tscn" id="7_tw3kd"]
 [ext_resource type="PackedScene" uid="uid://cwjehs5bqr6yj" path="res://gameplay/environment/rooms/specific/training_fight_room.tscn" id="9_gd4vy"]
 [ext_resource type="PackedScene" uid="uid://c07q6t30ebyah" path="res://gameplay/environment/rooms/specific/bridge_room.tscn" id="9_huihk"]
+[ext_resource type="PackedScene" uid="uid://0xk5oow351fp" path="res://gameplay/hero/slash/slash_vfx.tscn" id="9_tw3kd"]
+[ext_resource type="ArrayMesh" uid="uid://d3si88bul1c2f" path="res://gameplay/hero/models/dash.res" id="10_gd4vy"]
 [ext_resource type="Script" uid="uid://d35nxihjtikcy" path="res://localization/language_option.gd" id="11_gd4vy"]
+[ext_resource type="Shader" uid="uid://bfisk5hogwidb" path="res://gameplay/hero/dash/dash_shader.tres" id="11_qw60f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -36,6 +39,20 @@ adjustment_brightness = 1.3
 adjustment_contrast = 1.2
 adjustment_saturation = 0.7
 
+[sub_resource type="Gradient" id="Gradient_bf3um"]
+offsets = PackedFloat32Array(0.00895522, 1)
+colors = PackedColorArray(0.027451, 0.0980392, 0.129412, 1, 0.0666667, 0.211765, 0.219608, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_huihk"]
+gradient = SubResource("Gradient_bf3um")
+fill_from = Vector2(0.512821, 1)
+fill_to = Vector2(0.529915, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fu4y0"]
+render_priority = 0
+shader = ExtResource("11_qw60f")
+shader_parameter/Color = Color(0, 0.772549, 1, 1)
+
 [node name="Root" type="Node"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -52,12 +69,6 @@ sky_mode = 1
 
 [node name="Hero" parent="World3D" node_paths=PackedStringArray("camera") instance=ExtResource("1_vvh5c")]
 camera = NodePath("../Camera Point")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="World3D/Hero"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.54255, 0)
-visible = false
-light_energy = 6.841
-omni_range = 13.918
 
 [node name="Camera Point" parent="World3D" node_paths=PackedStringArray("target") instance=ExtResource("2_28aoi")]
 target = NodePath("../Hero")
@@ -80,6 +91,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
 
 [node name="Menu" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -97,8 +109,45 @@ offset_bottom = 20.0
 script = ExtResource("11_gd4vy")
 metadata/_custom_type_script = "uid://d35nxihjtikcy"
 
-[node name="Particles Warming" type="Node3D" parent="."]
+[node name="Loading Screen" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_huihk")
 
-[node name="Hit VFX" parent="Particles Warming" instance=ExtResource("5_jnlp7")]
+[node name="Label" type="Label" parent="CanvasLayer/Loading Screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "LOADING"
+
+[node name="Shaders Precompilation" type="Node3D" parent="."]
+
+[node name="Hit VFX" parent="Shaders Precompilation" instance=ExtResource("5_jnlp7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Slash VFX" parent="Shaders Precompilation" instance=ExtResource("9_tw3kd")]
+transform = Transform3D(1.70344, 0, 1.048, 0, 2, 0, -1.048, 0, 1.70344, -0.196116, 1, 0.112441)
+
+[node name="Dash VFX2" type="Node3D" parent="Shaders Precompilation"]
+unique_name_in_owner = true
+
+[node name="Dash Trail" type="MeshInstance3D" parent="Shaders Precompilation/Dash VFX2"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.803463, -1.12076)
+mesh = ExtResource("10_gd4vy")
+surface_material_override/0 = SubResource("ShaderMaterial_fu4y0")
 
 [editable path="World3D/Camera Point"]
+[editable path="Shaders Precompilation/Slash VFX"]
