@@ -23,6 +23,7 @@ func disable() -> void:
 
 func enable() -> void:
 	animation.play("open")
+	MainCamera.point.shake(0.2)
 	await get_tree().create_timer(0.1).timeout
 	view.visible = true
 	await get_tree().create_timer(1.0).timeout

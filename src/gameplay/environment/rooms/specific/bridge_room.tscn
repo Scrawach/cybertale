@@ -1,14 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://c07q6t30ebyah"]
+[gd_scene load_steps=5 format=3 uid="uid://c07q6t30ebyah"]
 
-[ext_resource type="PackedScene" uid="uid://dukbwdeib7621" path="res://gameplay/environment/locations/start_room/bridge_location.glb" id="1_ga6k0"]
+[ext_resource type="Script" uid="uid://cu1bslpttslrj" path="res://gameplay/environment/rooms/specific/scenario_room.gd" id="1_8w2j2"]
+[ext_resource type="PackedScene" uid="uid://dukbwdeib7621" path="res://gameplay/environment/rooms/specific/models/bridge_location.glb" id="1_ga6k0"]
 [ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box/box.tscn" id="2_rbcvh"]
+[ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="4_5x1k7"]
 
-[node name="Bridge Room" type="Node3D"]
+[node name="Bridge Room" type="Node3D" node_paths=PackedStringArray("door", "player_spawn")]
+script = ExtResource("1_8w2j2")
+door = NodePath("Next Room Door")
+player_spawn = NodePath("Marker3D")
 
 [node name="bridge_location" parent="." instance=ExtResource("1_ga6k0")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3, 0, 0)
 
-[node name="room" parent="bridge_location" index="23"]
+[node name="room" parent="bridge_location" index="22"]
 mesh = null
 
 [node name="CollisionShape3D" parent="bridge_location/room/StaticBody3D" index="0"]
@@ -34,5 +39,11 @@ transform = Transform3D(0.918357, 0, -0.395754, 0, 1, 0, 0.395754, 0, 0.918357, 
 
 [node name="Box6" parent="." instance=ExtResource("2_rbcvh")]
 transform = Transform3D(0.918357, 0, -0.395754, 0, 1, 0, 0.395754, 0, 0.918357, -4.27053, 1.04759, -0.242826)
+
+[node name="Next Room Door" parent="." instance=ExtResource("4_5x1k7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13.3324, 0, 0)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 
 [editable path="bridge_location"]

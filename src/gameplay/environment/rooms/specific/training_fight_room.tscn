@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwjehs5bqr6yj"]
+
+[ext_resource type="PackedScene" uid="uid://dyui0uh2ygrb2" path="res://gameplay/environment/rooms/specific/models/first_fight_location.glb" id="1_d8lm7"]
+[ext_resource type="Script" uid="uid://khfbh65obe36" path="res://gameplay/environment/rooms/specific/training_room.gd" id="1_mbu3v"]
+[ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="2_xasmq"]
+[ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="3_8m1ip"]
+[ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="3_mbu3v"]
+
+[node name="Training Fight Room" type="Node3D" node_paths=PackedStringArray("region", "door", "player_spawn")]
+script = ExtResource("1_mbu3v")
+want_to_spawn = 2
+region = NodePath("first_fight_location/@NavigationRegion3D@182517")
+spawn_targets = Array[PackedScene]([ExtResource("2_xasmq")])
+spawn_vfx = ExtResource("3_8m1ip")
+door = NodePath("Next Room Door")
+player_spawn = NodePath("Marker3D")
+
+[node name="first_fight_location" parent="." instance=ExtResource("1_d8lm7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.94534, 0, 0.0431666)
+
+[node name="room" parent="first_fight_location" index="22"]
+mesh = null
+
+[node name="Next Room Door" parent="." instance=ExtResource("3_mbu3v")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.3201, 0, 0)
+is_disable = true
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[editable path="first_fight_location"]

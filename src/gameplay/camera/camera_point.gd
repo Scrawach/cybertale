@@ -12,6 +12,7 @@ var base_size: float
 var tween: Tween
 
 func _ready() -> void:
+	MainCamera.point = self
 	base_size = camera.size
 
 func _physics_process(_delta: float) -> void:
@@ -34,11 +35,11 @@ func play_take_damage() -> void:
 	pass
 
 func play_low_health() -> void:
-	print("low health!")
+	#print("low health!")
 	pass
 
 func reset_low_health() -> void:
-	print("no low health")
+	#print("no low health")
 	pass
 
 func reset_vignette() -> void:

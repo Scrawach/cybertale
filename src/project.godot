@@ -21,6 +21,10 @@ boot_splash/show_image=false
 boot_splash/fullsize=false
 config/icon="uid://j4k0h7ijwbpb"
 
+[autoload]
+
+MainCamera="*res://gameplay/camera/main_camera.gd"
+
 [display]
 
 window/size/viewport_width=1920

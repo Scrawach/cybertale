@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dyui0uh2ygrb2"
-path="res://.godot/imported/first_fight_location.glb-cad38dbbade93cfe3f92061d0d9d8e31.scn"
+path="res://.godot/imported/first_fight_location.glb-1f0eb722f9070dec64b7cc2d13b2d733.scn"
 
 [deps]
 
-source_file="res://gameplay/environment/locations/start_room/first_fight_location.glb"
-dest_files=["res://.godot/imported/first_fight_location.glb-cad38dbbade93cfe3f92061d0d9d8e31.scn"]
+source_file="res://gameplay/environment/rooms/specific/models/first_fight_location.glb"
+dest_files=["res://.godot/imported/first_fight_location.glb-1f0eb722f9070dec64b7cc2d13b2d733.scn"]
 
 [params]
 

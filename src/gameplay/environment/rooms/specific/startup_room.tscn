@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6i783kul21w6"]
+
+[ext_resource type="Script" uid="uid://cu1bslpttslrj" path="res://gameplay/environment/rooms/specific/scenario_room.gd" id="1_dgb48"]
+[ext_resource type="PackedScene" uid="uid://hfmluwwlbqdj" path="res://gameplay/environment/rooms/specific/models/locations.glb" id="2_iwr0q"]
+[ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="3_v7gkj"]
+
+[node name="Startup Room" type="Node3D" node_paths=PackedStringArray("door", "player_spawn")]
+script = ExtResource("1_dgb48")
+door = NodePath("Next Room Door")
+player_spawn = NodePath("Marker3D")
+
+[node name="locations" parent="." instance=ExtResource("2_iwr0q")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="room" parent="locations" index="18"]
+mesh = null
+
+[node name="Next Room Door" parent="." instance=ExtResource("3_v7gkj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10.3582, 0, 0)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[editable path="locations"]

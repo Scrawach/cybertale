@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://hfmluwwlbqdj"
-path="res://.godot/imported/locations.glb-95c7a5f95e20f0f8503d567efa2d2c0b.scn"
+uid="uid://dukbwdeib7621"
+path="res://.godot/imported/bridge_location.glb-76322065ebaf2eea4796a1d4cd20fda6.scn"
 
 [deps]
 
-source_file="res://gameplay/environment/locations/start_room/locations.glb"
-dest_files=["res://.godot/imported/locations.glb-95c7a5f95e20f0f8503d567efa2d2c0b.scn"]
+source_file="res://gameplay/environment/rooms/specific/models/bridge_location.glb"
+dest_files=["res://.godot/imported/bridge_location.glb-76322065ebaf2eea4796a1d4cd20fda6.scn"]
 
 [params]
 
