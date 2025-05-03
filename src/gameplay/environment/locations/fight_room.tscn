@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d0763q65dmpb7" path="res://gameplay/enemies/virus/ranged_virus.tscn" id="3_ps470"]
 [ext_resource type="PackedScene" uid="uid://b5aahq5yu7fuu" path="res://gameplay/enemies/spikes/spikes.tscn" id="4_nv1s3"]
 [ext_resource type="PackedScene" uid="uid://dolepn0oqhymo" path="res://gameplay/enemies/boss/boss.tscn" id="5_nglla"]
-[ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box.tscn" id="6_y7p1g"]
+[ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box/box.tscn" id="6_y7p1g"]
 [ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="7_q5ows"]
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="8_djcon"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="9_q0yas"]

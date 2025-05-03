@@ -3,20 +3,20 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ba8bh6lnfix6"
-path="res://.godot/imported/columnd.glb-9c921dbc716c0e4b6a1bf37d89eb0a9c.scn"
+uid="uid://keoprrvg6be5"
+path="res://.godot/imported/box.glb-d65e4d0c3c8510488cc205d52368efac.scn"
 
 [deps]
 
-source_file="res://gameplay/environment/columnd.glb"
-dest_files=["res://.godot/imported/columnd.glb-9c921dbc716c0e4b6a1bf37d89eb0a9c.scn"]
+source_file="res://gameplay/environment/box/models/box.glb"
+dest_files=["res://.godot/imported/box.glb-d65e4d0c3c8510488cc205d52368efac.scn"]
 
 [params]
 
 nodes/root_type=""
 nodes/root_name=""
 nodes/apply_root_scale=true
-nodes/root_scale=1.0
+nodes/root_scale=0.4
 nodes/import_as_skeleton_bones=false
 nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true

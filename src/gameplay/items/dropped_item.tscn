@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://digo2wt884cud"]
+[gd_scene load_steps=13 format=3 uid="uid://digo2wt884cud"]
 
 [ext_resource type="Script" uid="uid://cbkj157q2uhyb" path="res://gameplay/items/dropped_item.gd" id="1_7ujtk"]
 [ext_resource type="PackedScene" uid="uid://csx5vj5iglrqi" path="res://gameplay/items/models/coin.glb" id="2_2mchq"]
@@ -12,12 +12,22 @@ bounce = 0.6
 [sub_resource type="BoxMesh" id="BoxMesh_jnlp7"]
 size = Vector3(0.5, 0.5, 0.5)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2mchq"]
+frequency = 0.0033
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_huv61"]
+noise = SubResource("FastNoiseLite_2mchq")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mchq"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.246446, 0.434817, 0.945043, 1)
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.247059, 0.588235, 1)
 emission_enabled = true
 emission = Color(0, 0.772549, 1, 1)
+emission_energy_multiplier = 0.3
+detail_mask = SubResource("NoiseTexture2D_huv61")
+detail_blend_mode = 3
 
 [sub_resource type="Animation" id="Animation_vyht1"]
 length = 0.001
@@ -63,7 +73,7 @@ radius = 3.0
 collision_layer = 128
 physics_material_override = SubResource("PhysicsMaterial_jnlp7")
 lock_rotation = true
-constant_force = Vector3(0, -25, 0)
+constant_force = Vector3(0, -30, 0)
 script = ExtResource("1_7ujtk")
 delay_before_pickup = 1.0
 pickup_speed = 25.0

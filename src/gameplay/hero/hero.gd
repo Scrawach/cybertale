@@ -24,7 +24,6 @@ const GRAVITY: float = 9.81
 @export var hit_effect: PackedScene
 @onready var hurt_collider: CollisionShape3D = %"Hurt Collision"
 
-@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var dash_vfx: Node3D = %"Dash VFX"
 
 var previous_slash_index: int = 0
@@ -78,11 +77,6 @@ func _animation_process() -> void:
 
 func _movement_process(delta: float) -> void:
 	var movement_input = get_movement_input(camera.camera)
-	nav_agent.target_position = global_position + movement_input * 2
-	
-	if not nav_agent.is_target_reachable():
-		return
-	
 	var movement = movement_input * stats.movement_speed
 	movement.y -= GRAVITY
 	velocity = movement
@@ -134,10 +128,6 @@ func _on_dash_timeout() -> void:
 
 func _dash_process(_delta: float) -> void:
 	var direction: Vector3 = Vector3.BACK.rotated(Vector3.UP, direction_angle).normalized()
-	nav_agent.target_position = global_position + direction * 2
-	if not nav_agent.is_target_reachable():
-		return
-	
 	velocity = direction * stats.get_dash_speed() 
 	move_and_slide()
 

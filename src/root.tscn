@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=18 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="Script" uid="uid://bj6p5luck5lnf" path="res://gameplay/environment/rooms/room.gd" id="1_l8v81"]
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://1juwwfcjfgxo" path="res://gameplay/environment/rooms/specific/fighting_training_room.tscn" id="4_bf3um"]
 [ext_resource type="PackedScene" uid="uid://dqpbotjwi8ltd" path="res://gameplay/hero/hit/hit_vfx.tscn" id="5_jnlp7"]
 [ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="6_l8v81"]
+[ext_resource type="PackedScene" uid="uid://dyui0uh2ygrb2" path="res://gameplay/environment/locations/start_room/first_fight_location.glb" id="9_huihk"]
 [ext_resource type="Script" uid="uid://d35nxihjtikcy" path="res://localization/language_option.gd" id="11_gd4vy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
@@ -21,13 +22,21 @@ sky_material = SubResource("ProceduralSkyMaterial_vho56")
 background_mode = 1
 sky = SubResource("Sky_pq8q7")
 ambient_light_source = 2
-ambient_light_color = Color(0.217697, 0.283275, 0.364416, 1)
-tonemap_mode = 2
+ambient_light_color = Color(0.606513, 0.832478, 0.991546, 1)
+tonemap_mode = 3
+tonemap_exposure = 1.3
+tonemap_white = 1.26
 glow_enabled = true
 glow_intensity = 1.0
 glow_bloom = 0.1
-fog_light_color = Color(0.053457, 0.129716, 0.163795, 1)
-fog_density = 0.03
+fog_enabled = true
+fog_light_color = Color(0.613537, 0.75655, 0.84681, 1)
+fog_light_energy = 0.03
+fog_density = 0.08
+adjustment_enabled = true
+adjustment_brightness = 1.3
+adjustment_contrast = 1.2
+adjustment_saturation = 0.7
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_28aoi"]
 vertices = PackedVector3Array(0.75, 0.1, -6, 0.5, 0.1, -8, -0.5, 0.1, -8, -0.75, 0.1, -6, 0.5, 0.1, -1.75, 3.5, 0.1, -2, 3.5, 0.1, -6, -0.5, 0.1, -1.75, -0.5, 0.1, 3, 0.5, 0.1, 3, -3.5, 0.1, -6, -3.5, 0.1, -2)
@@ -63,6 +72,8 @@ sky_mode = 1
 [node name="Boss Room" type="Node3D" parent="World3D"]
 
 [node name="Dungeon Generator" type="Node3D" parent="World3D" node_paths=PackedStringArray("current_room")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.87792, 0, -47.8407)
+visible = false
 script = ExtResource("1_vyht1")
 current_room = NodePath("Startup Room")
 
@@ -1182,6 +1193,12 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -41, 0
 [node name="Hero" parent="World3D" node_paths=PackedStringArray("camera") instance=ExtResource("1_vvh5c")]
 camera = NodePath("../Camera Point")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="World3D/Hero"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.54255, 0)
+visible = false
+light_energy = 6.841
+omni_range = 13.918
+
 [node name="Camera Point" parent="World3D" node_paths=PackedStringArray("target") instance=ExtResource("2_28aoi")]
 target = NodePath("../Hero")
 
@@ -1207,5 +1224,19 @@ metadata/_custom_type_script = "uid://d35nxihjtikcy"
 
 [node name="Hit VFX" parent="Particles Warming" instance=ExtResource("5_jnlp7")]
 
+[node name="Training Fight Room" type="Node3D" parent="."]
+
+[node name="first_fight_location" parent="Training Fight Room" instance=ExtResource("9_huihk")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.94534, 0, 0.0431666)
+
+[node name="room" parent="Training Fight Room/first_fight_location" index="23"]
+mesh = null
+
 [node name="Floating Sphere" parent="." instance=ExtResource("6_l8v81")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.55013, 0, -2.08368)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.20478, 9.53674e-07, -1.6672)
+
+[node name="Floating Sphere2" parent="." instance=ExtResource("6_l8v81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.27795, 4.76837e-07, 1.72945)
+
+[editable path="World3D/Camera Point"]
+[editable path="Training Fight Room/first_fight_location"]

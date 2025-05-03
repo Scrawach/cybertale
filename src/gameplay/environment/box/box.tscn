@@ -1,25 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://deqsey4x7eakf"]
+[gd_scene load_steps=10 format=3 uid="uid://deqsey4x7eakf"]
 
+[ext_resource type="Script" uid="uid://xd5y2eu0n4bt" path="res://gameplay/environment/box/box.gd" id="1_8jgoe"]
 [ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="1_71hpe"]
+[ext_resource type="PackedScene" uid="uid://keoprrvg6be5" path="res://gameplay/environment/box/models/box.glb" id="1_hurpj"]
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="1_qu0ts"]
+[ext_resource type="Material" uid="uid://wk2qkle5xofw" path="res://gameplay/environment/box/box.tres" id="2_8jgoe"]
 [ext_resource type="Script" uid="uid://dkkhphqh8vkxx" path="res://gameplay/common/death.gd" id="2_71hpe"]
 [ext_resource type="Script" uid="uid://cma2e03yqef6p" path="res://gameplay/common/death_drop.gd" id="3_hurpj"]
 [ext_resource type="PackedScene" uid="uid://digo2wt884cud" path="res://gameplay/items/dropped_item.tscn" id="4_yx4et"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_huihk"]
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_huihk"]
 radius = 1.0
 
-[sub_resource type="BoxMesh" id="BoxMesh_tw3kd"]
-
 [node name="Box" type="Node3D"]
+script = ExtResource("1_8jgoe")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="box" parent="." instance=ExtResource("1_hurpj")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_huihk")
+[node name="box" parent="box" index="0"]
+surface_material_override/0 = ExtResource("2_8jgoe")
 
 [node name="HitBox" type="Area3D" parent="." node_paths=PackedStringArray("health")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -30,10 +29,6 @@ health = NodePath("../Health")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
 shape = SubResource("SphereShape3D_huihk")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("BoxMesh_tw3kd")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("1_qu0ts")
@@ -52,4 +47,10 @@ script = ExtResource("3_hurpj")
 health = NodePath("../Health")
 parent = NodePath("..")
 drop_template = ExtResource("4_yx4et")
+min_drop_count = 2
+max_drop_count = 5
 metadata/_custom_type_script = "uid://cma2e03yqef6p"
+
+[connection signal="died" from="Health" to="." method="spawn_broken_box"]
+
+[editable path="box"]

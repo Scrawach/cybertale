@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://b5utujsll5gsj"]
 
-[ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box.tscn" id="1_l0ros"]
+[ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box/box.tscn" id="1_l0ros"]
 [ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="2_2geyn"]
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="3_3pew4"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="4_i5ax5"]
