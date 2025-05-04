@@ -220,6 +220,7 @@ polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(0, 3, 1), PackedInt32Arr
 [node name="Training Fight Room" type="Node3D" node_paths=PackedStringArray("region", "door", "player_spawn")]
 script = ExtResource("1_mbu3v")
 want_to_spawn = 2
+max_enemies_count = 2
 region = NodePath("first_fight_location/@NavigationRegion3D@182517")
 spawn_targets = Array[PackedScene]([ExtResource("2_xasmq")])
 spawn_vfx = ExtResource("3_8m1ip")

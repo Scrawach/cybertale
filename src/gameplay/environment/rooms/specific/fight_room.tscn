@@ -255,7 +255,8 @@ polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(0, 3, 1), PackedInt32Arr
 [node name="Fight Room" type="Node3D" node_paths=PackedStringArray("doors", "region", "door", "player_spawn")]
 script = ExtResource("1_cpm4f")
 doors = [NodePath("Next Room Door"), NodePath("Next Room Door2")]
-want_to_spawn = 6
+want_to_spawn = 16
+max_enemies_count = 6
 region = NodePath("fight_location_0/@NavigationRegion3D@322756")
 spawn_targets = Array[PackedScene]([ExtResource("2_uymcj")])
 spawn_vfx = ExtResource("3_rcd7p")

@@ -2,6 +2,7 @@ class_name TrainingRoom
 extends ScenarioRoom
 
 @export var want_to_spawn: int
+@export var max_enemies_count: int
 @export var region: NavigationRegion3D
 @export var spawn_targets: Array[PackedScene]
 @export var spawn_vfx: PackedScene
@@ -9,6 +10,7 @@ extends ScenarioRoom
 @onready var timer: Timer = $Timer
 @onready var enemies: Node3D = $Enemies
 
+var alive_enemies: int
 var spawned: int
 
 func start() -> void:
@@ -19,6 +21,10 @@ func start() -> void:
 		spawn_random_enemy_at_random_point()
 		await get_tree().create_timer(0.4).timeout
 		spawned += 1
+		alive_enemies += 1
+		
+		while alive_enemies > max_enemies_count:
+			await timer.timeout
 
 func stop() -> void:
 	region.enabled = false
@@ -40,7 +46,8 @@ func spawn_spawn_vfx(target: Vector3) -> void:
 	instance.global_position = target
 
 func _on_timeout() -> void:
-	if get_enemies_count() < 1 and want_to_spawn <= spawned:
+	alive_enemies = get_enemies_count()
+	if alive_enemies < 1 and want_to_spawn <= spawned:
 		timer.stop()
 		door.enable()
 

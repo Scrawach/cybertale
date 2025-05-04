@@ -20,7 +20,7 @@ func get_dash_speed() -> float:
 
 func upgrade_health(value: int) -> void:
 	health += value
-	health_node.increase_max_value(health)
+	health_node.increase_max_value(value)
 
 func upgrade_damage(value: int) -> void:
 	damage += value
