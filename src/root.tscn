@@ -394,5 +394,13 @@ surface_material_override/0 = ExtResource("34_qoqhg")
 mesh = SubResource("QuadMesh_ql764")
 surface_material_override/0 = ExtResource("33_ql764")
 
+[node name="Chasing Virus" parent="Shaders Precompilation" instance=ExtResource("18_ql764")]
+movement_speed = 0.0
+attack_range = 0.0
+
+[node name="Ranged Virus" parent="Shaders Precompilation" instance=ExtResource("19_24xe2")]
+movement_speed = 0.0
+attack_range = 0.0
+
 [editable path="World3D/Camera Point"]
 [editable path="Shaders Precompilation/Slash VFX"]
