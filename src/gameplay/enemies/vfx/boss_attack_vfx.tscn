@@ -1,0 +1,72 @@
+[gd_scene load_steps=14 format=3 uid="uid://dq1ktjvs2ay47"]
+
+[ext_resource type="Script" uid="uid://rsi6gtf7onoo" path="res://gameplay/enemies/vfx/spawn_vfx.gd" id="1_axob2"]
+[ext_resource type="Shader" uid="uid://3kevny1howhf" path="res://gameplay/enemies/vfx/smoke_shader.tres" id="2_0l1fy"]
+[ext_resource type="ArrayMesh" uid="uid://cjkxdc8fup3y" path="res://gameplay/enemies/vfx/smoke.res" id="3_4d4nx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qw60f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eji0w"]
+noise = SubResource("FastNoiseLite_qw60f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6eas5"]
+render_priority = 0
+shader = ExtResource("2_0l1fy")
+shader_parameter/Offset = Vector2(0, 0)
+shader_parameter/Texture2DParameter = SubResource("NoiseTexture2D_eji0w")
+
+[sub_resource type="Curve" id="Curve_rnm7y"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mqs3h"]
+curve = SubResource("Curve_rnm7y")
+
+[sub_resource type="Gradient" id="Gradient_7b4vy"]
+offsets = PackedFloat32Array(0, 0.704467)
+colors = PackedColorArray(1, 0, 0.0166664, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ccn36"]
+gradient = SubResource("Gradient_7b4vy")
+
+[sub_resource type="Curve" id="Curve_sbqrh"]
+_data = [Vector2(0, 0.76962), 0.0, 0.0, 0, 0, Vector2(0.984227, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a1mcb"]
+curve = SubResource("Curve_sbqrh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gxwpq"]
+particle_flag_rotate_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 6.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -180.0
+angle_max = 180.0
+gravity = Vector3(0, 10, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_a1mcb")
+color_ramp = SubResource("GradientTexture1D_ccn36")
+alpha_curve = SubResource("CurveTexture_mqs3h")
+
+[node name="Boss Attack VFX" type="Node3D" node_paths=PackedStringArray("particles")]
+script = ExtResource("1_axob2")
+play_on_ready = true
+lifetime = 1.0
+particles = [NodePath("GPUParticles3D")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_6eas5")
+emitting = false
+amount = 50
+lifetime = 0.35
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_gxwpq")
+draw_pass_1 = ExtResource("3_4d4nx")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

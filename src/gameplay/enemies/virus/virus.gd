@@ -88,6 +88,9 @@ func set_target_position(target_position: Vector3) -> void:
 	nav_agent.set_target_position(target_position)
 
 func _process_movement(delta: float) -> void:
+	if nav_agent.is_target_reached():
+		return
+	
 	if extra_animation:
 		extra_animation.play("walk")
 		extra_animation.speed_scale = 2 * movement_speed / 5
@@ -96,7 +99,7 @@ func _process_movement(delta: float) -> void:
 	global_position = global_position.move_toward(next_position, delta * movement_speed)
 	next_position.y = 0
 	
-	if self.position != next_position:
+	if self.global_position != next_position:
 		look_at(next_position)
 	
 

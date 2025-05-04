@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf04nxf2mce7u"]
+
+[ext_resource type="PackedScene" uid="uid://cuyyd304usipp" path="res://gameplay/hero/death/hero-death.glb" id="1_1yshc"]
+
+[node name="Hero Death Effect" type="Node3D"]
+
+[node name="hero-death" parent="." instance=ExtResource("1_1yshc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0132204)
+
+[editable path="hero-death"]

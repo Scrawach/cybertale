@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://naj2ppix1uto"]
+
+[ext_resource type="Texture2D" uid="uid://bfdt1efinynvs" path="res://gameplay/enemies/vfx/danger_zone.png" id="1_g06lh"]
+
+[resource]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0, 0, 0.27451)
+albedo_texture = ExtResource("1_g06lh")

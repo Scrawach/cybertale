@@ -31,11 +31,16 @@ var is_dash: bool = false
 var direction_angle: float
 var is_attack_processing: bool
 
+var is_can_control: bool = true
+
 func _ready() -> void:	
 	dash_timer.timeout.connect(_on_dash_timeout)
 	health.damage_taken.connect(_on_damage_taken)
 
 func _physics_process(delta: float) -> void:
+	if not is_can_control:
+		return
+	
 	body_animation.speed_scale = stats.movement_speed / 8 * base_animation_scale
 	
 	if not is_dash:
@@ -90,9 +95,18 @@ func set_hud_active(is_active: bool) -> void:
 	$CanvasLayer.visible = is_active
 
 func set_input_active(is_active: bool) -> void:
-	pass
+	is_can_control = is_active
+
+func hide_view() -> void:
+	$"hero-base".hide()
+	$Hitbox/CollisionShape3D.disabled = true
+
+func show_view() -> void:
+	$"hero-base".show()
+	$Hitbox/CollisionShape3D.disabled = false
 
 func _alt_attack_process() -> void:
+	Audio.play("res://gameplay/hero/sounds/sword_attack.wav", Vector2(1.5, 1.8))
 	attack_cooldown.start()
 	is_attack_processing = true
 	hurt_collider.set_deferred("disabled", false)
@@ -125,6 +139,7 @@ func _start_dash() -> void:
 	hitbox.monitoring = false
 	dash_timer.start(stats.dash_length)
 	dash_vfx.visible = true
+	Audio.play("res://gameplay/hero/sounds/sword_attack.wav", Vector2(1.9, 2.2))
 
 func _end_dash() -> void:
 	camera.reset_size()
@@ -164,4 +179,5 @@ func _on_hurt_box_area_entered(area: Area3D) -> void:
 	camera.shake(0.03)
 
 func _on_damage_taken(value: int) -> void:
+	Audio.play("res://gameplay/hero/sounds/hit-hunt.wav")
 	camera.play_take_damage()

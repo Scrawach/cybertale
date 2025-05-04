@@ -1,42 +1,199 @@
-[gd_scene load_steps=19 format=3 uid="uid://dolepn0oqhymo"]
+[gd_scene load_steps=39 format=3 uid="uid://dolepn0oqhymo"]
 
 [ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="1_i2yv3"]
 [ext_resource type="Script" uid="uid://c22exopbnidld" path="res://gameplay/enemies/boss/boss.gd" id="1_sjs6l"]
+[ext_resource type="PackedScene" uid="uid://sgqqmldffmiq" path="res://gameplay/enemies/boss/models/boss.glb" id="2_pxy2m"]
 [ext_resource type="Script" uid="uid://b8hqs1hbipqv7" path="res://gameplay/common/health.gd" id="2_sjs6l"]
+[ext_resource type="PackedScene" uid="uid://ds1tsskq2x0v" path="res://gameplay/enemies/floating/models/floating_sphere.glb" id="2_xd3vb"]
+[ext_resource type="Material" uid="uid://d32gt020w0h13" path="res://gameplay/enemies/virus/materials/chasing_virus.tres" id="3_xd3vb"]
+[ext_resource type="Material" uid="uid://d0s0pt5lh6p77" path="res://gameplay/enemies/floating/floating_sphere.tres" id="4_5rtw8"]
 [ext_resource type="Script" uid="uid://bq2skqf4slwo" path="res://gameplay/enemies/boss/stages/boss_chasing.gd" id="4_sahvm"]
 [ext_resource type="Script" uid="uid://v8wapx6ixbrh" path="res://gameplay/enemies/boss/stages/boss_bombs.gd" id="5_jgtq3"]
 [ext_resource type="PackedScene" uid="uid://tvgmq41j3lhy" path="res://gameplay/enemies/boss/bombs/boss_bomb.tscn" id="6_gq7ic"]
 [ext_resource type="Script" uid="uid://davywyg5lnttl" path="res://gameplay/enemies/boss/stages/boss_waiting.gd" id="6_s2xka"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="7_s2xka"]
+[ext_resource type="PackedScene" uid="uid://dq1ktjvs2ay47" path="res://gameplay/enemies/vfx/boss_attack_vfx.tscn" id="9_5rtw8"]
 [ext_resource type="Script" uid="uid://ku7uo0oubavo" path="res://gameplay/enemies/boss/hud/boss_hud.gd" id="9_j0e7c"]
 [ext_resource type="Script" uid="uid://dkkhphqh8vkxx" path="res://gameplay/common/death.gd" id="10_2q0ix"]
+[ext_resource type="Material" uid="uid://naj2ppix1uto" path="res://gameplay/enemies/virus/materials/danger_area.tres" id="12_faxlq"]
+[ext_resource type="Script" uid="uid://dinvnyk5r8rb4" path="res://gameplay/enemies/boss/stages/spawn_guards.gd" id="13_faxlq"]
+[ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="14_wxfhk"]
+[ext_resource type="Script" uid="uid://11mhs6ehk33f" path="res://gameplay/environment/rooms/spawn_settings.gd" id="15_2ilma"]
+[ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="16_odqoi"]
+[ext_resource type="PackedScene" uid="uid://bkfe7or2qr1ti" path="res://gameplay/enemies/virus/chasing_virus.tscn" id="17_ca7of"]
+[ext_resource type="PackedScene" uid="uid://d0763q65dmpb7" path="res://gameplay/enemies/virus/ranged_virus.tscn" id="18_i7l34"]
+[ext_resource type="Script" uid="uid://brtd615r8eoo4" path="res://gameplay/environment/rooms/room_spawn_settings.gd" id="19_4bl1y"]
+[ext_resource type="Script" uid="uid://c27j7p36ppclx" path="res://gameplay/common/death_vfx.gd" id="24_odqoi"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gd4vy"]
 radius = 2.5
 
-[sub_resource type="PrismMesh" id="PrismMesh_bf3um"]
-size = Vector3(3, 3, 3)
+[sub_resource type="Animation" id="Animation_xd3vb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.5, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5rtw8"]
+resource_name = "attack"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.5, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.4, 0.6, 1.4), Vector3(0.6, 1.4, 0.6), Vector3(0.8, 1.2, 0.8), Vector3(0.6, 1.4, 0.6), Vector3(1.7, 0.5, 1.7), Vector3(0.8, 1.2, 0.8), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2, 0), Vector3(0, 2, 0), Vector3(0, 2, 0), Vector3(0, 5, 0), Vector3(0, 2, 0), Vector3(0, 2, 0), Vector3(0, 2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pxy2m"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.9, 1.2, 0.9), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2, 0), Vector3(0, 2.5, 0), Vector3(0, 2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5rtw8"]
+_data = {
+&"RESET": SubResource("Animation_xd3vb"),
+&"attack": SubResource("Animation_5rtw8"),
+&"idle": SubResource("Animation_pxy2m")
+}
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tw3kd"]
 radius = 2.5
 
+[sub_resource type="Resource" id="Resource_wr7ex"]
+script = ExtResource("15_2ilma")
+scene = ExtResource("16_odqoi")
+count = 6
+metadata/_custom_type_script = "uid://11mhs6ehk33f"
+
+[sub_resource type="Resource" id="Resource_vsn8l"]
+script = ExtResource("15_2ilma")
+scene = ExtResource("17_ca7of")
+count = 4
+metadata/_custom_type_script = "uid://11mhs6ehk33f"
+
+[sub_resource type="Resource" id="Resource_co3f4"]
+script = ExtResource("15_2ilma")
+scene = ExtResource("18_i7l34")
+count = 3
+metadata/_custom_type_script = "uid://11mhs6ehk33f"
+
+[sub_resource type="Resource" id="Resource_gf2ws"]
+script = ExtResource("19_4bl1y")
+enemies = Array[ExtResource("15_2ilma")]([SubResource("Resource_wr7ex"), SubResource("Resource_vsn8l"), SubResource("Resource_co3f4")])
+max_alive_enemies = 0
+pause_between_spawns = 0.2
+metadata/_custom_type_script = "uid://brtd615r8eoo4"
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_s2xka"]
 radius = 6.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_gq7ic"]
-radius = 6.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j0e7c"]
-transparency = 1
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(1, 0, 0, 0.278431)
+[sub_resource type="QuadMesh" id="QuadMesh_wxfhk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0e7c"]
 bg_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2q0ix"]
 bg_color = Color(0.964706, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(1, 0, 0, 0.470588)
+shadow_size = 6
 
 [node name="Boss" type="CharacterBody3D"]
 script = ExtResource("1_sjs6l")
@@ -47,10 +204,58 @@ shape = SubResource("SphereShape3D_gd4vy")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="View" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="View"]
-mesh = SubResource("PrismMesh_bf3um")
+[node name="floating_sphere" parent="View" instance=ExtResource("2_xd3vb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.411764, 0.204347, 1.02528)
+
+[node name="Sphere" parent="View/floating_sphere" index="0"]
+blend_shapes/Displace = 0.2
+blend_shapes/Displace.001 = 0.968995
+surface_material_override/0 = ExtResource("4_5rtw8")
+
+[node name="AnimationPlayer" parent="View/floating_sphere" index="1"]
+autoplay = "Idle"
+
+[node name="floating_sphere2" parent="View" instance=ExtResource("2_xd3vb")]
+transform = Transform3D(-0.435608, 0, -0.900136, 0, 1, 0, 0.900136, 0, -0.435608, -0.262542, 0.204347, 0.921827)
+
+[node name="Sphere" parent="View/floating_sphere2" index="0"]
+blend_shapes/Displace = 0.2
+blend_shapes/Displace.001 = 0.968995
+surface_material_override/0 = ExtResource("4_5rtw8")
+
+[node name="AnimationPlayer" parent="View/floating_sphere2" index="1"]
+autoplay = "Idle"
+
+[node name="floating_sphere3" parent="View" instance=ExtResource("2_xd3vb")]
+transform = Transform3D(-0.435608, 0, -0.900136, 0, 1, 0, 0.900136, 0, -0.435608, 0.0521711, 0.912197, 0.618292)
+
+[node name="Sphere" parent="View/floating_sphere3" index="0"]
+blend_shapes/Displace = 0.2
+blend_shapes/Displace.001 = 0.968995
+surface_material_override/0 = ExtResource("4_5rtw8")
+
+[node name="AnimationPlayer" parent="View/floating_sphere3" index="1"]
+autoplay = "Idle"
+
+[node name="boss" parent="View" instance=ExtResource("2_pxy2m")]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, -0.743176, 0)
+
+[node name="Cylinder_001" parent="View/boss" index="0"]
+blend_shapes/Displace = 0.192982
+blend_shapes/Displace.001 = 0.385965
+surface_material_override/0 = ExtResource("3_xd3vb")
+surface_material_override/1 = ExtResource("4_5rtw8")
+
+[node name="AnimationPlayer" parent="View/boss" index="1"]
+autoplay = "idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="View"]
+libraries = {
+&"": SubResource("AnimationLibrary_5rtw8")
+}
+autoplay = "idle"
 
 [node name="HitBox" type="Area3D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 32
@@ -64,8 +269,8 @@ debug_color = Color(0.968627, 0.0352941, 0, 1)
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_sjs6l")
-value = 150
-max_value = 150
+value = 300
+max_value = 300
 metadata/_custom_type_script = "uid://b8hqs1hbipqv7"
 
 [node name="Fire Point" type="Marker3D" parent="."]
@@ -73,13 +278,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2)
 
 [node name="Behaviour" type="Node" parent="."]
 
-[node name="Chasing" type="Node" parent="Behaviour" node_paths=PackedStringArray("boss", "nav_agent", "collision", "attack_area")]
+[node name="Chasing" type="Node" parent="Behaviour" node_paths=PackedStringArray("boss", "nav_agent", "collision", "attack_area", "animation")]
 unique_name_in_owner = true
 script = ExtResource("4_sahvm")
 boss = NodePath("../..")
 nav_agent = NodePath("../../NavigationAgent3D")
 collision = NodePath("../../Attack HurtBox/CollisionShape3D")
 attack_area = NodePath("../../Attack HurtBox/Attack Range Area")
+animation = NodePath("../../View/AnimationPlayer")
+attack_vfx = ExtResource("9_5rtw8")
 
 [node name="Bombs" type="Node" parent="Behaviour" node_paths=PackedStringArray("boss", "fire_point")]
 unique_name_in_owner = true
@@ -92,11 +299,21 @@ fire_point = NodePath("../../Fire Point")
 unique_name_in_owner = true
 script = ExtResource("6_s2xka")
 boss = NodePath("../..")
-min_time = 2.0
-max_time = 4.0
+min_time = 1.0
+max_time = 2.0
 
 [node name="Timer" type="Timer" parent="Behaviour/Waiting"]
 one_shot = true
+
+[node name="Spawn Guards" type="Node" parent="Behaviour" node_paths=PackedStringArray("boss", "health", "agent")]
+script = ExtResource("13_faxlq")
+boss = NodePath("../..")
+health = NodePath("../../Health")
+required_minimum_health_1 = 200
+required_minimum_health_2 = 100
+agent = NodePath("../../NavigationAgent3D")
+spawn_vfx = ExtResource("14_wxfhk")
+settings = SubResource("Resource_gf2ws")
 
 [node name="Attack HurtBox" type="Area3D" parent="."]
 collision_layer = 8
@@ -109,12 +326,13 @@ shape = SubResource("SphereShape3D_s2xka")
 disabled = true
 
 [node name="Attack Range Area" type="MeshInstance3D" parent="Attack HurtBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+transform = Transform3D(12, 0, 0, 0, -5.24537e-07, 12, 0, -12, -5.24537e-07, 0, 0.701, 0)
 visible = false
-mesh = SubResource("SphereMesh_gq7ic")
-surface_material_override/0 = SubResource("StandardMaterial3D_j0e7c")
+mesh = SubResource("QuadMesh_wxfhk")
+surface_material_override/0 = ExtResource("12_faxlq")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" node_paths=PackedStringArray("health")]
 anchors_preset = 12
@@ -144,3 +362,16 @@ script = ExtResource("10_2q0ix")
 health = NodePath("../Health")
 body = NodePath("..")
 metadata/_custom_type_script = "uid://dkkhphqh8vkxx"
+
+[node name="DeathVFX" type="Node" parent="." node_paths=PackedStringArray("health", "parent", "spawn_point")]
+script = ExtResource("24_odqoi")
+health = NodePath("../Health")
+parent = NodePath("..")
+spawn_point = NodePath("../View")
+scene = ExtResource("9_5rtw8")
+metadata/_custom_type_script = "uid://c27j7p36ppclx"
+
+[editable path="View/floating_sphere"]
+[editable path="View/floating_sphere2"]
+[editable path="View/floating_sphere3"]
+[editable path="View/boss"]

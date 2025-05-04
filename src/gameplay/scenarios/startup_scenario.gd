@@ -20,21 +20,21 @@ func execute() -> void:
 	var hero = await wait_complete(startup_room)
 	startup_room.queue_free()
 	hero.global_position = bridge_room.player_spawn.global_position
-	tutorial_label.text = tr("TUTORIAL_ATTACK_KEY")
+	#tutorial_label.text = tr("TUTORIAL_ATTACK_KEY")
 	hero.set_hud_active(true)
 	hero = await wait_complete(bridge_room)
 	bridge_room.queue_free()
 	hero.global_position = training_room.player_spawn.global_position
 	
 	training_room.start()
-	tutorial_label.text = ""
+	#tutorial_label.text = ""
 	hero.show_health_bar(true)
 	hero = await wait_complete(training_room)
 	training_room.queue_free()
 	hero.global_position = dash_room.player_spawn.global_position
 	
 	dash_room.start()
-	tutorial_label.text = tr("TUTORIAL_DASH_KEY")
+	#tutorial_label.text = tr("TUTORIAL_DASH_KEY")
 	hero.health.damage_taken.connect(_on_damage_taken)
 	await dash_room.completed
 	hero.health.damage_taken.disconnect(_on_damage_taken)

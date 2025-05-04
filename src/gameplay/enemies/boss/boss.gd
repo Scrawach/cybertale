@@ -35,7 +35,6 @@ func switch_to(type: Script) -> void:
 	var next_stage = states[type]
 	current_stage = next_stage
 	next_stage.start()
-	print("%s started" % type.get_global_name())
 
 func _process(delta: float) -> void:
 	if current_stage == null:
@@ -48,3 +47,6 @@ func _process_movement(delta: float) -> void:
 	global_position = global_position.move_toward(next_position, delta * movement_speed)
 	next_position.y = 0
 	look_at(next_position)
+
+func hud_set_active(is_active: bool) -> void:
+	$CanvasLayer.visible = is_active

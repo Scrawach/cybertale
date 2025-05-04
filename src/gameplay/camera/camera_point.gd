@@ -9,6 +9,8 @@ extends Node3D
 @onready var vignette: ColorRect = %Vignette
 @onready var vignette_animation: AnimationPlayer = $CanvasLayer/Vignette/AnimationPlayer
 
+@onready var fullscreen_texture: TextureRect = $CanvasLayer/TextureRect
+
 var base_size: float
 var tween: Tween
 
@@ -45,6 +47,13 @@ func reset_low_health() -> void:
 
 func reset_vignette() -> void:
 	pass
+
+func make_screen_white() -> void:
+	var image := get_viewport().get_texture().get_image()
+	var texture := ImageTexture.create_from_image(image)
+	fullscreen_texture.texture = texture
+	await get_tree().create_timer(0.1).timeout
+	fullscreen_texture.texture = null
 
 func reset_size() -> void:
 	if tween:

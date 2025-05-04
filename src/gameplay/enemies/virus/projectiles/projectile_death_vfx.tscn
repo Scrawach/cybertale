@@ -1,11 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b17rlm6hsktab"]
 
 [ext_resource type="Script" uid="uid://bgdmrlnn4dpdu" path="res://gameplay/enemies/virus/projectiles/projectile_death_vfx.gd" id="1_afrt0"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjo4s"]
-diffuse_mode = 3
-specular_mode = 1
-vertex_color_use_as_albedo = true
+[ext_resource type="Material" uid="uid://b05gugos0nccs" path="res://gameplay/enemies/virus/projectiles/projectile_death_vfx.tres" id="1_qc7q2"]
 
 [sub_resource type="Gradient" id="Gradient_28pge"]
 colors = PackedColorArray(1, 0, 0, 1, 0.201816, 1.14311e-07, 7.21961e-08, 1)
@@ -37,7 +33,7 @@ size = Vector3(0.2, 0.2, 0.2)
 
 [node name="Projectile Death VFX" type="GPUParticles3D"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_wjo4s")
+material_override = ExtResource("1_qc7q2")
 emitting = false
 amount = 45
 lifetime = 0.15

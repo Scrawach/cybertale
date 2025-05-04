@@ -24,4 +24,4 @@ func stop() -> void:
 func _on_timeout() -> void:
 	var index = randi_range(0, 1)
 	var stages = [BossChasing, BossBombs]
-	boss.switch_to(stages[index])
+	boss.switch_to(BossChasing)

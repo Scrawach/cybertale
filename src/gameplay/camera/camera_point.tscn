@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://btn6jwawira3l"]
+[gd_scene load_steps=12 format=3 uid="uid://btn6jwawira3l"]
 
 [ext_resource type="Script" uid="uid://cbsh51qlv60ho" path="res://gameplay/camera/camera_point.gd" id="1_iyhh0"]
 [ext_resource type="Script" uid="uid://bpbjl4h7l0c4w" path="res://gameplay/camera/camera_shaker.gd" id="1_nh48w"]
 [ext_resource type="Shader" uid="uid://465q8akic3pc" path="res://gameplay/camera/post_processing/vignette.gdshader" id="3_c4btx"]
+[ext_resource type="Shader" uid="uid://b40j6fb2gb1tp" path="res://gameplay/camera/post_processing/white_effect.gdshader" id="3_qt5t4"]
 
 [sub_resource type="Curve" id="Curve_nh48w"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -11,6 +12,9 @@ point_count = 2
 [sub_resource type="Curve" id="Curve_iyhh0"]
 _data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rbxik"]
+shader = ExtResource("3_qt5t4")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qt5t4"]
 shader = ExtResource("3_c4btx")
@@ -76,6 +80,14 @@ shake_duration = SubResource("Curve_iyhh0")
 shake_range = Vector2i(5, 8)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_rbxik")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Vignette" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true

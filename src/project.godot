@@ -24,6 +24,7 @@ config/icon="uid://j4k0h7ijwbpb"
 [autoload]
 
 MainCamera="*res://gameplay/camera/main_camera.gd"
+Audio="*res://gameplay/audio/audio.gd"
 
 [display]
 

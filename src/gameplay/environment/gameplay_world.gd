@@ -14,8 +14,6 @@ const OFFSET_BETWEEN_ROOMS: float = 50
 @export var settings: GameplaySpawnSettings
 
 @onready var progress: SmartProgressBar = $"Game Progress/MarginContainer/ProgressBar"
-@onready var defeat_all_label: Control = $"Game Progress/Defeat All"
-@onready var defeat_all_timer: Timer = $"Game Progress/Defeat All/Timer"
 
 var hero: Hero
 var current_room: int
@@ -44,13 +42,6 @@ func start(hero: Hero) -> void:
 	progress.complete_room(current_room)
 	
 	room.start()
-	defeat_all_label.show()
-	defeat_all_timer.start()
-	await defeat_all_timer.timeout
-	var tween = create_tween()
-	tween.tween_property(defeat_all_label, "modulate:a", 0, 1.0)
-	tween.tween_callback(func(): defeat_all_label.hide())
-	
 	var door: NextRoomDoor = await room.completed
 	
 	if not is_died:
@@ -135,8 +126,9 @@ func create_room(template: PackedScene) -> ScenarioRoom:
 func revive_hero() -> void:
 	is_died = true
 	previous_room.completed.emit(null)
-	current_room -= 1
+	current_room -= 2
 	current_room = max(0, current_room)
+	progress.complete_room(current_room)
 	
 	hero.set_input_active(false)
 	

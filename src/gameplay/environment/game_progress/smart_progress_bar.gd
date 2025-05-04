@@ -24,7 +24,7 @@ func setup_path(count_of_rooms: int) -> void:
 		
 		room_icons.append(instance)
 
-func complete_room(room_number: int) -> void:
+func complete_room(room_number: int) -> void:	
 	const VISUAL_OFFSET: float = 0.1
 	create_tween().tween_property(self, "value", room_number + VISUAL_OFFSET, 1.5)
 

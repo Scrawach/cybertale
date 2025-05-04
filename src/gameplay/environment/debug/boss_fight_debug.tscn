@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bi6220l1mw3xh"]
+
+[ext_resource type="PackedScene" uid="uid://2ofopwmam6h5" path="res://gameplay/environment/rooms/specific/boss_room.tscn" id="1_bje47"]
+[ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="2_yftvi"]
+[ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="3_ao5v5"]
+[ext_resource type="PackedScene" uid="uid://bvgagm260nud7" path="res://gameplay/environment/world_environment.tscn" id="4_yftvi"]
+
+[node name="Boss Fight Debug" type="Node3D"]
+
+[node name="Boss Room" parent="." instance=ExtResource("1_bje47")]
+
+[node name="Hero" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_yftvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, 0)
+camera = NodePath("../Camera Point")
+
+[node name="Camera Point" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_ao5v5")]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 18, 0, 0)
+target = NodePath("../Hero")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("4_yftvi")]

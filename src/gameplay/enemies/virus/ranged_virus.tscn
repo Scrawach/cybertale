@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://by5mwvn4a2jlv" path="res://gameplay/enemies/virus/models/drone.glb" id="10_75w2o"]
 [ext_resource type="Material" uid="uid://d0s0pt5lh6p77" path="res://gameplay/enemies/floating/floating_sphere.tres" id="11_mpgtu"]
 [ext_resource type="Script" uid="uid://c27j7p36ppclx" path="res://gameplay/common/death_vfx.gd" id="11_nqbhc"]
+[ext_resource type="Material" uid="uid://berhoo1h2o2ni" path="res://gameplay/enemies/virus/materials/ranged_virus.tres" id="11_u50j8"]
 [ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="12_2bl11"]
 [ext_resource type="Script" uid="uid://vfqw5g7s4ou6" path="res://gameplay/common/hit_flash.gd" id="12_nqbhc"]
 [ext_resource type="PackedScene" uid="uid://ds1tsskq2x0v" path="res://gameplay/enemies/floating/models/floating_sphere.glb" id="14_tdamw"]
@@ -21,15 +22,6 @@ radius = 10.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tkedg"]
 radius = 0.8
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bl11"]
-resource_local_to_scene = true
-resource_name = "Material"
-cull_mode = 2
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.113465, 0.124021, 0.126659, 1)
-emission_enabled = true
 
 [sub_resource type="Animation" id="Animation_75w2o"]
 resource_name = "Idle"
@@ -177,7 +169,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.7702
 [node name="Drone" parent="drone/drone" index="0"]
 blend_shapes/Displace = 0.329825
 blend_shapes/Displace.001 = 0.280702
-surface_material_override/0 = SubResource("StandardMaterial3D_2bl11")
+surface_material_override/0 = ExtResource("11_u50j8")
 surface_material_override/1 = ExtResource("11_mpgtu")
 
 [node name="AnimationPlayer" parent="drone/drone" index="1"]

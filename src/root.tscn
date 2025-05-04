@@ -1,6 +1,7 @@
-[gd_scene load_steps=58 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=65 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
+[ext_resource type="PackedScene" uid="uid://bvgagm260nud7" path="res://gameplay/environment/world_environment.tscn" id="1_xu2l0"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
 [ext_resource type="PackedScene" uid="uid://dqpbotjwi8ltd" path="res://gameplay/hero/hit/hit_vfx.tscn" id="5_jnlp7"]
 [ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="6_l8v81"]
@@ -31,37 +32,14 @@
 [ext_resource type="PackedScene" uid="uid://bkfe7or2qr1ti" path="res://gameplay/enemies/virus/chasing_virus.tscn" id="18_ql764"]
 [ext_resource type="PackedScene" uid="uid://d0763q65dmpb7" path="res://gameplay/enemies/virus/ranged_virus.tscn" id="19_24xe2"]
 [ext_resource type="PackedScene" uid="uid://0xk5oow351fp" path="res://gameplay/hero/slash/slash_vfx.tscn" id="19_ynlg5"]
+[ext_resource type="PackedScene" uid="uid://cf04nxf2mce7u" path="res://gameplay/hero/death/hero_death_effect.tscn" id="24_f6va0"]
 [ext_resource type="Material" uid="uid://b05gugos0nccs" path="res://gameplay/enemies/virus/projectiles/projectile_death_vfx.tres" id="32_cj3xu"]
 [ext_resource type="Material" uid="uid://berhoo1h2o2ni" path="res://gameplay/enemies/virus/materials/ranged_virus.tres" id="33_ql764"]
 [ext_resource type="Material" uid="uid://d32gt020w0h13" path="res://gameplay/enemies/virus/materials/chasing_virus.tres" id="34_qoqhg"]
 [ext_resource type="PackedScene" uid="uid://dsk1kogc4v1iw" path="res://gameplay/enemies/virus/projectiles/enemy_projectile.tscn" id="35_udg8a"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-
-[sub_resource type="Sky" id="Sky_pq8q7"]
-sky_material = SubResource("ProceduralSkyMaterial_vho56")
-
-[sub_resource type="Environment" id="Environment_pyidc"]
-background_mode = 1
-sky = SubResource("Sky_pq8q7")
-ambient_light_source = 2
-ambient_light_color = Color(0.606513, 0.832478, 0.991546, 1)
-tonemap_mode = 3
-tonemap_exposure = 1.3
-tonemap_white = 1.26
-glow_enabled = true
-glow_intensity = 2.0
-glow_bloom = 0.1
-fog_enabled = true
-fog_light_color = Color(0.613537, 0.75655, 0.84681, 1)
-fog_light_energy = 0.03
-fog_density = 0.07
-adjustment_enabled = true
-adjustment_brightness = 1.3
-adjustment_contrast = 1.2
-adjustment_saturation = 0.7
+[ext_resource type="PackedScene" uid="uid://csqaiqegl0r0p" path="res://gameplay/enemies/vfx/virus_attack_vfx.tscn" id="36_cr30j"]
+[ext_resource type="PackedScene" uid="uid://dq1ktjvs2ay47" path="res://gameplay/enemies/vfx/boss_attack_vfx.tscn" id="38_sc48t"]
+[ext_resource type="Shader" uid="uid://b40j6fb2gb1tp" path="res://gameplay/camera/post_processing/white_effect.gdshader" id="39_f6va0"]
 
 [sub_resource type="Resource" id="Resource_qoqhg"]
 script = ExtResource("16_cj3xu")
@@ -104,19 +82,19 @@ metadata/_custom_type_script = "uid://brtd615r8eoo4"
 [sub_resource type="Resource" id="Resource_cj3xu"]
 script = ExtResource("16_cj3xu")
 scene = ExtResource("6_l8v81")
-count = 6
+count = 12
 metadata/_custom_type_script = "uid://11mhs6ehk33f"
 
 [sub_resource type="Resource" id="Resource_ql764"]
 script = ExtResource("16_cj3xu")
 scene = ExtResource("18_ql764")
-count = 4
+count = 6
 metadata/_custom_type_script = "uid://11mhs6ehk33f"
 
 [sub_resource type="Resource" id="Resource_uk3k5"]
 script = ExtResource("16_cj3xu")
 scene = ExtResource("19_24xe2")
-count = 3
+count = 6
 metadata/_custom_type_script = "uid://11mhs6ehk33f"
 
 [sub_resource type="Resource" id="Resource_0aysq"]
@@ -126,9 +104,30 @@ max_alive_enemies = 6
 pause_between_spawns = 0.5
 metadata/_custom_type_script = "uid://brtd615r8eoo4"
 
+[sub_resource type="Resource" id="Resource_vnkct"]
+script = ExtResource("15_24xe2")
+enemies = Array[ExtResource("16_cj3xu")]([SubResource("Resource_cj3xu"), SubResource("Resource_ql764"), SubResource("Resource_uk3k5")])
+max_alive_enemies = 8
+pause_between_spawns = 0.5
+metadata/_custom_type_script = "uid://brtd615r8eoo4"
+
+[sub_resource type="Resource" id="Resource_obcww"]
+script = ExtResource("15_24xe2")
+enemies = Array[ExtResource("16_cj3xu")]([SubResource("Resource_cj3xu"), SubResource("Resource_ql764"), SubResource("Resource_uk3k5")])
+max_alive_enemies = 10
+pause_between_spawns = 0.3
+metadata/_custom_type_script = "uid://brtd615r8eoo4"
+
+[sub_resource type="Resource" id="Resource_mh7w8"]
+script = ExtResource("15_24xe2")
+enemies = Array[ExtResource("16_cj3xu")]([SubResource("Resource_cj3xu"), SubResource("Resource_ql764"), SubResource("Resource_uk3k5")])
+max_alive_enemies = 10
+pause_between_spawns = 0.3
+metadata/_custom_type_script = "uid://brtd615r8eoo4"
+
 [sub_resource type="Resource" id="Resource_f6va0"]
 script = ExtResource("14_tilu5")
-settings = Array[ExtResource("15_24xe2")]([SubResource("Resource_cr30j"), SubResource("Resource_sc48t"), SubResource("Resource_0aysq")])
+settings = Array[ExtResource("15_24xe2")]([SubResource("Resource_cr30j"), SubResource("Resource_sc48t"), SubResource("Resource_0aysq"), SubResource("Resource_vnkct"), SubResource("Resource_obcww"), SubResource("Resource_mh7w8")])
 metadata/_custom_type_script = "uid://le42ofjyspuk"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blcw0"]
@@ -170,17 +169,14 @@ shader_parameter/Color = Color(0, 0.772549, 1, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_ql764"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uk3k5"]
+shader = ExtResource("39_f6va0")
+
+[sub_resource type="QuadMesh" id="QuadMesh_0aysq"]
+
 [node name="Root" type="Node"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_pyidc")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-light_specular = 0.871
-shadow_enabled = true
-directional_shadow_split_1 = 0.01
-sky_mode = 1
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_xu2l0")]
 
 [node name="World3D" type="Node3D" parent="."]
 
@@ -228,12 +224,12 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("14_vte5o")
-theme_override_constants/outline_size = 10
+theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 30
 
 [node name="Gameplay World" type="Node3D" parent="World3D" node_paths=PackedStringArray("last_window")]
 script = ExtResource("7_sq7yr")
-number_of_rooms = 4
+number_of_rooms = 9
 fighting_room_template = ExtResource("8_r3r3k")
 boss_room_template = ExtResource("9_3dlgs")
 shoop_room_template = ExtResource("6_sq7yr")
@@ -264,45 +260,17 @@ show_percentage = false
 script = ExtResource("9_50g4q")
 room_icon = ExtResource("9_blcw0")
 
-[node name="Defeat All" type="Control" parent="World3D/Gameplay World/Game Progress"]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="World3D/Gameplay World/Game Progress/Defeat All"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -230.5
-offset_top = 120.0
-offset_right = 230.5
-offset_bottom = 230.0
-grow_horizontal = 2
-theme = ExtResource("14_vte5o")
-theme_override_colors/font_outline_color = Color(0.0196078, 0.705882, 1, 0.470588)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 40
-text = "DEFEAT_ALL_KEY"
-
-[node name="Timer" type="Timer" parent="World3D/Gameplay World/Game Progress/Defeat All"]
-wait_time = 2.0
-one_shot = true
-
 [node name="Hero Death" type="Node" parent="World3D" node_paths=PackedStringArray("hero", "gameplay")]
 script = ExtResource("13_ub8w1")
 hero = NodePath("../Hero")
 gameplay = NodePath("../Gameplay World")
+hero_dead = ExtResource("24_f6va0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 10
 
 [node name="Menu" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -405,6 +373,14 @@ attack_range = 0.0
 
 [node name="Enemy Projectile" parent="Shaders Precompilation" instance=ExtResource("35_udg8a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0286618)
+
+[node name="Spawn VFX2" parent="Shaders Precompilation" instance=ExtResource("36_cr30j")]
+
+[node name="Boss Attack VFX" parent="Shaders Precompilation" instance=ExtResource("38_sc48t")]
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Shaders Precompilation"]
+material_override = SubResource("ShaderMaterial_uk3k5")
+mesh = SubResource("QuadMesh_0aysq")
 
 [editable path="World3D/Camera Point"]
 [editable path="Shaders Precompilation/Slash VFX"]

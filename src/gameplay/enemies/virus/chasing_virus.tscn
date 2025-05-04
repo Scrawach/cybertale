@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bkfe7or2qr1ti"]
+[gd_scene load_steps=31 format=3 uid="uid://bkfe7or2qr1ti"]
 
 [ext_resource type="Script" uid="uid://b47jb5u0e2f1m" path="res://gameplay/enemies/virus/virus.gd" id="1_s1dqi"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="2_0etyu"]
@@ -10,12 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://digo2wt884cud" path="res://gameplay/items/dropped_item.tscn" id="8_54su0"]
 [ext_resource type="Script" uid="uid://dk4s5v6knj8ch" path="res://gameplay/enemies/virus/attacks/enemy_melee_attack.gd" id="9_wbyrl"]
 [ext_resource type="PackedScene" uid="uid://da4wrhtd5ockg" path="res://gameplay/enemies/virus/models/melee.glb" id="10_cvao0"]
+[ext_resource type="PackedScene" uid="uid://csqaiqegl0r0p" path="res://gameplay/enemies/vfx/virus_attack_vfx.tscn" id="10_ramgg"]
 [ext_resource type="Material" uid="uid://d32gt020w0h13" path="res://gameplay/enemies/virus/materials/chasing_virus.tres" id="11_jxhpx"]
 [ext_resource type="Script" uid="uid://c27j7p36ppclx" path="res://gameplay/common/death_vfx.gd" id="11_kmxfo"]
 [ext_resource type="Material" uid="uid://d0s0pt5lh6p77" path="res://gameplay/enemies/floating/floating_sphere.tres" id="11_unt7g"]
 [ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="12_unt7g"]
 [ext_resource type="Material" uid="uid://cwfrvre1he5mi" path="res://gameplay/enemies/virus/materials/chasing_virus2.tres" id="13_nhlee"]
 [ext_resource type="Script" uid="uid://vfqw5g7s4ou6" path="res://gameplay/common/hit_flash.gd" id="13_ypbh2"]
+[ext_resource type="Material" uid="uid://naj2ppix1uto" path="res://gameplay/enemies/virus/materials/danger_area.tres" id="18_ramgg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jnlp7"]
 radius = 5.0
@@ -24,7 +26,7 @@ radius = 5.0
 radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_28aoi"]
-radius = 2.0
+radius = 2.6
 
 [sub_resource type="Animation" id="Animation_cvao0"]
 resource_name = "walk"
@@ -111,9 +113,26 @@ tracks/2/keys = {
 resource_name = "idle"
 step = 0.1
 
+[sub_resource type="Animation" id="Animation_nhlee"]
+resource_name = "attack"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("melee:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.4, 0.6, 1.4), Vector3(0.9, 1.2, 0.9), Vector3(1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s23dp"]
 _data = {
 &"RESET": SubResource("Animation_7davi"),
+&"attack": SubResource("Animation_nhlee"),
 &"idle": SubResource("Animation_s23dp"),
 &"walk": SubResource("Animation_cvao0")
 }
@@ -154,6 +173,8 @@ _data = {
 &"RESET": SubResource("Animation_ypbh2"),
 &"hit": SubResource("Animation_unt7g")
 }
+
+[sub_resource type="QuadMesh" id="QuadMesh_ramgg"]
 
 [node name="Chasing Virus" type="Node3D" node_paths=PackedStringArray("enemy_attack", "extra_animation")]
 script = ExtResource("1_s1dqi")
@@ -207,22 +228,24 @@ drop_template = ExtResource("8_54su0")
 metadata/_custom_type_script = "uid://cma2e03yqef6p"
 
 [node name="Attack Hurt Box" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 disable_mode = 2
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("2_0etyu")
-value = 3
+value = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Attack Hurt Box"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 shape = SubResource("SphereShape3D_28aoi")
 disabled = true
 
-[node name="Enemy Attack" type="Node" parent="." node_paths=PackedStringArray("body", "collision")]
+[node name="Enemy Attack" type="Node" parent="." node_paths=PackedStringArray("body", "collision", "vfx_point")]
 script = ExtResource("9_wbyrl")
 body = NodePath("..")
 collision = NodePath("../Attack Hurt Box/CollisionShape3D")
+vfx_point = NodePath("../HitBox")
+attacK_vfx = ExtResource("10_ramgg")
 metadata/_custom_type_script = "uid://dk4s5v6knj8ch"
 
 [node name="Cooldown Timer" type="Timer" parent="Enemy Attack"]
@@ -268,8 +291,13 @@ speed_scale = 1.5
 [node name="Death Vfx Spawn Point" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11543, 0)
 
+[node name="Danger Area" type="MeshInstance3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, -2.62268e-07, 6, 0, -6, -2.62268e-07, 0, 0.05, 0)
+visible = false
+mesh = SubResource("QuadMesh_ramgg")
+surface_material_override/0 = ExtResource("18_ramgg")
+
 [connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
 [connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]
-[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 
 [editable path="melee"]
