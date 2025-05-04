@@ -15,6 +15,7 @@ func _on_hero_died() -> void:
 	var instance = hero_dead.instantiate()
 	hero.get_parent().add_child(instance)
 	instance.global_transform = hero.global_transform
+	Audio.play("res://gameplay/environment/sounds/box-destroy.wav", Vector2(0.9, 1.1), true)
 	
 	await get_tree().create_timer(2.5).timeout
 	

@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://p6cmwrwxajj2"
-path="res://.godot/imported/hit-hunt.wav-fccd15f6467247a0e4032094f4644fc0.sample"
+uid="uid://cort212yj8xpc"
+path="res://.godot/imported/step3.wav-56838bbd87da44aded0cde11928ab3e5.sample"
 
 [deps]
 
-source_file="res://gameplay/hero/sounds/hit-hunt.wav"
-dest_files=["res://.godot/imported/hit-hunt.wav-fccd15f6467247a0e4032094f4644fc0.sample"]
+source_file="res://gameplay/hero/sounds/step3.wav"
+dest_files=["res://.godot/imported/step3.wav-56838bbd87da44aded0cde11928ab3e5.sample"]
 
 [params]
 

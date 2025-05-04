@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://c7c4bfap41lu2"
-path="res://.godot/imported/coin.wav-e561efe4345d14e20a457a38b2448e35.sample"
+uid="uid://blloetupr3nbq"
+path="res://.godot/imported/laser.wav-82edc4116868c4decf31f507dce55d8f.sample"
 
 [deps]
 
-source_file="res://gameplay/hero/sounds/coin.wav"
-dest_files=["res://.godot/imported/coin.wav-e561efe4345d14e20a457a38b2448e35.sample"]
+source_file="res://gameplay/enemies/virus/sound/laser.wav"
+dest_files=["res://.godot/imported/laser.wav-82edc4116868c4decf31f507dce55d8f.sample"]
 
 [params]
 

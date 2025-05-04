@@ -8,7 +8,7 @@ signal coins_changed(value: int)
 func pickup(coin_count: int) -> void:
 	value += coin_count
 	coins_changed.emit(value)
-	#Audio.play("res://gameplay/hero/sounds/coin.wav", Vector2(1.3, 1.6))
+	Audio.play("res://gameplay/hero/sounds/coin.wav", Vector2(1.0, 1.1), true)
 
 func has_enough_coins(target: int) -> bool:
 	return value >= target

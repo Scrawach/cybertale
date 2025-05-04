@@ -27,6 +27,7 @@ func start() -> void:
 	body.get_parent().add_child(vfx_instance)
 	vfx_instance.global_position = vfx_point.global_position
 	collision.disabled = false
+	Audio.play("res://gameplay/environment/sounds/door-open.wav", Vector2(1.3, 1.4), true)
 	await get_tree().create_timer(0.1).timeout
 	collision.disabled = true
 	animation_player.play("idle")

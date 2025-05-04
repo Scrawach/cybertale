@@ -23,6 +23,7 @@ func start() -> void:
 		var projectile: EnemyProjectile = projectile_template.instantiate()
 		body.get_parent().add_child(projectile)
 		projectile.global_transform = fire_point.global_transform
+		Audio.play("res://gameplay/enemies/virus/sound/laser.wav", Vector2(0.9, 1.1), true)
 		projectile.launch(direction)
 		await get_tree().create_timer(0.2).timeout
 	

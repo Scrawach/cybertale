@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://gbxjv8xjs2b1"]
+[gd_scene load_steps=23 format=3 uid="uid://gbxjv8xjs2b1"]
 
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="1_7rpqw"]
 [ext_resource type="Script" uid="uid://dh156tg8jvery" path="res://gameplay/enemies/floating/floating_sphere.gd" id="1_fkqck"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://vfqw5g7s4ou6" path="res://gameplay/common/hit_flash.gd" id="11_6odje"]
 [ext_resource type="Script" uid="uid://cma2e03yqef6p" path="res://gameplay/common/death_drop.gd" id="12_3tudn"]
 [ext_resource type="PackedScene" uid="uid://digo2wt884cud" path="res://gameplay/items/dropped_item.tscn" id="13_672ll"]
+[ext_resource type="Script" uid="uid://djd2xi5yftvei" path="res://gameplay/common/hit_sound.gd" id="14_672ll"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tw3kd"]
 
@@ -206,5 +207,10 @@ max_drop_count = 3
 metadata/_custom_type_script = "uid://cma2e03yqef6p"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Hit Sound" type="Node" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("14_672ll")
+health = NodePath("../Health")
+sound_path = "res://gameplay/enemies/floating/sound/hit_meat.wav"
 
 [editable path="View/floating_sphere"]

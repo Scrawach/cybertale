@@ -105,8 +105,11 @@ func show_view() -> void:
 	$"hero-base".show()
 	$Hitbox/CollisionShape3D.disabled = false
 
+func on_step() -> void:
+	Audio.play("res://gameplay/hero/sounds/step3.wav", Vector2(2, 2.2))
+
 func _alt_attack_process() -> void:
-	Audio.play("res://gameplay/hero/sounds/sword_attack.wav", Vector2(1.5, 1.8))
+	Audio.play("res://gameplay/hero/sounds/attack.wav", Vector2(1.5, 1.8))
 	attack_cooldown.start()
 	is_attack_processing = true
 	hurt_collider.set_deferred("disabled", false)
@@ -139,7 +142,7 @@ func _start_dash() -> void:
 	hitbox.monitoring = false
 	dash_timer.start(stats.dash_length)
 	dash_vfx.visible = true
-	Audio.play("res://gameplay/hero/sounds/sword_attack.wav", Vector2(1.9, 2.2))
+	Audio.play("res://gameplay/hero/sounds/attack.wav", Vector2(1.9, 2.2))
 
 func _end_dash() -> void:
 	camera.reset_size()
@@ -179,5 +182,5 @@ func _on_hurt_box_area_entered(area: Area3D) -> void:
 	camera.shake(0.03)
 
 func _on_damage_taken(value: int) -> void:
-	Audio.play("res://gameplay/hero/sounds/hit-hunt.wav")
+	Audio.play("res://gameplay/hero/sounds/hit.wav")
 	camera.play_take_damage()

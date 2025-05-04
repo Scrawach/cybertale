@@ -180,12 +180,20 @@ hit_effect = ExtResource("2_btuvy")
 
 [node name="hero-base" parent="." instance=ExtResource("2_smhnq")]
 
+[node name="Skeleton3D" parent="hero-base/Hero Bot" index="0"]
+bones/1/position = Vector3(0, 0.492913, 0)
+bones/2/position = Vector3(6.4111e-08, 0.539068, 7.44187e-08)
+bones/3/position = Vector3(0.111599, 0.476484, -5.46298e-09)
+bones/3/rotation = Quaternion(2.86247e-06, -9.25278e-09, 0.999048, -0.0436191)
+bones/4/position = Vector3(-0.111599, 0.476484, -5.46298e-09)
+bones/4/rotation = Quaternion(-2.86247e-06, -9.25278e-09, 0.999048, 0.0436191)
+
 [node name="Hero Bot Model" parent="hero-base/Hero Bot/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_hrca2")
 surface_material_override/1 = SubResource("StandardMaterial3D_hcw0p")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="hero-base/Hero Bot/Skeleton3D" index="1"]
-transform = Transform3D(1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0.517144, 0)
+transform = Transform3D(1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0.492913, 0)
 bone_name = "body"
 bone_idx = 1
 

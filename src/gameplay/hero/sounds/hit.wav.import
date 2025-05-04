@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://c7c4bfap41lu2"
-path="res://.godot/imported/coin.wav-e561efe4345d14e20a457a38b2448e35.sample"
+uid="uid://cikoyupw5uyhr"
+path="res://.godot/imported/hit.wav-97710a32c5a068c33b5388a551b3614d.sample"
 
 [deps]
 
-source_file="res://gameplay/hero/sounds/coin.wav"
-dest_files=["res://.godot/imported/coin.wav-e561efe4345d14e20a457a38b2448e35.sample"]
+source_file="res://gameplay/hero/sounds/hit.wav"
+dest_files=["res://.godot/imported/hit.wav-97710a32c5a068c33b5388a551b3614d.sample"]
 
 [params]
 

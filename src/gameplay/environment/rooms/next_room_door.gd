@@ -19,6 +19,7 @@ func disable() -> void:
 	view.visible = false
 
 func enable() -> void:
+	Audio.play("res://gameplay/environment/sounds/door-open.wav", Vector2(0.8, 0.9), true)
 	animation.play("open")
 	MainCamera.point.shake(0.2)
 	await get_tree().create_timer(0.1).timeout

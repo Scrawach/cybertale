@@ -33,6 +33,7 @@ func start_attack() -> void:
 	attack_area.visible = true
 	animation.play("attack")
 	await get_tree().create_timer(0.5).timeout
+	Audio.play("res://gameplay/environment/sounds/door-open.wav", Vector2(0.67, 0.8))
 	var instance = attack_vfx.instantiate()
 	boss.get_parent().add_child(instance)
 	instance.global_position = attack_area.global_position

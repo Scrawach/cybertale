@@ -22,7 +22,10 @@ func get_cached_sound(instance_id: int) -> String:
 			return path
 	return ""
 
-func play(path: String, pitch_range: Vector2 = Vector2(0.9, 1.1)) -> void:
+func play(path: String, pitch_range: Vector2 = Vector2(0.9, 1.1), is_single: bool = false) -> void:
+	if is_single and playing_sounds.has(path):
+		return
+	
 	var player: AudioStreamPlayer = players.pop_front() as AudioStreamPlayer
 	player.stream = load(path)
 	player.play()

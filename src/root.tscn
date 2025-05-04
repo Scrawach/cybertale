@@ -229,7 +229,6 @@ theme_override_font_sizes/font_size = 30
 
 [node name="Gameplay World" type="Node3D" parent="World3D" node_paths=PackedStringArray("last_window")]
 script = ExtResource("7_sq7yr")
-number_of_rooms = 9
 fighting_room_template = ExtResource("8_r3r3k")
 boss_room_template = ExtResource("9_3dlgs")
 shoop_room_template = ExtResource("6_sq7yr")
