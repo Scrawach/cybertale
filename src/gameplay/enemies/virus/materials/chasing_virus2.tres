@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cwfrvre1he5mi"]
+
+[resource]
+resource_name = "Body.001"
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.247679, 0.273325, 0.273325, 1)
+roughness = 0.5

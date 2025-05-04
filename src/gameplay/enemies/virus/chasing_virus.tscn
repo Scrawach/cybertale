@@ -10,9 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://digo2wt884cud" path="res://gameplay/items/dropped_item.tscn" id="8_54su0"]
 [ext_resource type="Script" uid="uid://dk4s5v6knj8ch" path="res://gameplay/enemies/virus/attacks/enemy_melee_attack.gd" id="9_wbyrl"]
 [ext_resource type="PackedScene" uid="uid://da4wrhtd5ockg" path="res://gameplay/enemies/virus/models/melee.glb" id="10_cvao0"]
+[ext_resource type="Material" uid="uid://d32gt020w0h13" path="res://gameplay/enemies/virus/materials/chasing_virus.tres" id="11_jxhpx"]
 [ext_resource type="Script" uid="uid://c27j7p36ppclx" path="res://gameplay/common/death_vfx.gd" id="11_kmxfo"]
 [ext_resource type="Material" uid="uid://d0s0pt5lh6p77" path="res://gameplay/enemies/floating/floating_sphere.tres" id="11_unt7g"]
 [ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="12_unt7g"]
+[ext_resource type="Material" uid="uid://cwfrvre1he5mi" path="res://gameplay/enemies/virus/materials/chasing_virus2.tres" id="13_nhlee"]
 [ext_resource type="Script" uid="uid://vfqw5g7s4ou6" path="res://gameplay/common/hit_flash.gd" id="13_ypbh2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jnlp7"]
@@ -23,24 +25,6 @@ radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_28aoi"]
 radius = 2.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmxfo"]
-resource_local_to_scene = true
-resource_name = "Body"
-cull_mode = 2
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.113725, 0.12549, 0.12549, 1)
-roughness = 0.5
-emission_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ypbh2"]
-resource_name = "Body.001"
-cull_mode = 2
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.247679, 0.273325, 0.273325, 1)
-roughness = 0.5
 
 [sub_resource type="Animation" id="Animation_cvao0"]
 resource_name = "walk"
@@ -248,9 +232,9 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 0.905, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Sphere" parent="melee" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_kmxfo")
+surface_material_override/0 = ExtResource("11_jxhpx")
 surface_material_override/1 = ExtResource("11_unt7g")
-surface_material_override/2 = SubResource("StandardMaterial3D_ypbh2")
+surface_material_override/2 = ExtResource("13_nhlee")
 
 [node name="AnimationPlayer" parent="melee" index="1"]
 autoplay = "Idle"

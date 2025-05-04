@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b05gugos0nccs"]
+
+[resource]
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true

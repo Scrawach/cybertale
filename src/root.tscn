@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=57 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
@@ -31,6 +31,9 @@
 [ext_resource type="PackedScene" uid="uid://bkfe7or2qr1ti" path="res://gameplay/enemies/virus/chasing_virus.tscn" id="18_ql764"]
 [ext_resource type="PackedScene" uid="uid://d0763q65dmpb7" path="res://gameplay/enemies/virus/ranged_virus.tscn" id="19_24xe2"]
 [ext_resource type="PackedScene" uid="uid://0xk5oow351fp" path="res://gameplay/hero/slash/slash_vfx.tscn" id="19_ynlg5"]
+[ext_resource type="Material" uid="uid://b05gugos0nccs" path="res://gameplay/enemies/virus/projectiles/projectile_death_vfx.tres" id="32_cj3xu"]
+[ext_resource type="Material" uid="uid://berhoo1h2o2ni" path="res://gameplay/enemies/virus/materials/ranged_virus.tres" id="33_ql764"]
+[ext_resource type="Material" uid="uid://d32gt020w0h13" path="res://gameplay/enemies/virus/materials/chasing_virus.tres" id="34_qoqhg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -163,6 +166,8 @@ shader = ExtResource("11_qw60f")
 shader_parameter/Color = Color(0, 0.772549, 1, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_sq7yr"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ql764"]
 
 [node name="Root" type="Node"]
 
@@ -372,6 +377,22 @@ surface_material_override/0 = SubResource("ShaderMaterial_fu4y0")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Shaders Precompilation"]
 mesh = SubResource("QuadMesh_sq7yr")
 surface_material_override/0 = ExtResource("14_qt76e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Shaders Precompilation"]
+mesh = SubResource("QuadMesh_ql764")
+surface_material_override/0 = ExtResource("32_cj3xu")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Shaders Precompilation"]
+mesh = SubResource("QuadMesh_ql764")
+surface_material_override/0 = ExtResource("33_ql764")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Shaders Precompilation"]
+mesh = SubResource("QuadMesh_ql764")
+surface_material_override/0 = ExtResource("34_qoqhg")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Shaders Precompilation"]
+mesh = SubResource("QuadMesh_ql764")
+surface_material_override/0 = ExtResource("33_ql764")
 
 [editable path="World3D/Camera Point"]
 [editable path="Shaders Precompilation/Slash VFX"]
