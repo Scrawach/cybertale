@@ -75,6 +75,7 @@ metadata/_custom_type_script = "uid://11mhs6ehk33f"
 script = ExtResource("15_24xe2")
 enemies = Array[ExtResource("16_cj3xu")]([SubResource("Resource_qoqhg"), SubResource("Resource_udg8a")])
 max_alive_enemies = 6
+pause_between_spawns = 0.5
 metadata/_custom_type_script = "uid://brtd615r8eoo4"
 
 [sub_resource type="Resource" id="Resource_xu2l0"]
@@ -93,6 +94,7 @@ metadata/_custom_type_script = "uid://11mhs6ehk33f"
 script = ExtResource("15_24xe2")
 enemies = Array[ExtResource("16_cj3xu")]([SubResource("Resource_xu2l0"), SubResource("Resource_lci31")])
 max_alive_enemies = 8
+pause_between_spawns = 0.5
 metadata/_custom_type_script = "uid://brtd615r8eoo4"
 
 [sub_resource type="Resource" id="Resource_cj3xu"]
@@ -117,6 +119,7 @@ metadata/_custom_type_script = "uid://11mhs6ehk33f"
 script = ExtResource("15_24xe2")
 enemies = Array[ExtResource("16_cj3xu")]([SubResource("Resource_cj3xu"), SubResource("Resource_ql764"), SubResource("Resource_uk3k5")])
 max_alive_enemies = 6
+pause_between_spawns = 0.5
 metadata/_custom_type_script = "uid://brtd615r8eoo4"
 
 [sub_resource type="Resource" id="Resource_f6va0"]

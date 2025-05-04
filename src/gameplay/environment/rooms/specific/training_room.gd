@@ -43,7 +43,7 @@ func setting_driven_spawn() -> void:
 	while random_query.size() > 0:
 		var scene: PackedScene = random_query.pop_front()
 		spawn_random_enemy_at_random_point(scene)
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(settings.pause_between_spawns).timeout
 		
 		spawned += 1
 		alive_enemies += 1
@@ -55,7 +55,7 @@ func setting_driven_spawn() -> void:
 func default_spawn() -> void:
 	for i in want_to_spawn:
 		spawn_random_enemy_at_random_point(spawn_targets.pick_random())
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.3).timeout
 		spawned += 1
 		alive_enemies += 1
 		

@@ -15,11 +15,15 @@ func can_attack() -> bool:
 func start() -> void:
 	is_processing = true
 	var target = body.target
+	var direction = target.global_position - body.global_position
+	direction.y = 0
+	body.look_at(body.global_position + direction)
+	
 	for i in range(3):
 		var projectile: EnemyProjectile = projectile_template.instantiate()
 		body.get_parent().add_child(projectile)
 		projectile.global_transform = fire_point.global_transform
-		projectile.launch(target.global_position - body.global_position)
+		projectile.launch(direction)
 		await get_tree().create_timer(0.2).timeout
 	
 	cooldown.start()

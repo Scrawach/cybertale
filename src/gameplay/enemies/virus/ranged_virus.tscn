@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0763q65dmpb7"]
+[gd_scene load_steps=24 format=3 uid="uid://d0763q65dmpb7"]
 
 [ext_resource type="Script" uid="uid://b47jb5u0e2f1m" path="res://gameplay/enemies/virus/virus.gd" id="1_jlusn"]
 [ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="2_f5ikr"]
@@ -9,23 +9,115 @@
 [ext_resource type="PackedScene" uid="uid://digo2wt884cud" path="res://gameplay/items/dropped_item.tscn" id="7_tdamw"]
 [ext_resource type="Script" uid="uid://bfh5lon8d1ljv" path="res://gameplay/enemies/virus/attacks/enemy_range_attack.gd" id="8_mpgtu"]
 [ext_resource type="PackedScene" uid="uid://dsk1kogc4v1iw" path="res://gameplay/enemies/virus/projectiles/enemy_projectile.tscn" id="9_f5ikr"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_vvh5c"]
+[ext_resource type="PackedScene" uid="uid://by5mwvn4a2jlv" path="res://gameplay/enemies/virus/models/drone.glb" id="10_75w2o"]
+[ext_resource type="Script" uid="uid://c27j7p36ppclx" path="res://gameplay/common/death_vfx.gd" id="11_nqbhc"]
+[ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="12_2bl11"]
+[ext_resource type="Script" uid="uid://vfqw5g7s4ou6" path="res://gameplay/common/hit_flash.gd" id="12_nqbhc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jlusn"]
 radius = 10.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tkedg"]
-radius = 1.0
+radius = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bl11"]
+resource_local_to_scene = true
+resource_name = "Material"
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.113465, 0.124021, 0.126659, 1)
+emission_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tdamw"]
+resource_local_to_scene = true
+resource_name = "EnemyEmission"
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.906332, 0, 0.0221873, 1)
+emission_enabled = true
+emission = Color(1, 0, 0.180232, 1)
+
+[sub_resource type="Animation" id="Animation_75w2o"]
+resource_name = "Idle"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("drone:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.150639, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.13907, 0), Vector3(0, 1.2, 0), Vector3(0, 1.13907, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xgjyd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("drone:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.13907, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nqbhc"]
+_data = {
+&"Idle": SubResource("Animation_75w2o"),
+&"RESET": SubResource("Animation_xgjyd")
+}
+
+[sub_resource type="Animation" id="Animation_mpgtu"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../drone/drone/Drone:surface_material_override/0:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.101718, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.741385, 0.741385, 0.741385, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u50j8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../drone/drone/Drone:surface_material_override/0:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jbbbg"]
+_data = {
+&"RESET": SubResource("Animation_u50j8"),
+&"hit": SubResource("Animation_mpgtu")
+}
 
 [node name="Ranged Virus" type="Node3D" node_paths=PackedStringArray("enemy_attack")]
 script = ExtResource("1_jlusn")
 attack_range = 8.0
 enemy_attack = NodePath("EnemyRangeAttack")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_vvh5c")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
@@ -55,7 +147,7 @@ max_value = 10
 metadata/_custom_type_script = "uid://b8hqs1hbipqv7"
 
 [node name="Health Bar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_xgjyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.03304, 0)
 health = NodePath("../Health")
 
 [node name="Death" type="Node" parent="." node_paths=PackedStringArray("health", "body")]
@@ -75,15 +167,59 @@ metadata/_custom_type_script = "uid://cma2e03yqef6p"
 script = ExtResource("8_mpgtu")
 body = NodePath("..")
 projectile_template = ExtResource("9_f5ikr")
-fire_point = NodePath("../Fire Point")
+fire_point = NodePath("../drone/Fire Point")
 metadata/_custom_type_script = "uid://bfh5lon8d1ljv"
 
 [node name="Cooldown Timer" type="Timer" parent="EnemyRangeAttack"]
 wait_time = 0.5
 one_shot = true
 
-[node name="Fire Point" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+[node name="drone" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.13907, 0)
+
+[node name="Fire Point" type="Marker3D" parent="drone"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.64585e-08, 0.0237858, 0.760196)
+
+[node name="drone" parent="drone" instance=ExtResource("10_75w2o")]
+
+[node name="Drone" parent="drone/drone" index="0"]
+blend_shapes/Displace = 0.329825
+blend_shapes/Displace.001 = 0.280702
+surface_material_override/0 = SubResource("StandardMaterial3D_2bl11")
+surface_material_override/1 = SubResource("StandardMaterial3D_tdamw")
+
+[node name="AnimationPlayer" parent="drone/drone" index="1"]
+autoplay = "Idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nqbhc")
+}
+autoplay = "Idle"
+speed_scale = 0.4
+
+[node name="DeathVFX" type="Node" parent="." node_paths=PackedStringArray("health", "parent", "spawn_point")]
+script = ExtResource("11_nqbhc")
+health = NodePath("../Health")
+parent = NodePath("..")
+spawn_point = NodePath("../drone")
+scene = ExtResource("12_2bl11")
+metadata/_custom_type_script = "uid://c27j7p36ppclx"
+
+[node name="HitFlash" type="Node" parent="." node_paths=PackedStringArray("animation", "health")]
+script = ExtResource("12_nqbhc")
+animation = NodePath("AnimationPlayer")
+animation_name = "hit"
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://vfqw5g7s4ou6"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HitFlash"]
+libraries = {
+&"": SubResource("AnimationLibrary_jbbbg")
+}
+speed_scale = 2.0
 
 [connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
 [connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]
+
+[editable path="drone/drone"]

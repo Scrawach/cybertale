@@ -7,6 +7,9 @@ extends Node3D
 @export var enemy_attack: EnemyAttack
 @export var is_wandering: bool
 
+@export var chasing_speed: float = 5.0
+@export var wandering_speed: float = 2.5
+
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 
 var target: Node3D
@@ -46,8 +49,10 @@ func switch_to(state: State) -> void:
 		State.Idle:
 			pass
 		State.Walking:
+			movement_speed = wandering_speed
 			set_target_position(_random_point())
 		State.Chasing:
+			movement_speed = chasing_speed
 			pass
 		State.Attack:
 			await enemy_attack.start()
