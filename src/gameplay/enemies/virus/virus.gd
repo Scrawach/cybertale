@@ -105,3 +105,6 @@ func _on_observer_body_exited(_body: Node3D) -> void:
 			switch_to(State.Walking)
 		else:
 			switch_to(State.Idle)
+
+func _on_hit_box_area_entered(area: Area3D) -> void:
+	enemy_attack.stop()

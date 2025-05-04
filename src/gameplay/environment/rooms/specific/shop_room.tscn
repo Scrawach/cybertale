@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://026ts4o6j5dg"]
+[gd_scene load_steps=9 format=3 uid="uid://026ts4o6j5dg"]
 
 [ext_resource type="Script" uid="uid://tcp8jcuh0gha" path="res://gameplay/environment/rooms/specific/shop_room.gd" id="1_0xorv"]
 [ext_resource type="PackedScene" uid="uid://pui3a1ev5hik" path="res://gameplay/environment/rooms/specific/models/shop_location.glb" id="1_l30wa"]
 [ext_resource type="PackedScene" uid="uid://b8w8vh6038ft0" path="res://gameplay/shop/shop.tscn" id="2_l30wa"]
 [ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="4_ycejs"]
+[ext_resource type="PackedScene" uid="uid://dsm0aecj1nwkx" path="res://gameplay/environment/rooms/details/details-0.glb" id="5_nn8nr"]
+[ext_resource type="PackedScene" uid="uid://dqh50kq8xl3xf" path="res://gameplay/environment/rooms/details/details-1.glb" id="6_2t4nl"]
+[ext_resource type="PackedScene" uid="uid://36vmqe3tt014" path="res://gameplay/environment/rooms/details/details-2.glb" id="7_u1qq1"]
+[ext_resource type="PackedScene" uid="uid://taxl0xlxgalh" path="res://gameplay/environment/rooms/details/details-4.glb" id="8_oocfn"]
 
 [node name="Shop Room" type="Node3D" node_paths=PackedStringArray("door", "player_spawn")]
 script = ExtResource("1_0xorv")
@@ -29,5 +33,29 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 0,
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -23.2593, 0, 0.217337)
 
 [node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="details-0" parent="." instance=ExtResource("5_nn8nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.26122, -0.0157571, 1.25416)
+
+[node name="details-1" parent="." instance=ExtResource("5_nn8nr")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17.2612, -0.0157571, -1.96799)
+
+[node name="details-2" parent="." instance=ExtResource("6_2t4nl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -2)
+
+[node name="details-3" parent="." instance=ExtResource("6_2t4nl")]
+transform = Transform3D(-3.0598e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.0598e-08, -17.2631, -2.38419e-07, 1.70461)
+
+[node name="details-4" parent="." instance=ExtResource("7_u1qq1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -22.0308, 0.0333631, 0.101902)
+
+[node name="details-5" parent="." instance=ExtResource("7_u1qq1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.255958, 0.0190854, 0.101902)
+
+[node name="details-6" parent="." instance=ExtResource("8_oocfn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9653, 0, 1.84439)
+
+[node name="details-7" parent="." instance=ExtResource("8_oocfn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13.9653, 0, 0.844391)
 
 [editable path="shop_location"]

@@ -54,8 +54,8 @@ shape = SubResource("SphereShape3D_tkedg")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_hetxe")
-value = 10
-max_value = 10
+value = 20
+max_value = 20
 metadata/_custom_type_script = "uid://b8hqs1hbipqv7"
 
 [node name="Health Bar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_hetxe")]
@@ -99,3 +99,4 @@ one_shot = true
 
 [connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
 [connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

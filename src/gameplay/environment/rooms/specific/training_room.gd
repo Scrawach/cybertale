@@ -89,7 +89,7 @@ func _on_timeout() -> void:
 func get_enemies_count() -> int:
 	var counter: int
 	for child in enemies.get_children():
-		if child is RigidBody3D:
+		if child is RigidBody3D or child is GPUParticles3D:
 			continue
 		
 		counter += 1

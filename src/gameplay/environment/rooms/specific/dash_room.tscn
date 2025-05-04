@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bh1ht7ofkniav"]
+[gd_scene load_steps=8 format=3 uid="uid://bh1ht7ofkniav"]
 
 [ext_resource type="Script" uid="uid://cu1bslpttslrj" path="res://gameplay/environment/rooms/specific/scenario_room.gd" id="1_egjwa"]
 [ext_resource type="PackedScene" uid="uid://dukbwdeib7621" path="res://gameplay/environment/rooms/specific/models/bridge_location.glb" id="1_mapil"]
 [ext_resource type="PackedScene" uid="uid://b5aahq5yu7fuu" path="res://gameplay/enemies/spikes/spikes.tscn" id="2_hvqfx"]
 [ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box/box.tscn" id="3_2aura"]
 [ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="5_eokn6"]
+[ext_resource type="PackedScene" uid="uid://dsm0aecj1nwkx" path="res://gameplay/environment/rooms/details/details-0.glb" id="6_4j1f1"]
+[ext_resource type="PackedScene" uid="uid://dqh50kq8xl3xf" path="res://gameplay/environment/rooms/details/details-1.glb" id="7_y3gqt"]
 
 [node name="Dash Room" type="Node3D" node_paths=PackedStringArray("door", "player_spawn")]
 script = ExtResource("1_egjwa")
@@ -58,5 +60,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 
 [node name="Next Room Door" parent="." instance=ExtResource("5_eokn6")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10.5367, 0, 0)
+
+[node name="details-0" parent="." instance=ExtResource("6_4j1f1")]
+transform = Transform3D(-3.49691e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.49691e-08, -3.64923, -0.0262501, -0.489428)
+
+[node name="details-1" parent="." instance=ExtResource("7_y3gqt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34087, -0.00821729, 1.89549)
+
+[node name="details-2" parent="." instance=ExtResource("7_y3gqt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.96207, -0.00821777, -0.0544841)
+
+[node name="details-3" parent="." instance=ExtResource("7_y3gqt")]
+transform = Transform3D(-3.49691e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.49691e-08, -4.50282, -0.00821777, 2.26688)
+
+[node name="details-4" parent="." instance=ExtResource("6_4j1f1")]
+transform = Transform3D(-0.6, 0, -5.24537e-08, 0, 0.6, 0, 5.24537e-08, 0, -0.6, 1.07624, 0.0171051, -2.57537)
+
+[node name="details-5" parent="." instance=ExtResource("6_4j1f1")]
+transform = Transform3D(-0.6, 0, -5.24537e-08, 0, 0.6, 0, 5.24537e-08, 0, -0.6, -9.88513, 0.0171051, -0.575366)
 
 [editable path="bridge_location"]

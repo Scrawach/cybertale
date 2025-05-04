@@ -22,4 +22,4 @@ func start() -> void:
 		body.switch_to(Virus.State.Idle)
 
 func stop() -> void:
-	pass
+	cooldown.start()

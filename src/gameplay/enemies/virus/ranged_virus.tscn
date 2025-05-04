@@ -69,6 +69,21 @@ _data = {
 &"RESET": SubResource("Animation_xgjyd")
 }
 
+[sub_resource type="Animation" id="Animation_u50j8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../drone/drone/Drone:surface_material_override/0:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_mpgtu"]
 resource_name = "hit"
 length = 0.3
@@ -83,21 +98,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0.741385, 0.741385, 0.741385, 1), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_u50j8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../drone/drone/Drone:surface_material_override/0:emission")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jbbbg"]
@@ -134,8 +134,8 @@ shape = SubResource("SphereShape3D_tkedg")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_75w2o")
-value = 10
-max_value = 10
+value = 15
+max_value = 15
 metadata/_custom_type_script = "uid://b8hqs1hbipqv7"
 
 [node name="Health Bar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_xgjyd")]
@@ -170,7 +170,7 @@ one_shot = true
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.13907, 0)
 
 [node name="Fire Point" type="Marker3D" parent="drone"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.64585e-08, 0.0237858, 0.760196)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.77022e-08, 0.00235832, 0.545649)
 
 [node name="drone" parent="drone" instance=ExtResource("10_75w2o")]
 

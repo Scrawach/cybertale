@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://bidvxu0rv31ay"]
+[gd_scene load_steps=28 format=4 uid="uid://bidvxu0rv31ay"]
 
 [ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="1_3bpu3"]
 [ext_resource type="Script" uid="uid://cost74er78pu0" path="res://gameplay/environment/rooms/specific/fight_room.gd" id="1_cpm4f"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="3_rcd7p"]
 [ext_resource type="PackedScene" uid="uid://bkfe7or2qr1ti" path="res://gameplay/enemies/virus/chasing_virus.tscn" id="3_stp7o"]
 [ext_resource type="PackedScene" uid="uid://b5aahq5yu7fuu" path="res://gameplay/enemies/spikes/spikes.tscn" id="5_rcd7p"]
+[ext_resource type="PackedScene" uid="uid://dsm0aecj1nwkx" path="res://gameplay/environment/rooms/details/details-0.glb" id="6_7op34"]
+[ext_resource type="PackedScene" uid="uid://taxl0xlxgalh" path="res://gameplay/environment/rooms/details/details-4.glb" id="7_xwx1r"]
+[ext_resource type="PackedScene" uid="uid://36vmqe3tt014" path="res://gameplay/environment/rooms/details/details-2.glb" id="8_rtnxy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2kfs"]
 resource_name = "Stone"
@@ -491,24 +494,6 @@ autostart = true
 
 [node name="Enemies" type="Node3D" parent="."]
 
-[node name="Spikes" parent="." instance=ExtResource("5_rcd7p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, 3)
-
-[node name="Spikes2" parent="." instance=ExtResource("5_rcd7p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, 0)
-
-[node name="Spikes3" parent="." instance=ExtResource("5_rcd7p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, -3)
-
-[node name="Spikes7" parent="." instance=ExtResource("5_rcd7p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, -13)
-
-[node name="Spikes8" parent="." instance=ExtResource("5_rcd7p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5618, 0, -13)
-
-[node name="Spikes9" parent="." instance=ExtResource("5_rcd7p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5618, 0, -13)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
@@ -528,3 +513,94 @@ theme_override_styles/background = SubResource("StyleBoxFlat_stp7o")
 theme_override_styles/fill = SubResource("StyleBoxFlat_svn0r")
 value = 55.0
 show_percentage = false
+
+[node name="Details" type="Node3D" parent="."]
+
+[node name="details-0" parent="Details" instance=ExtResource("6_7op34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3018, 0, 0.34266)
+
+[node name="details-17" parent="Details" instance=ExtResource("6_7op34")]
+transform = Transform3D(3.7749e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, 3.7749e-08, 7.42339, 0.0251069, -2.48564)
+
+[node name="details-1" parent="Details" instance=ExtResource("6_7op34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7167, 0, -11.6573)
+
+[node name="details-22" parent="Details" instance=ExtResource("6_7op34")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16.7167, 0, -10.6573)
+
+[node name="details-21" parent="Details" instance=ExtResource("6_7op34")]
+transform = Transform3D(-2.62268e-08, 0, -0.6, 0, 0.6, 0, 0.6, 0, -2.62268e-08, -23.1101, 0.0332729, -12.9066)
+
+[node name="details-2" parent="Details" instance=ExtResource("6_7op34")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10.495, 0, -19.3231)
+
+[node name="details-3" parent="Details" instance=ExtResource("6_7op34")]
+transform = Transform3D(-3.49691e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.49691e-08, -16.097, 0.026176, 2.91427)
+
+[node name="details-16" parent="Details" instance=ExtResource("6_7op34")]
+transform = Transform3D(-3.49691e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.49691e-08, -4.60699, 0.026176, -2.74843)
+
+[node name="details-4" parent="Details" instance=ExtResource("7_xwx1r")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -12.2629, 0.0140431, -3.1468)
+
+[node name="details-5" parent="Details" instance=ExtResource("7_xwx1r")]
+transform = Transform3D(-5.24537e-08, 0, -1.2, 0, 1.2, 0, 1.2, 0, -5.24537e-08, -13.808, 0.0140431, -5.94118)
+
+[node name="details-6" parent="Details" instance=ExtResource("7_xwx1r")]
+transform = Transform3D(-1.2, 0, 1.04907e-07, 0, 1.2, 0, -1.04907e-07, 0, -1.2, -9.81467, 0.0140431, -6.17675)
+
+[node name="details-18" parent="Details" instance=ExtResource("7_xwx1r")]
+transform = Transform3D(-1.2, 0, 1.04907e-07, 0, 1.2, 0, -1.04907e-07, 0, -1.2, -9.38043, 0.0140431, -14.25)
+
+[node name="details-20" parent="Details" instance=ExtResource("7_xwx1r")]
+transform = Transform3D(-1.2, 0, 1.04907e-07, 0, 1.2, 0, -1.04907e-07, 0, -1.2, -20.3804, 0.0140431, -6.19577)
+
+[node name="details-19" parent="Details" instance=ExtResource("7_xwx1r")]
+transform = Transform3D(1.57361e-07, 0, 1.2, 0, 1.2, 0, -1.2, 0, 1.57361e-07, -10.8147, 0.0140431, -11.1768)
+
+[node name="details-12" parent="Details" instance=ExtResource("7_xwx1r")]
+transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 1.2, 0, 1.04907e-07, 0, -1.2, -7.47515, 0.0140431, -0.174437)
+
+[node name="details-13" parent="Details" instance=ExtResource("7_xwx1r")]
+transform = Transform3D(-5.24537e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.24537e-08, -5.93011, 0.0140431, 2.61994)
+
+[node name="details-14" parent="Details" instance=ExtResource("7_xwx1r")]
+transform = Transform3D(1.2, 0, 1.42109e-14, 0, 1.2, 0, -1.42109e-14, 0, 1.2, -9.92343, 0.0140431, 2.85551)
+
+[node name="details-7" parent="Details" instance=ExtResource("8_rtnxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.598, 0, -5.15997)
+
+[node name="details-8" parent="Details" instance=ExtResource("8_rtnxy")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -5.2938, 0, -10.16)
+
+[node name="details-15" parent="Details" instance=ExtResource("8_rtnxy")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.98092, 0, -20.16)
+
+[node name="details-9" parent="Details" instance=ExtResource("8_rtnxy")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.58274, 0, 2.80243)
+
+[node name="details-10" parent="Details" instance=ExtResource("7_xwx1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.191967, 0.0133628, 3.52644)
+
+[node name="details-11" parent="Details" instance=ExtResource("7_xwx1r")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.09391, 0.0133628, 0.787166)
+
+[node name="Traps" type="Node3D" parent="."]
+
+[node name="Spikes" parent="Traps" instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, 3)
+
+[node name="Spikes2" parent="Traps" instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, 0)
+
+[node name="Spikes3" parent="Traps" instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, -3)
+
+[node name="Spikes7" parent="Traps" instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, -13)
+
+[node name="Spikes8" parent="Traps" instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5618, 0, -13)
+
+[node name="Spikes9" parent="Traps" instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5618, 0, -13)
