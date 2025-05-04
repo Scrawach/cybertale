@@ -35,7 +35,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.266663, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.7, 1.4), Vector2(1.1, 0.9), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(0.6, 1.5), Vector2(1.2, 0.8), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fbawj"]
@@ -68,7 +68,7 @@ render_target_update_mode = 4
 libraries = {
 &"": SubResource("AnimationLibrary_fbawj")
 }
-speed_scale = 2.0
+speed_scale = 1.5
 
 [node name="Control" type="Control" parent="SubViewport"]
 custom_minimum_size = Vector2(480, 270)

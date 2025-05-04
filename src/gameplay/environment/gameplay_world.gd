@@ -8,6 +8,8 @@ const OFFSET_BETWEEN_ROOMS: float = 50
 @export var fighting_room_template: PackedScene
 @export var boss_room_template: PackedScene
 
+@export var last_window: Control
+
 @onready var progress: SmartProgressBar = $"Game Progress/MarginContainer/ProgressBar"
 
 var hero: Hero
@@ -52,13 +54,15 @@ func gameloop() -> void:
 		previous_room = room
 		current_room += 1
 		progress.complete_room(current_room)
-	print("LAST ROOM!")
+	last_window.visible = true
 
 func create_fight_room() -> FightRoom:
 	return create_room(fighting_room_template)
 
-func create_boss_room() -> ScenarioRoom:
-	return create_room(boss_room_template)
+func create_boss_room() -> BossRoom:
+	var boss_room: BossRoom = create_room(boss_room_template)
+	boss_room.initialize(hero)
+	return boss_room
 
 func create_room(template: PackedScene) -> ScenarioRoom:
 	var next_room_position: Vector3 = previous_room_position + Vector3(OFFSET_BETWEEN_ROOMS, 0, 0)

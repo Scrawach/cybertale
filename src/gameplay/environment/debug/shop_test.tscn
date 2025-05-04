@@ -1,0 +1,26 @@
+[gd_scene load_steps=11 format=3 uid="uid://b6vuijlsbb5k8"]
+
+[ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_nl1xv"]
+[ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_uwyag"]
+[ext_resource type="PackedScene" uid="uid://b8w8vh6038ft0" path="res://gameplay/shop/shop.tscn" id="3_6dvlq"]
+[ext_resource type="Script" uid="uid://dvkhhia37u4by" path="res://gameplay/shop/shop_item_resource.gd" id="4_ygmea"]
+[ext_resource type="Resource" uid="uid://dwufohfi7gct" path="res://gameplay/shop/items/gain_max_health/gain_max_health.tres" id="5_6gp4g"]
+[ext_resource type="Resource" uid="uid://ban234da1wur1" path="res://gameplay/shop/items/coins/gain_coins.tres" id="6_00d5o"]
+[ext_resource type="Resource" uid="uid://b6dp8xgrngxi4" path="res://gameplay/shop/items/health/health_item.tres" id="7_g8yrt"]
+[ext_resource type="Resource" uid="uid://1kbf02drqvd5" path="res://gameplay/shop/items/heal_after_room/heal_after_room.tres" id="8_eeenc"]
+[ext_resource type="Resource" uid="uid://bkpaphlj0v3px" path="res://gameplay/shop/items/attack/attack_item.tres" id="9_3gqxa"]
+[ext_resource type="Resource" uid="uid://b8enbt4wpgc81" path="res://gameplay/shop/items/movement/movement_item.tres" id="10_rstec"]
+
+[node name="Shop Test" type="Node3D"]
+
+[node name="Hero" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_nl1xv")]
+camera = NodePath("../Camera Point")
+
+[node name="Camera Point" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_uwyag")]
+transform = Transform3D(0.707107, -0.45452, 0.541675, 0, 0.766045, 0.642788, -0.707107, -0.45452, 0.541675, 0, 0, 0)
+target = NodePath("../Hero")
+
+[node name="Shop" parent="." node_paths=PackedStringArray("hero") instance=ExtResource("3_6dvlq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+hero = NodePath("../Hero")
+available_items = Array[ExtResource("4_ygmea")]([ExtResource("5_6gp4g"), ExtResource("6_00d5o"), ExtResource("7_g8yrt"), ExtResource("8_eeenc"), ExtResource("9_3gqxa"), ExtResource("10_rstec")])

@@ -7,3 +7,4 @@ COINS_AFTER_ROOM_KEY,"Gain %s coins after room","Даёт %s монет посл
 MAX_HEALTH_KEY,"Increase max health on %s points","Увеличивает макс. здоровье на %s ед."
 ATTACK_ITEM_KEY,"Increase damage on %s points","Увеличивает урон на %s ед."
 MOVEMENT_ITEM_KEY,"Increate movement speed","Увеличивает скорость передвижения"
+THANKS_KEY,"THANKS FOR PLAYING!","СПАСИБО ЗА ИГРУ!"

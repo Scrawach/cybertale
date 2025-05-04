@@ -109,6 +109,7 @@ shape = SubResource("SphereShape3D_s2xka")
 disabled = true
 
 [node name="Attack Range Area" type="MeshInstance3D" parent="Attack HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 visible = false
 mesh = SubResource("SphereMesh_gq7ic")
 surface_material_override/0 = SubResource("StandardMaterial3D_j0e7c")

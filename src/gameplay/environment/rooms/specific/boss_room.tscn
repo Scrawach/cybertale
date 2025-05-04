@@ -1,6 +1,8 @@
-[gd_scene load_steps=20 format=4 uid="uid://2ofopwmam6h5"]
+[gd_scene load_steps=22 format=4 uid="uid://2ofopwmam6h5"]
 
-[ext_resource type="Script" uid="uid://cu1bslpttslrj" path="res://gameplay/environment/rooms/specific/scenario_room.gd" id="1_pvgye"]
+[ext_resource type="Script" uid="uid://c47bqwhcker1p" path="res://gameplay/environment/rooms/specific/boss_room.gd" id="1_pvgye"]
+[ext_resource type="PackedScene" uid="uid://dolepn0oqhymo" path="res://gameplay/enemies/boss/boss.tscn" id="2_k1i2y"]
+[ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="3_mkl8x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eymeq"]
 resource_name = "Stone"
@@ -281,8 +283,10 @@ resource_local_to_scene = true
 vertices = PackedVector3Array(-0.4, 0.4, -4, 0.4, 0.4, -20, 0.4, 0.4, -4, -0.4, 0.4, -20, -0.4, 0.4, 20.4, 0.4, 0.4, 20.4, 0.4, 0.4, -35.2, -0.4, 0.4, -35.2, 4.03301, 0.4, -4, 4.03301, 0.4, -20, -4, 0.4, -20, -4, 0.4, -4)
 polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(0, 3, 1), PackedInt32Array(2, 4, 0), PackedInt32Array(2, 5, 4), PackedInt32Array(3, 6, 1), PackedInt32Array(3, 7, 6), PackedInt32Array(1, 8, 2), PackedInt32Array(1, 9, 8), PackedInt32Array(0, 10, 3), PackedInt32Array(0, 11, 10)]
 
-[node name="Boss Room" type="Node3D" node_paths=PackedStringArray("player_spawn")]
+[node name="Boss Room" type="Node3D" node_paths=PackedStringArray("boss", "door", "player_spawn")]
 script = ExtResource("1_pvgye")
+boss = NodePath("Boss")
+door = NodePath("Next Room Door")
 player_spawn = NodePath("Marker3D")
 
 [node name="boss_location" type="Node3D" parent="."]
@@ -658,3 +662,10 @@ navigation_mesh = SubResource("NavigationMesh_csowb")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 0)
+
+[node name="Boss" parent="." instance=ExtResource("2_k1i2y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.684, 0, 0.283)
+
+[node name="Next Room Door" parent="." instance=ExtResource("3_mkl8x")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -34.6844, 0.379659, 0.185808)
+is_disable = true

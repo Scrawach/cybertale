@@ -8,7 +8,7 @@ viewport_path = NodePath("SubViewport")
 
 [node name="Floating Numbers" type="Node3D"]
 script = ExtResource("1_uqs0f")
-negative_number_color = Color(1, 0, 0.0166664, 1)
+negative_number_color = Color(2, 0, 0.017, 1)
 positive_number_color = Color(0.178857, 0.633796, 0.305974, 1)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

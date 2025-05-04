@@ -40,6 +40,15 @@ func spawn_spawn_vfx(target: Vector3) -> void:
 	instance.global_position = target
 
 func _on_timeout() -> void:
-	if enemies.get_child_count() < 1 and want_to_spawn <= spawned:
+	if get_enemies_count() < 1 and want_to_spawn <= spawned:
 		timer.stop()
 		door.enable()
+
+func get_enemies_count() -> int:
+	var counter: int
+	for child in enemies.get_children():
+		if child is RigidBody3D:
+			continue
+		
+		counter += 1
+	return counter

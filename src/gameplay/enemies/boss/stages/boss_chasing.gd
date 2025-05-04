@@ -41,5 +41,5 @@ func start_attack() -> void:
 func _process_movement(delta: float) -> void:
 	var next_position := nav_agent.get_next_path_position()
 	boss.global_position = boss.global_position.move_toward(next_position, delta * movement_speed)
-	next_position.y = 0
+	next_position.y = boss.global_position.y
 	boss.look_at(next_position)

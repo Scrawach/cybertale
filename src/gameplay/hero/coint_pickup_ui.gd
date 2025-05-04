@@ -5,6 +5,7 @@ extends Node3D
 
 @onready var icon: TextureRect = %TextureRect
 @onready var label: Label = %Label
+@onready var control: Control = $SubViewport/Control
 @onready var animation: AnimationPlayer = $SubViewport/AnimationPlayer
 @onready var timer: Timer = $Awaiting
 
@@ -17,10 +18,17 @@ func _ready() -> void:
 	_on_timeout()
 
 func _on_coins_changed(value: int) -> void:
+	if tween:
+		tween.kill()
+		tween = null
+		control.modulate.a = 1.0
+	
 	visible = true
 	label.text = str(value)
 	animation.play("pickup")
 	timer.start()
 
 func _on_timeout() -> void:
-	visible = false
+	tween = create_tween()
+	tween.tween_property(control, "modulate:a", 0, 1.0)
+	tween.tween_callback(func(): visible = false)

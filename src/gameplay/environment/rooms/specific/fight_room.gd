@@ -8,7 +8,7 @@ func _ready() -> void:
 		custom_door.used.connect(_on_door_used)
 
 func _on_timeout() -> void:
-	if enemies.get_child_count() < 1 and want_to_spawn <= spawned:
+	if get_enemies_count() < 1 and want_to_spawn <= spawned:
 		timer.stop()
 		
 		for custom_door in doors:

@@ -5,6 +5,9 @@ extends ProgressBar
 
 var room_icons: Array[RoomIcon]
 
+func _ready() -> void:
+	value_changed.connect(_on_value_changed)
+
 func setup_path(count_of_rooms: int) -> void:
 	max_value = count_of_rooms + 1
 	var offset: int = size.x / max_value
@@ -23,11 +26,12 @@ func setup_path(count_of_rooms: int) -> void:
 
 func complete_room(room_number: int) -> void:
 	const VISUAL_OFFSET: float = 0.1
-	value = room_number + VISUAL_OFFSET
-	for i in room_number:
+	create_tween().tween_property(self, "value", room_number + VISUAL_OFFSET, 1.5)
+
+func _on_value_changed(new_value: float) -> void:
+	for i in int(new_value):
 		if room_icons.size() <= i:
 			break
 		
 		var icon = room_icons[i]
 		icon.mark_as_reach()
-		

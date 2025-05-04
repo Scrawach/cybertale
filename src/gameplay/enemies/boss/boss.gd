@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var hero: Hero
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var health: Health = $Health
 
 @onready var states: Dictionary[Script, BossStage] = {
 	BossChasing: %Chasing,
@@ -20,6 +21,11 @@ var previous_stage: Script
 var current_stage: BossStage
 
 func _ready() -> void:
+	if hero != null:
+		initialize(hero)
+
+func initialize(hero: Hero) -> void:
+	self.hero = hero
 	switch_to(BossWaiting)
 
 func switch_to(type: Script) -> void:
