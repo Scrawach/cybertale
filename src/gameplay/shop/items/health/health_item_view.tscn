@@ -1,9 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://7oc32glq1cdy"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_td7wb"]
-size = Vector3(0.5, 0.5, 0.5)
+[ext_resource type="PackedScene" uid="uid://egibm6l2ui8t" path="res://gameplay/shop/models/base_item.glb" id="1_f1thx"]
 
 [node name="Health Item View" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_td7wb")
+[node name="base_item" parent="." instance=ExtResource("1_f1thx")]

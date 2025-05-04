@@ -465,12 +465,12 @@ mesh = SubResource("ArrayMesh_gs5wt")
 skeleton = NodePath("")
 
 [node name="Cube_036" type="MeshInstance3D" parent="fight_location_0"]
-transform = Transform3D(-0.485315, 0, 0.87434, 0, 1, 0, -0.87434, 0, -0.485315, -5.05068, -15.2764, 8.79904)
+transform = Transform3D(-0.485315, 0, 0.87434, 0, 1, 0, -0.87434, 0, -0.485315, -5.05068, -17.2764, 8.79904)
 mesh = SubResource("ArrayMesh_yvrvs")
 skeleton = NodePath("")
 
 [node name="Cube_037" type="MeshInstance3D" parent="fight_location_0"]
-transform = Transform3D(-0.438381, 0, 0.789784, 0, 1, 0, -0.789784, 0, -0.438381, -5.05068, -4.87641, 8.79904)
+transform = Transform3D(-0.438381, 0, 0.789784, 0, 1, 0, -0.789784, 0, -0.438381, -5.05068, -11.7858, 8.79904)
 mesh = SubResource("ArrayMesh_yvrvs")
 skeleton = NodePath("")
 

@@ -5,6 +5,7 @@ extends Node3D
 @export var attack_range: float = 1.25
 @export var is_endless_chasing: bool = false
 @export var enemy_attack: EnemyAttack
+@export var is_wandering: bool
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 
@@ -19,6 +20,10 @@ enum State {
 
 var current_state: State
 
+func _ready() -> void:
+	if is_wandering:
+		switch_to(State.Walking)
+
 func _physics_process(delta: float) -> void:
 	process_state(current_state, delta)
 
@@ -27,6 +32,7 @@ func process_state(state: State, delta: float) -> void:
 		State.Idle:
 			pass
 		State.Walking:
+			_process_walking(delta)
 			pass
 		State.Chasing:
 			_process_chase(delta)
@@ -40,11 +46,21 @@ func switch_to(state: State) -> void:
 		State.Idle:
 			pass
 		State.Walking:
-			pass
+			set_target_position(_random_point())
 		State.Chasing:
 			pass
 		State.Attack:
 			await enemy_attack.start()
+
+func _process_walking(delta: float) -> void:
+	if nav_agent.is_target_reached():
+		set_target_position(_random_point())
+	
+	_process_movement(delta)
+
+
+func _random_point() -> Vector3:
+	return NavigationServer3D.map_get_random_point(nav_agent.get_navigation_map(), 1, false)
 
 func _process_chase(delta: float) -> void:
 	set_target_position(target.global_position)
@@ -72,4 +88,8 @@ func _on_observer_body_entered(body: Node3D) -> void:
 func _on_observer_body_exited(_body: Node3D) -> void:
 	if not is_endless_chasing:
 		target = null
-		switch_to(State.Idle)
+		
+		if is_wandering:
+			switch_to(State.Walking)
+		else:
+			switch_to(State.Idle)

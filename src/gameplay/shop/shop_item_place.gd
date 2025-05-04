@@ -16,9 +16,15 @@ signal purchased(item: ShopItemResource)
 @onready var buy_tooltip: WorldSpaceTooltip = $"Item/Buy Tooltip"
 
 var target: Hero
+var view: Node3D
 
 func initialize() -> void:
-	var view: Node3D = item.view.instantiate()
+	if view != null:
+		view.queue_free()
+	
+	item_view.visible = true
+	collision.disabled = false
+	view = item.view.instantiate()
 	item_view.add_child(view)
 	setup_tooltips()
 

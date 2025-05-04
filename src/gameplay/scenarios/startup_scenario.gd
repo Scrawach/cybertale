@@ -27,7 +27,7 @@ func execute() -> void:
 	hero.global_position = training_room.player_spawn.global_position
 	
 	training_room.start()
-	tutorial_label.text = tr("TUTORIAL_FIGHT_KEY")
+	tutorial_label.text = ""
 	hero.show_health_bar(true)
 	hero = await wait_complete(training_room)
 	training_room.queue_free()

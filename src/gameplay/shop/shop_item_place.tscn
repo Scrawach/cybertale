@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxa4qw700f0gr"]
+[gd_scene load_steps=12 format=3 uid="uid://dxa4qw700f0gr"]
 
 [ext_resource type="Script" uid="uid://b7uqeyrplobpb" path="res://gameplay/shop/shop_item_place.gd" id="1_7p1km"]
 [ext_resource type="Script" uid="uid://bvbf52vy74pv0" path="res://gameplay/environment/smooth_floating_3d.gd" id="1_bf30i"]
@@ -8,9 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://m7vcjsans2o3" path="res://gameplay/items/coin_icon.png" id="6_clngh"]
 [ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="7_xtaa6"]
 [ext_resource type="PackedScene" uid="uid://dif2kgcovpkqm" path="res://gameplay/shop/models/shop_plate.glb" id="8_clngh"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_bf3um"]
-size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_t8gki"]
 viewport_path = NodePath("Item/Price Tooltip/SubViewport")
@@ -28,9 +25,6 @@ not_enough_label_color = Color(1, 0, 0, 1)
 
 [node name="Item" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87678, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Item"]
-mesh = SubResource("BoxMesh_bf3um")
 
 [node name="SmoothFloating3D" type="Node" parent="Item" node_paths=PackedStringArray("target")]
 script = ExtResource("1_bf30i")

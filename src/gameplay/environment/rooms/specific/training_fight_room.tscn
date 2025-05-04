@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=4 uid="uid://cwjehs5bqr6yj"]
+[gd_scene load_steps=20 format=4 uid="uid://cwjehs5bqr6yj"]
 
 [ext_resource type="Script" uid="uid://khfbh65obe36" path="res://gameplay/environment/rooms/specific/training_room.gd" id="1_mbu3v"]
 [ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="2_xasmq"]
 [ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="3_8m1ip"]
 [ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="3_mbu3v"]
+[ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box/box.tscn" id="5_xasmq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ghko"]
 resource_name = "Stone"
@@ -365,3 +366,21 @@ wait_time = 0.5
 autostart = true
 
 [node name="Enemies" type="Node3D" parent="."]
+
+[node name="Box" parent="." instance=ExtResource("5_xasmq")]
+transform = Transform3D(0.704362, 0, 0.709841, 0, 1, 0, -0.709841, 0, 0.704362, -10.0329, 0.0125039, 3.26135)
+
+[node name="Box2" parent="." instance=ExtResource("5_xasmq")]
+transform = Transform3D(0.807465, 0, -0.589915, 0, 1, 0, 0.589915, 0, 0.807465, -10.0329, 0.0125039, -2.73865)
+
+[node name="Box3" parent="." instance=ExtResource("5_xasmq")]
+transform = Transform3D(0.807465, 0, -0.589915, 0, 1, 0, 0.589915, 0, 0.807465, -4.70755, 0.0125039, -3.15749)
+
+[node name="Box4" parent="." instance=ExtResource("5_xasmq")]
+transform = Transform3D(0.979198, 0, -0.202907, 0, 1, 0, 0.202907, 0, 0.979198, -6.06032, 0.0125039, -3.52242)
+
+[node name="Box5" parent="." instance=ExtResource("5_xasmq")]
+transform = Transform3D(0.979198, 0, -0.202907, 0, 1, 0, 0.202907, 0, 0.979198, -5.54185, 0.95429, -3.42796)
+
+[node name="Box6" parent="." instance=ExtResource("5_xasmq")]
+transform = Transform3D(0.247033, 0, -0.969007, 0, 1, 0, 0.969007, 0, 0.247033, -4.53916, 0.0348667, 3.07936)
