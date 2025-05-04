@@ -37,6 +37,12 @@ transform = Transform3D(0.69058, 0, 0.723256, 0, 1, 0, -0.723256, 0, 0.69058, -1
 [node name="Box5" parent="." instance=ExtResource("2_rbcvh")]
 transform = Transform3D(0.918357, 0, -0.395754, 0, 1, 0, 0.395754, 0, 0.918357, -8.06786, 0.0125034, -2.37299)
 
+[node name="Box7" parent="." instance=ExtResource("2_rbcvh")]
+transform = Transform3D(0.395754, 0, 0.918357, 0, 1, 0, -0.918357, 0, 0.395754, -8.11276, 0.0125034, 2.06908)
+
+[node name="Box8" parent="." instance=ExtResource("2_rbcvh")]
+transform = Transform3D(-0.0984167, 0, 0.995146, 0, 1, 0, -0.995146, 0, -0.0984167, -6.94746, 0.0125034, 2.11157)
+
 [node name="Box6" parent="." instance=ExtResource("2_rbcvh")]
 transform = Transform3D(0.918357, 0, -0.395754, 0, 1, 0, 0.395754, 0, 0.918357, -4.27053, 1.04759, -0.242826)
 

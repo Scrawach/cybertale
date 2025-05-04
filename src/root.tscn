@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=33 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
 [ext_resource type="PackedScene" uid="uid://dqpbotjwi8ltd" path="res://gameplay/hero/hit/hit_vfx.tscn" id="5_jnlp7"]
+[ext_resource type="PackedScene" uid="uid://026ts4o6j5dg" path="res://gameplay/environment/rooms/specific/shop_room.tscn" id="6_sq7yr"]
 [ext_resource type="Script" uid="uid://sy1okakhrrii" path="res://gameplay/scenarios/startup_scenario.gd" id="7_gd4vy"]
 [ext_resource type="Script" uid="uid://dl7u5fm8mkbej" path="res://gameplay/environment/gameplay_world.gd" id="7_sq7yr"]
 [ext_resource type="PackedScene" uid="uid://c6i783kul21w6" path="res://gameplay/environment/rooms/specific/startup_room.tscn" id="7_tw3kd"]
@@ -128,9 +129,9 @@ want_to_spawn = 3
 
 [node name="Gameplay World" type="Node3D" parent="World3D" node_paths=PackedStringArray("last_window")]
 script = ExtResource("7_sq7yr")
-number_of_rooms = 1
 fighting_room_template = ExtResource("8_r3r3k")
 boss_room_template = ExtResource("9_3dlgs")
+shoop_room_template = ExtResource("6_sq7yr")
 last_window = NodePath("../../CanvasLayer/Thanks For Playing")
 
 [node name="Game Progress" type="CanvasLayer" parent="World3D/Gameplay World"]

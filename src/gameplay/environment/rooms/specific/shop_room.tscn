@@ -5,8 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://b8w8vh6038ft0" path="res://gameplay/shop/shop.tscn" id="2_l30wa"]
 [ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="4_ycejs"]
 
-[node name="Shop Room" type="Node3D"]
+[node name="Shop Room" type="Node3D" node_paths=PackedStringArray("door", "player_spawn")]
 script = ExtResource("1_0xorv")
+door = NodePath("Next Room Door")
+player_spawn = NodePath("Marker3D")
 
 [node name="shop_location" parent="." instance=ExtResource("1_l30wa")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3, 0, 0)
@@ -19,5 +21,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 0,
 
 [node name="Next Room Door" parent="." instance=ExtResource("4_ycejs")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -23.2593, 0, 0.217337)
+
+[node name="Marker3D" type="Marker3D" parent="."]
 
 [editable path="shop_location"]
