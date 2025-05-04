@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_r8e0s")
-strength = 10
+strength = 15
 view = ExtResource("2_cdfgs")
 price = 30
 tooltip = "HEALTH_ITEM_TOOLTIP_KEY"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8w8vh6038ft0"]
+[gd_scene load_steps=12 format=3 uid="uid://b8w8vh6038ft0"]
 
 [ext_resource type="PackedScene" uid="uid://dxa4qw700f0gr" path="res://gameplay/shop/shop_item_place.tscn" id="1_4byi3"]
 [ext_resource type="Script" uid="uid://dv7l3q1w4kjre" path="res://gameplay/shop/shop.gd" id="1_ufn31"]
@@ -10,10 +10,11 @@
 [ext_resource type="Resource" uid="uid://bkpaphlj0v3px" path="res://gameplay/shop/items/attack/attack_item.tres" id="7_nh01h"]
 [ext_resource type="Resource" uid="uid://vfnjn7hmj1tu" path="res://gameplay/shop/items/vampiric/vampiric_item.tres" id="8_gpdn2"]
 [ext_resource type="Resource" uid="uid://bw8jhoxxkbj0r" path="res://gameplay/shop/items/roll.tres" id="9_5b4dv"]
+[ext_resource type="Resource" uid="uid://b8enbt4wpgc81" path="res://gameplay/shop/items/movement/movement_item.tres" id="9_136h2"]
 
 [node name="Shop" type="Node3D" node_paths=PackedStringArray("roll_place")]
 script = ExtResource("1_ufn31")
-available_items = Array[ExtResource("2_lcrdu")]([ExtResource("3_nh01h"), ExtResource("4_5b4dv"), ExtResource("5_gpdn2"), ExtResource("6_136h2"), ExtResource("7_nh01h"), ExtResource("8_gpdn2")])
+available_items = Array[ExtResource("2_lcrdu")]([ExtResource("3_nh01h"), ExtResource("4_5b4dv"), ExtResource("5_gpdn2"), ExtResource("6_136h2"), ExtResource("7_nh01h"), ExtResource("8_gpdn2"), ExtResource("9_136h2")])
 roll_place = NodePath("Shop Item Place4")
 
 [node name="Shop Item Place" parent="." instance=ExtResource("1_4byi3")]
