@@ -1,9 +1,11 @@
-[gd_scene load_steps=21 format=4 uid="uid://bidvxu0rv31ay"]
+[gd_scene load_steps=25 format=4 uid="uid://bidvxu0rv31ay"]
 
 [ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="1_3bpu3"]
 [ext_resource type="Script" uid="uid://cost74er78pu0" path="res://gameplay/environment/rooms/specific/fight_room.gd" id="1_cpm4f"]
 [ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="2_uymcj"]
 [ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="3_rcd7p"]
+[ext_resource type="PackedScene" uid="uid://bkfe7or2qr1ti" path="res://gameplay/enemies/virus/chasing_virus.tscn" id="3_stp7o"]
+[ext_resource type="PackedScene" uid="uid://b5aahq5yu7fuu" path="res://gameplay/enemies/spikes/spikes.tscn" id="5_rcd7p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2kfs"]
 resource_name = "Stone"
@@ -252,13 +254,31 @@ resource_local_to_scene = true
 vertices = PackedVector3Array(-0.173222, 0, 0.4, 0.4, 0, -0.4, 0.4, 0, 0.4, -0.173222, 0, -0.4, -0.173222, 0, -1.20726, 0.4, 0, -2.01453, 0.4, 0, -1.20726, -0.173222, 0, -2.01453, 0.925253, 0, -0.803632, 1.45051, 0, -0.4, 0.925253, 0, -0.4, 1.45051, 0, -0.803632, -0.440404, 0, -1.20726, -0.440404, 0, -2.01453, -0.440404, 0, 0.4, -0.440404, 0, -0.4, 0.925253, 0, -2.01453, 1.45051, 0, -2.82261, 1.45051, 0, -2.01453, 0.925253, 0, -2.82261, -0.440404, 0, -0.803632, -0.173222, 0, -0.803632, 1.45051, 0, -1.20726, 0.925253, 0, -1.20726, 0.4, 0, -0.803632, 2.17778, 0, -0.4, 2.17778, 0, -0.803632, -0.173222, 0, 1.20808, 0.4, 0, 1.20808, 0.4, 0, -2.82261, 2.17778, 0, -1.20726)
 polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(0, 3, 1), PackedInt32Array(4, 5, 6), PackedInt32Array(4, 7, 5), PackedInt32Array(8, 9, 10), PackedInt32Array(8, 11, 9), PackedInt32Array(12, 7, 4), PackedInt32Array(12, 13, 7), PackedInt32Array(14, 3, 0), PackedInt32Array(14, 15, 3), PackedInt32Array(16, 17, 18), PackedInt32Array(16, 19, 17), PackedInt32Array(20, 4, 21), PackedInt32Array(20, 12, 4), PackedInt32Array(16, 22, 23), PackedInt32Array(16, 18, 22), PackedInt32Array(21, 6, 24), PackedInt32Array(21, 4, 6), PackedInt32Array(11, 25, 9), PackedInt32Array(11, 26, 25), PackedInt32Array(2, 27, 0), PackedInt32Array(2, 28, 27), PackedInt32Array(5, 23, 6), PackedInt32Array(5, 16, 23), PackedInt32Array(5, 19, 16), PackedInt32Array(5, 29, 19), PackedInt32Array(24, 10, 1), PackedInt32Array(24, 8, 10), PackedInt32Array(6, 8, 24), PackedInt32Array(6, 23, 8), PackedInt32Array(22, 26, 11), PackedInt32Array(22, 30, 26), PackedInt32Array(3, 24, 1), PackedInt32Array(3, 21, 24), PackedInt32Array(15, 21, 3), PackedInt32Array(15, 20, 21), PackedInt32Array(23, 11, 8), PackedInt32Array(23, 22, 11)]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stp7o"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svn0r"]
+bg_color = Color(0.912271, 4.71681e-06, 6.73831e-07, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+shadow_color = Color(1, 0, 0, 0.470588)
+shadow_size = 6
+
 [node name="Fight Room" type="Node3D" node_paths=PackedStringArray("doors", "region", "door", "player_spawn")]
 script = ExtResource("1_cpm4f")
 doors = [NodePath("Next Room Door"), NodePath("Next Room Door2")]
 want_to_spawn = 16
 max_enemies_count = 6
 region = NodePath("fight_location_0/@NavigationRegion3D@322756")
-spawn_targets = Array[PackedScene]([ExtResource("2_uymcj")])
+spawn_targets = Array[PackedScene]([ExtResource("2_uymcj"), ExtResource("3_stp7o")])
 spawn_vfx = ExtResource("3_rcd7p")
 door = NodePath("Next Room Door")
 player_spawn = NodePath("Marker3D")
@@ -470,3 +490,41 @@ wait_time = 0.3
 autostart = true
 
 [node name="Enemies" type="Node3D" parent="."]
+
+[node name="Spikes" parent="." instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, 3)
+
+[node name="Spikes2" parent="." instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, 0)
+
+[node name="Spikes3" parent="." instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, -3)
+
+[node name="Spikes7" parent="." instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5618, 0, -13)
+
+[node name="Spikes8" parent="." instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5618, 0, -13)
+
+[node name="Spikes9" parent="." instance=ExtResource("5_rcd7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5618, 0, -13)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 27.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/MarginContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_stp7o")
+theme_override_styles/fill = SubResource("StyleBoxFlat_svn0r")
+value = 55.0
+show_percentage = false

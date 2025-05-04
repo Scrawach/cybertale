@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://bh1ht7ofkniav"]
+
+[ext_resource type="Script" uid="uid://cu1bslpttslrj" path="res://gameplay/environment/rooms/specific/scenario_room.gd" id="1_egjwa"]
+[ext_resource type="PackedScene" uid="uid://dukbwdeib7621" path="res://gameplay/environment/rooms/specific/models/bridge_location.glb" id="1_mapil"]
+[ext_resource type="PackedScene" uid="uid://b5aahq5yu7fuu" path="res://gameplay/enemies/spikes/spikes.tscn" id="2_hvqfx"]
+[ext_resource type="PackedScene" uid="uid://deqsey4x7eakf" path="res://gameplay/environment/box/box.tscn" id="3_2aura"]
+[ext_resource type="PackedScene" uid="uid://b2jkolpa6wknw" path="res://gameplay/environment/rooms/next_room_door.tscn" id="5_eokn6"]
+
+[node name="Dash Room" type="Node3D" node_paths=PackedStringArray("door", "player_spawn")]
+script = ExtResource("1_egjwa")
+door = NodePath("Next Room Door")
+player_spawn = NodePath("Marker3D")
+
+[node name="bridge_location" parent="." instance=ExtResource("1_mapil")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="room" parent="bridge_location" index="22"]
+mesh = null
+
+[node name="Spikes" parent="." instance=ExtResource("2_hvqfx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.53911, 0, -0.0995677)
+
+[node name="Box" parent="." instance=ExtResource("3_2aura")]
+transform = Transform3D(0.980693, 0, 0.195552, 0, 1, 0, -0.195552, 0, 0.980693, 0.669152, 0, -2.78375)
+
+[node name="Box2" parent="." instance=ExtResource("3_2aura")]
+transform = Transform3D(0.762217, 0, -0.647322, 0, 1, 0, 0.647322, 0, 0.762217, 2.06192, -2.38419e-07, -2.78299)
+
+[node name="Box3" parent="." instance=ExtResource("3_2aura")]
+transform = Transform3D(0.762217, 0, -0.647322, 0, 1, 0, 0.647322, 0, 0.762217, 0.892341, -2.38419e-07, 2.34247)
+
+[node name="Box4" parent="." instance=ExtResource("3_2aura")]
+transform = Transform3D(0.971138, 0, 0.238517, 0, 1, 0, -0.238517, 0, 0.971138, 2.12766, -2.38419e-07, 2.40355)
+
+[node name="Box5" parent="." instance=ExtResource("3_2aura")]
+transform = Transform3D(0.971138, 0, 0.238517, 0, 1, 0, -0.238517, 0, 0.971138, -3.59418, -2.38419e-07, 2.21668)
+
+[node name="Box6" parent="." instance=ExtResource("3_2aura")]
+transform = Transform3D(0.798541, 0, -0.601941, 0, 1, 0, 0.601941, 0, 0.798541, -5.04978, -2.38419e-07, 2.03939)
+
+[node name="Box7" parent="." instance=ExtResource("3_2aura")]
+transform = Transform3D(0.798541, 0, -0.601941, 0, 1, 0, 0.601941, 0, 0.798541, -4.38331, 0.952855, 2.33369)
+
+[node name="Box8" parent="." instance=ExtResource("3_2aura")]
+transform = Transform3D(-0.471705, 0, -0.881757, 0, 1, 0, 0.881757, 0, -0.471705, -5.20797, -2.38419e-07, -1.71172)
+
+[node name="Box9" parent="." instance=ExtResource("3_2aura")]
+transform = Transform3D(-0.98147, 0, -0.191614, 0, 1, 0, 0.191614, 0, -0.98147, -4.10318, -2.38419e-07, -2.67589)
+
+[node name="Box11" parent="." instance=ExtResource("3_2aura")]
+transform = Transform3D(-0.98147, 0, -0.191614, 0, 1, 0, 0.191614, 0, -0.98147, -4.05788, -2.38419e-07, -1.59596)
+
+[node name="Box10" parent="." instance=ExtResource("3_2aura")]
+transform = Transform3D(-0.98147, 0, -0.191614, 0, 1, 0, 0.191614, 0, -0.98147, -4.76755, 0.952855, -2.37688)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Next Room Door" parent="." instance=ExtResource("5_eokn6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10.5367, 0, 0)
+
+[editable path="bridge_location"]

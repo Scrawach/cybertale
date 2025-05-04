@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ShopItemResource" load_steps=3 format=3 uid="uid://bw8jhoxxkbj0r"]
+
+[ext_resource type="Script" uid="uid://dvkhhia37u4by" path="res://gameplay/shop/shop_item_resource.gd" id="1_ui4ew"]
+[ext_resource type="PackedScene" uid="uid://7oc32glq1cdy" path="res://gameplay/shop/items/health/health_item_view.tscn" id="2_ktn48"]
+
+[resource]
+script = ExtResource("1_ui4ew")
+view = ExtResource("2_ktn48")
+price = 20
+tooltip = "ROLL_ITEM_KEY"
+metadata/_custom_type_script = "uid://dvkhhia37u4by"

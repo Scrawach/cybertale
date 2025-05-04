@@ -1,9 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=53 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
 [ext_resource type="PackedScene" uid="uid://dqpbotjwi8ltd" path="res://gameplay/hero/hit/hit_vfx.tscn" id="5_jnlp7"]
+[ext_resource type="PackedScene" uid="uid://gbxjv8xjs2b1" path="res://gameplay/enemies/floating/floating_sphere.tscn" id="6_l8v81"]
 [ext_resource type="PackedScene" uid="uid://026ts4o6j5dg" path="res://gameplay/environment/rooms/specific/shop_room.tscn" id="6_sq7yr"]
+[ext_resource type="PackedScene" uid="uid://bh1ht7ofkniav" path="res://gameplay/environment/rooms/specific/dash_room.tscn" id="7_ab83r"]
 [ext_resource type="Script" uid="uid://sy1okakhrrii" path="res://gameplay/scenarios/startup_scenario.gd" id="7_gd4vy"]
 [ext_resource type="Script" uid="uid://dl7u5fm8mkbej" path="res://gameplay/environment/gameplay_world.gd" id="7_sq7yr"]
 [ext_resource type="PackedScene" uid="uid://c6i783kul21w6" path="res://gameplay/environment/rooms/specific/startup_room.tscn" id="7_tw3kd"]
@@ -14,14 +16,21 @@
 [ext_resource type="PackedScene" uid="uid://sc6ch0vywry6" path="res://gameplay/environment/game_progress/room_icon.tscn" id="9_blcw0"]
 [ext_resource type="PackedScene" uid="uid://cwjehs5bqr6yj" path="res://gameplay/environment/rooms/specific/training_fight_room.tscn" id="9_gd4vy"]
 [ext_resource type="PackedScene" uid="uid://c07q6t30ebyah" path="res://gameplay/environment/rooms/specific/bridge_room.tscn" id="9_huihk"]
-[ext_resource type="PackedScene" uid="uid://0xk5oow351fp" path="res://gameplay/hero/slash/slash_vfx.tscn" id="9_tw3kd"]
 [ext_resource type="ArrayMesh" uid="uid://d3si88bul1c2f" path="res://gameplay/hero/models/dash.res" id="10_gd4vy"]
 [ext_resource type="Script" uid="uid://d35nxihjtikcy" path="res://localization/language_option.gd" id="11_gd4vy"]
 [ext_resource type="Shader" uid="uid://bfisk5hogwidb" path="res://gameplay/hero/dash/dash_shader.tres" id="11_qw60f"]
+[ext_resource type="PackedScene" uid="uid://dlcugfojmbuy8" path="res://gameplay/environment/rooms/specific/revive_room.tscn" id="11_ynlg5"]
 [ext_resource type="PackedScene" uid="uid://digo2wt884cud" path="res://gameplay/items/dropped_item.tscn" id="12_qw60f"]
 [ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="13_qwhpj"]
+[ext_resource type="Script" uid="uid://dao8djqvgqu2p" path="res://gameplay/hero/hero_death.gd" id="13_ub8w1"]
 [ext_resource type="Material" uid="uid://d0s0pt5lh6p77" path="res://gameplay/enemies/floating/floating_sphere.tres" id="14_qt76e"]
+[ext_resource type="Script" uid="uid://le42ofjyspuk" path="res://gameplay/environment/rooms/gameplay_spawn_settings.gd" id="14_tilu5"]
 [ext_resource type="Theme" uid="uid://coopdw151wixp" path="res://themes/base_theme.tres" id="14_vte5o"]
+[ext_resource type="Script" uid="uid://brtd615r8eoo4" path="res://gameplay/environment/rooms/room_spawn_settings.gd" id="15_24xe2"]
+[ext_resource type="Script" uid="uid://11mhs6ehk33f" path="res://gameplay/environment/rooms/spawn_settings.gd" id="16_cj3xu"]
+[ext_resource type="PackedScene" uid="uid://bkfe7or2qr1ti" path="res://gameplay/enemies/virus/chasing_virus.tscn" id="18_ql764"]
+[ext_resource type="PackedScene" uid="uid://d0763q65dmpb7" path="res://gameplay/enemies/virus/ranged_virus.tscn" id="19_24xe2"]
+[ext_resource type="PackedScene" uid="uid://0xk5oow351fp" path="res://gameplay/hero/slash/slash_vfx.tscn" id="19_ynlg5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -49,6 +58,71 @@ adjustment_enabled = true
 adjustment_brightness = 1.3
 adjustment_contrast = 1.2
 adjustment_saturation = 0.7
+
+[sub_resource type="Resource" id="Resource_qoqhg"]
+script = ExtResource("16_cj3xu")
+scene = ExtResource("6_l8v81")
+count = 8
+metadata/_custom_type_script = "uid://11mhs6ehk33f"
+
+[sub_resource type="Resource" id="Resource_udg8a"]
+script = ExtResource("16_cj3xu")
+scene = ExtResource("18_ql764")
+count = 4
+metadata/_custom_type_script = "uid://11mhs6ehk33f"
+
+[sub_resource type="Resource" id="Resource_cr30j"]
+script = ExtResource("15_24xe2")
+enemies = Array[ExtResource("16_cj3xu")]([SubResource("Resource_qoqhg"), SubResource("Resource_udg8a")])
+max_alive_enemies = 6
+metadata/_custom_type_script = "uid://brtd615r8eoo4"
+
+[sub_resource type="Resource" id="Resource_xu2l0"]
+script = ExtResource("16_cj3xu")
+scene = ExtResource("6_l8v81")
+count = 8
+metadata/_custom_type_script = "uid://11mhs6ehk33f"
+
+[sub_resource type="Resource" id="Resource_lci31"]
+script = ExtResource("16_cj3xu")
+scene = ExtResource("18_ql764")
+count = 8
+metadata/_custom_type_script = "uid://11mhs6ehk33f"
+
+[sub_resource type="Resource" id="Resource_sc48t"]
+script = ExtResource("15_24xe2")
+enemies = Array[ExtResource("16_cj3xu")]([SubResource("Resource_xu2l0"), SubResource("Resource_lci31")])
+max_alive_enemies = 8
+metadata/_custom_type_script = "uid://brtd615r8eoo4"
+
+[sub_resource type="Resource" id="Resource_cj3xu"]
+script = ExtResource("16_cj3xu")
+scene = ExtResource("6_l8v81")
+count = 6
+metadata/_custom_type_script = "uid://11mhs6ehk33f"
+
+[sub_resource type="Resource" id="Resource_ql764"]
+script = ExtResource("16_cj3xu")
+scene = ExtResource("18_ql764")
+count = 4
+metadata/_custom_type_script = "uid://11mhs6ehk33f"
+
+[sub_resource type="Resource" id="Resource_uk3k5"]
+script = ExtResource("16_cj3xu")
+scene = ExtResource("19_24xe2")
+count = 3
+metadata/_custom_type_script = "uid://11mhs6ehk33f"
+
+[sub_resource type="Resource" id="Resource_0aysq"]
+script = ExtResource("15_24xe2")
+enemies = Array[ExtResource("16_cj3xu")]([SubResource("Resource_cj3xu"), SubResource("Resource_ql764"), SubResource("Resource_uk3k5")])
+max_alive_enemies = 6
+metadata/_custom_type_script = "uid://brtd615r8eoo4"
+
+[sub_resource type="Resource" id="Resource_f6va0"]
+script = ExtResource("14_tilu5")
+settings = Array[ExtResource("15_24xe2")]([SubResource("Resource_cr30j"), SubResource("Resource_sc48t"), SubResource("Resource_0aysq")])
+metadata/_custom_type_script = "uid://le42ofjyspuk"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blcw0"]
 bg_color = Color(0, 0, 0, 1)
@@ -109,12 +183,13 @@ target = NodePath("../Hero")
 
 [node name="Startup World" type="Node3D" parent="World3D"]
 
-[node name="StartupScenario" type="Node" parent="World3D/Startup World" node_paths=PackedStringArray("hero", "startup_room", "bridge_room", "training_room", "gameplay_world")]
+[node name="StartupScenario" type="Node" parent="World3D/Startup World" node_paths=PackedStringArray("hero", "startup_room", "bridge_room", "training_room", "dash_room", "gameplay_world")]
 script = ExtResource("7_gd4vy")
 hero = NodePath("../../Hero")
 startup_room = NodePath("../Startup Room")
 bridge_room = NodePath("../Bridge Room")
 training_room = NodePath("../Training Fight Room")
+dash_room = NodePath("../Dash Room")
 gameplay_world = NodePath("../../Gameplay World")
 metadata/_custom_type_script = "uid://sy1okakhrrii"
 
@@ -127,12 +202,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 0, 0)
 want_to_spawn = 3
 
+[node name="Dash Room" parent="World3D/Startup World" instance=ExtResource("7_ab83r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -108, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="World3D/Startup World"]
+
+[node name="Tutorial Label" type="Label" parent="World3D/Startup World/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -83.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("14_vte5o")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+
 [node name="Gameplay World" type="Node3D" parent="World3D" node_paths=PackedStringArray("last_window")]
 script = ExtResource("7_sq7yr")
+number_of_rooms = 4
 fighting_room_template = ExtResource("8_r3r3k")
 boss_room_template = ExtResource("9_3dlgs")
 shoop_room_template = ExtResource("6_sq7yr")
+revive_room_template = ExtResource("11_ynlg5")
 last_window = NodePath("../../CanvasLayer/Thanks For Playing")
+settings = SubResource("Resource_f6va0")
 
 [node name="Game Progress" type="CanvasLayer" parent="World3D/Gameplay World"]
 
@@ -156,6 +254,41 @@ max_value = 6.0
 show_percentage = false
 script = ExtResource("9_50g4q")
 room_icon = ExtResource("9_blcw0")
+
+[node name="Defeat All" type="Control" parent="World3D/Gameplay World/Game Progress"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="World3D/Gameplay World/Game Progress/Defeat All"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -230.5
+offset_top = 120.0
+offset_right = 230.5
+offset_bottom = 230.0
+grow_horizontal = 2
+theme = ExtResource("14_vte5o")
+theme_override_colors/font_outline_color = Color(0.0196078, 0.705882, 1, 0.470588)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+text = "DEFEAT_ALL_KEY"
+
+[node name="Timer" type="Timer" parent="World3D/Gameplay World/Game Progress/Defeat All"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Hero Death" type="Node" parent="World3D" node_paths=PackedStringArray("hero", "gameplay")]
+script = ExtResource("13_ub8w1")
+hero = NodePath("../Hero")
+gameplay = NodePath("../Gameplay World")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 10
@@ -218,7 +351,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -1)
 [node name="Hit VFX" parent="Shaders Precompilation" instance=ExtResource("5_jnlp7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[node name="Slash VFX" parent="Shaders Precompilation" instance=ExtResource("9_tw3kd")]
+[node name="Slash VFX" parent="Shaders Precompilation" instance=ExtResource("19_ynlg5")]
 transform = Transform3D(1.70344, 0, 1.048, 0, 2, 0, -1.048, 0, 1.70344, -0.196116, 1, 0.112441)
 
 [node name="Dash VFX2" type="Node3D" parent="Shaders Precompilation"]

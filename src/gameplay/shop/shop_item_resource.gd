@@ -15,4 +15,4 @@ func after_room() -> void:
 	pass
 
 func get_tooltip_text() -> String:
-	return ""
+	return tooltip

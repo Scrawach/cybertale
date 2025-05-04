@@ -1,7 +1,10 @@
 class_name ShopItemPlace
 extends Node3D
 
+signal purchased(item: ShopItemResource)
+
 @export var item: ShopItemResource
+@export var is_endless: bool
 
 @export var not_enough_label_color: Color
 
@@ -34,18 +37,20 @@ func _input(event: InputEvent) -> void:
 		interact()
 
 func interact() -> void:
-	if try_purchase():
-		item_view.visible = false
-	else:
-		print("not enouth coins!")
+	try_purchase()
 
 func try_purchase() -> bool:
 	if target.inventory.value < item.price:
 		return false
 	
 	target.inventory.substract(item.price)
+	purchased.emit(item)
 	item.apply(target)
-	collision.disabled = true
+	
+	if not is_endless:
+		item_view.visible = false
+		collision.disabled = true
+	
 	return true
 
 func _notification(what: int) -> void:

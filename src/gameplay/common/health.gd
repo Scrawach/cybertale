@@ -13,6 +13,10 @@ func initialize(new_value: int) -> void:
 	max_value = new_value
 	changed.emit(self)
 
+func restore() -> void:
+	value = max_value
+	changed.emit(self)
+
 func increase_max_value(increase: int) -> void:
 	max_value += increase
 	heal(increase)

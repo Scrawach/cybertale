@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6vuijlsbb5k8"]
+[gd_scene load_steps=17 format=3 uid="uid://b6vuijlsbb5k8"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_nl1xv"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_uwyag"]
@@ -10,8 +10,34 @@
 [ext_resource type="Resource" uid="uid://1kbf02drqvd5" path="res://gameplay/shop/items/heal_after_room/heal_after_room.tres" id="8_eeenc"]
 [ext_resource type="Resource" uid="uid://bkpaphlj0v3px" path="res://gameplay/shop/items/attack/attack_item.tres" id="9_3gqxa"]
 [ext_resource type="Resource" uid="uid://b8enbt4wpgc81" path="res://gameplay/shop/items/movement/movement_item.tres" id="10_rstec"]
+[ext_resource type="Resource" uid="uid://vfnjn7hmj1tu" path="res://gameplay/shop/items/vampiric/vampiric_item.tres" id="11_uwyag"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uwyag"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_6dvlq"]
+sky_material = SubResource("ProceduralSkyMaterial_uwyag")
+
+[sub_resource type="Environment" id="Environment_ygmea"]
+background_mode = 2
+sky = SubResource("Sky_6dvlq")
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uwyag"]
+size = Vector2(222, 222)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6dvlq"]
+data = PackedVector3Array(111, 0, 111, -111, 0, 111, 111, 0, -111, -111, 0, 111, -111, 0, -111, 111, 0, -111)
 
 [node name="Shop Test" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ygmea")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
 
 [node name="Hero" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_nl1xv")]
 camera = NodePath("../Camera Point")
@@ -23,4 +49,17 @@ target = NodePath("../Hero")
 [node name="Shop" parent="." node_paths=PackedStringArray("hero") instance=ExtResource("3_6dvlq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 hero = NodePath("../Hero")
-available_items = Array[ExtResource("4_ygmea")]([ExtResource("5_6gp4g"), ExtResource("6_00d5o"), ExtResource("7_g8yrt"), ExtResource("8_eeenc"), ExtResource("9_3gqxa"), ExtResource("10_rstec")])
+available_items = Array[ExtResource("4_ygmea")]([ExtResource("5_6gp4g"), ExtResource("6_00d5o"), ExtResource("7_g8yrt"), ExtResource("8_eeenc"), ExtResource("9_3gqxa"), ExtResource("10_rstec"), ExtResource("11_uwyag")])
+
+[node name="Shop Item Place" parent="Shop" index="0"]
+item = ExtResource("11_uwyag")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_uwyag")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_6dvlq")
+
+[editable path="Shop"]

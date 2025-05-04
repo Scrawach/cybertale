@@ -245,6 +245,7 @@ max_value = 100
 [node name="Health Bar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_14oge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.27989, 0)
 health = NodePath("../Health")
+color = Color(0.02, 0.706, 1, 1)
 
 [node name="Attack Cooldown" type="Timer" parent="."]
 wait_time = 0.2

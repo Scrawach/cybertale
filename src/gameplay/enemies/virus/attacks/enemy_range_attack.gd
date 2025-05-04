@@ -17,8 +17,8 @@ func start() -> void:
 	var target = body.target
 	for i in range(3):
 		var projectile: EnemyProjectile = projectile_template.instantiate()
-		body.owner.add_child(projectile)
-		projectile.transform = fire_point.global_transform
+		body.get_parent().add_child(projectile)
+		projectile.global_transform = fire_point.global_transform
 		projectile.launch(target.global_position - body.global_position)
 		await get_tree().create_timer(0.2).timeout
 	
