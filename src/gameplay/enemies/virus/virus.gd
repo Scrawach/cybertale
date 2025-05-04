@@ -10,6 +10,8 @@ extends Node3D
 @export var chasing_speed: float = 5.0
 @export var wandering_speed: float = 2.5
 
+@export var extra_animation: AnimationPlayer
+
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 
 var target: Node3D
@@ -52,7 +54,8 @@ func switch_to(state: State) -> void:
 	current_state = state
 	match current_state:
 		State.Idle:
-			pass
+			if extra_animation:
+				extra_animation.play("idle")
 		State.Walking:
 			movement_speed = wandering_speed
 			set_target_position(_random_point())
@@ -85,6 +88,10 @@ func set_target_position(target_position: Vector3) -> void:
 	nav_agent.set_target_position(target_position)
 
 func _process_movement(delta: float) -> void:
+	if extra_animation:
+		extra_animation.play("walk")
+		extra_animation.speed_scale = 2 * movement_speed / 5
+	
 	var next_position := nav_agent.get_next_path_position()
 	global_position = global_position.move_toward(next_position, delta * movement_speed)
 	next_position.y = 0

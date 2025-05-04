@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkfe7or2qr1ti"]
+[gd_scene load_steps=27 format=3 uid="uid://bkfe7or2qr1ti"]
 
 [ext_resource type="Script" uid="uid://b47jb5u0e2f1m" path="res://gameplay/enemies/virus/virus.gd" id="1_s1dqi"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="2_0etyu"]
@@ -9,8 +9,11 @@
 [ext_resource type="Script" uid="uid://cma2e03yqef6p" path="res://gameplay/common/death_drop.gd" id="7_kp1x4"]
 [ext_resource type="PackedScene" uid="uid://digo2wt884cud" path="res://gameplay/items/dropped_item.tscn" id="8_54su0"]
 [ext_resource type="Script" uid="uid://dk4s5v6knj8ch" path="res://gameplay/enemies/virus/attacks/enemy_melee_attack.gd" id="9_wbyrl"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_vvh5c"]
+[ext_resource type="PackedScene" uid="uid://da4wrhtd5ockg" path="res://gameplay/enemies/virus/models/melee.glb" id="10_cvao0"]
+[ext_resource type="Script" uid="uid://c27j7p36ppclx" path="res://gameplay/common/death_vfx.gd" id="11_kmxfo"]
+[ext_resource type="Material" uid="uid://d0s0pt5lh6p77" path="res://gameplay/enemies/floating/floating_sphere.tres" id="11_unt7g"]
+[ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="12_unt7g"]
+[ext_resource type="Script" uid="uid://vfqw5g7s4ou6" path="res://gameplay/common/hit_flash.gd" id="13_ypbh2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jnlp7"]
 radius = 5.0
@@ -21,15 +24,159 @@ radius = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_28aoi"]
 radius = 2.0
 
-[node name="Chasing Virus" type="Node3D" node_paths=PackedStringArray("enemy_attack")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmxfo"]
+resource_local_to_scene = true
+resource_name = "Body"
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.113725, 0.12549, 0.12549, 1)
+roughness = 0.5
+emission_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ypbh2"]
+resource_name = "Body.001"
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.247679, 0.273325, 0.273325, 1)
+roughness = 0.5
+
+[sub_resource type="Animation" id="Animation_cvao0"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("melee:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 3.14159, 0.219911), Vector3(0, 3.14159, 0), Vector3(0, 3.14159, -0.261799), Vector3(0, 3.14159, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("melee:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.0944361, 0), Vector3(0, 0, 0), Vector3(0, 0.143635, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("melee:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.905, 1), Vector3(1, 1, 1), Vector3(1, 0.9, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7davi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("melee:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("melee:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("melee:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0.905, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_s23dp"]
+resource_name = "idle"
+step = 0.1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s23dp"]
+_data = {
+&"RESET": SubResource("Animation_7davi"),
+&"idle": SubResource("Animation_s23dp"),
+&"walk": SubResource("Animation_cvao0")
+}
+
+[sub_resource type="Animation" id="Animation_unt7g"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../melee/Sphere:surface_material_override/0:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.868985, 0.868985, 0.868985, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ypbh2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../melee/Sphere:surface_material_override/0:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jxhpx"]
+_data = {
+&"RESET": SubResource("Animation_ypbh2"),
+&"hit": SubResource("Animation_unt7g")
+}
+
+[node name="Chasing Virus" type="Node3D" node_paths=PackedStringArray("enemy_attack", "extra_animation")]
 script = ExtResource("1_s1dqi")
 attack_range = 1.5
 enemy_attack = NodePath("Enemy Attack")
 is_wandering = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_vvh5c")
+extra_animation = NodePath("AnimationPlayer")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
@@ -97,6 +244,48 @@ metadata/_custom_type_script = "uid://dk4s5v6knj8ch"
 [node name="Cooldown Timer" type="Timer" parent="Enemy Attack"]
 one_shot = true
 
+[node name="melee" parent="." instance=ExtResource("10_cvao0")]
+transform = Transform3D(1, 0, 0, 0, 0.905, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Sphere" parent="melee" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_kmxfo")
+surface_material_override/1 = ExtResource("11_unt7g")
+surface_material_override/2 = SubResource("StandardMaterial3D_ypbh2")
+
+[node name="AnimationPlayer" parent="melee" index="1"]
+autoplay = "Idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_s23dp")
+}
+
+[node name="DeathVFX" type="Node" parent="." node_paths=PackedStringArray("health", "parent", "spawn_point")]
+script = ExtResource("11_kmxfo")
+health = NodePath("../Health")
+parent = NodePath("..")
+spawn_point = NodePath("../Death Vfx Spawn Point")
+scene = ExtResource("12_unt7g")
+metadata/_custom_type_script = "uid://c27j7p36ppclx"
+
+[node name="HitFlash" type="Node" parent="." node_paths=PackedStringArray("animation", "health")]
+script = ExtResource("13_ypbh2")
+animation = NodePath("AnimationPlayer")
+animation_name = "hit"
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://vfqw5g7s4ou6"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HitFlash"]
+libraries = {
+&"": SubResource("AnimationLibrary_jxhpx")
+}
+speed_scale = 1.5
+
+[node name="Death Vfx Spawn Point" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11543, 0)
+
 [connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
 [connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+
+[editable path="melee"]
