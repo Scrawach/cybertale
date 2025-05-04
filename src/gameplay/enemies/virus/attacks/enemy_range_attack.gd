@@ -32,7 +32,7 @@ func start() -> void:
 	if body.target != null:
 		body.switch_to(Virus.State.Chasing)
 	else:
-		body.switch_to(Virus.State.Idle)
+		body.switch_to(Virus.State.Walking)
 
 func stop() -> void:
 	pass

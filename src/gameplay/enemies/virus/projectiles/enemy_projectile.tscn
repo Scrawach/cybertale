@@ -1,29 +1,64 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsk1kogc4v1iw"]
+[gd_scene load_steps=14 format=3 uid="uid://dsk1kogc4v1iw"]
 
 [ext_resource type="Script" uid="uid://dixwqidc431b7" path="res://gameplay/enemies/virus/projectiles/enemy_projectile.gd" id="1_0lxh8"]
 [ext_resource type="Script" uid="uid://d35kd0bck3s7d" path="res://gameplay/common/damage.gd" id="2_4pso5"]
+[ext_resource type="PackedScene" uid="uid://b17rlm6hsktab" path="res://gameplay/enemies/virus/projectiles/projectile_death_vfx.tscn" id="2_28pge"]
+[ext_resource type="Material" uid="uid://d0s0pt5lh6p77" path="res://gameplay/enemies/floating/floating_sphere.tres" id="2_wjo4s"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vyht1"]
 size = Vector3(0.3, 0.3, 0.3)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4pso5"]
-albedo_color = Color(1, 0, 0, 1)
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 2.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjo4s"]
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="Gradient" id="Gradient_28pge"]
+colors = PackedColorArray(1, 0, 0, 1, 0.201816, 1.14311e-07, 7.21961e-08, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3l6ax"]
+gradient = SubResource("Gradient_28pge")
+
+[sub_resource type="Curve" id="Curve_vhkyy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iihbt"]
+curve = SubResource("Curve_vhkyy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k0j1l"]
+emission_shape = 1
+emission_sphere_radius = 0.4
+gravity = Vector3(0, 3, 0)
+scale_min = 0.5
+scale_max = 0.85
+scale_curve = SubResource("CurveTexture_iihbt")
+color_ramp = SubResource("GradientTexture1D_3l6ax")
+
+[sub_resource type="BoxMesh" id="BoxMesh_y2hf7"]
+size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0lxh8"]
 radius = 0.3
 
 [node name="Enemy Projectile" type="Node3D"]
 script = ExtResource("1_0lxh8")
+death_vfx = ExtResource("2_28pge")
 
 [node name="View" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="View"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 mesh = SubResource("BoxMesh_vyht1")
-surface_material_override/0 = SubResource("StandardMaterial3D_4pso5")
+surface_material_override/0 = ExtResource("2_wjo4s")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="View/MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_wjo4s")
+amount = 45
+lifetime = 0.15
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_k0j1l")
+draw_pass_1 = SubResource("BoxMesh_y2hf7")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 8

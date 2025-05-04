@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://b17rlm6hsktab"]
+
+[ext_resource type="Script" uid="uid://bgdmrlnn4dpdu" path="res://gameplay/enemies/virus/projectiles/projectile_death_vfx.gd" id="1_afrt0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjo4s"]
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="Gradient" id="Gradient_28pge"]
+colors = PackedColorArray(1, 0, 0, 1, 0.201816, 1.14311e-07, 7.21961e-08, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3l6ax"]
+gradient = SubResource("Gradient_28pge")
+
+[sub_resource type="Curve" id="Curve_vhkyy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iihbt"]
+curve = SubResource("Curve_vhkyy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wjo4s"]
+emission_shape = 1
+emission_sphere_radius = 0.4
+spread = 180.0
+initial_velocity_min = 6.0
+initial_velocity_max = 7.0
+gravity = Vector3(0, 3, 0)
+scale_min = 0.5
+scale_max = 0.85
+scale_curve = SubResource("CurveTexture_iihbt")
+color_ramp = SubResource("GradientTexture1D_3l6ax")
+
+[sub_resource type="BoxMesh" id="BoxMesh_y2hf7"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="Projectile Death VFX" type="GPUParticles3D"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_wjo4s")
+emitting = false
+amount = 45
+lifetime = 0.15
+one_shot = true
+preprocess = 0.1
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_wjo4s")
+draw_pass_1 = SubResource("BoxMesh_y2hf7")
+script = ExtResource("1_afrt0")
+
+[node name="Lifetimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Lifetimer" to="." method="_on_lifetimer_timeout"]

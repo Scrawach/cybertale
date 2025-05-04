@@ -373,5 +373,8 @@ surface_material_override/0 = SubResource("ShaderMaterial_fu4y0")
 mesh = SubResource("QuadMesh_sq7yr")
 surface_material_override/0 = ExtResource("14_qt76e")
 
+[node name="Ranged Virus" parent="." instance=ExtResource("19_24xe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.27272, 0, 0.141374)
+
 [editable path="World3D/Camera Point"]
 [editable path="Shaders Precompilation/Slash VFX"]

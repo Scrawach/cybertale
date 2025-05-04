@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d0763q65dmpb7"]
+[gd_scene load_steps=25 format=3 uid="uid://d0763q65dmpb7"]
 
 [ext_resource type="Script" uid="uid://b47jb5u0e2f1m" path="res://gameplay/enemies/virus/virus.gd" id="1_jlusn"]
 [ext_resource type="Script" uid="uid://piwtt8eoedqa" path="res://gameplay/common/hitbox.gd" id="2_f5ikr"]
@@ -10,9 +10,11 @@
 [ext_resource type="Script" uid="uid://bfh5lon8d1ljv" path="res://gameplay/enemies/virus/attacks/enemy_range_attack.gd" id="8_mpgtu"]
 [ext_resource type="PackedScene" uid="uid://dsk1kogc4v1iw" path="res://gameplay/enemies/virus/projectiles/enemy_projectile.tscn" id="9_f5ikr"]
 [ext_resource type="PackedScene" uid="uid://by5mwvn4a2jlv" path="res://gameplay/enemies/virus/models/drone.glb" id="10_75w2o"]
+[ext_resource type="Material" uid="uid://d0s0pt5lh6p77" path="res://gameplay/enemies/floating/floating_sphere.tres" id="11_mpgtu"]
 [ext_resource type="Script" uid="uid://c27j7p36ppclx" path="res://gameplay/common/death_vfx.gd" id="11_nqbhc"]
 [ext_resource type="PackedScene" uid="uid://n8lure5qjhvg" path="res://gameplay/enemies/vfx/spawn_vfx.tscn" id="12_2bl11"]
 [ext_resource type="Script" uid="uid://vfqw5g7s4ou6" path="res://gameplay/common/hit_flash.gd" id="12_nqbhc"]
+[ext_resource type="PackedScene" uid="uid://ds1tsskq2x0v" path="res://gameplay/enemies/floating/models/floating_sphere.glb" id="14_tdamw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jlusn"]
 radius = 10.0
@@ -28,16 +30,6 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.113465, 0.124021, 0.126659, 1)
 emission_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tdamw"]
-resource_local_to_scene = true
-resource_name = "EnemyEmission"
-cull_mode = 2
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.906332, 0, 0.0221873, 1)
-emission_enabled = true
-emission = Color(1, 0, 0.180232, 1)
 
 [sub_resource type="Animation" id="Animation_75w2o"]
 resource_name = "Idle"
@@ -186,7 +178,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.6458
 blend_shapes/Displace = 0.329825
 blend_shapes/Displace.001 = 0.280702
 surface_material_override/0 = SubResource("StandardMaterial3D_2bl11")
-surface_material_override/1 = SubResource("StandardMaterial3D_tdamw")
+surface_material_override/1 = ExtResource("11_mpgtu")
 
 [node name="AnimationPlayer" parent="drone/drone" index="1"]
 autoplay = "Idle"
@@ -219,7 +211,20 @@ libraries = {
 }
 speed_scale = 2.0
 
+[node name="floating_sphere" parent="." instance=ExtResource("14_tdamw")]
+transform = Transform3D(0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, -0.0193813, 0.935116, 0.409744)
+
+[node name="Sphere" parent="floating_sphere" index="0"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.125878, 0)
+blend_shapes/Displace = 0.2
+blend_shapes/Displace.001 = 0.5
+surface_material_override/0 = ExtResource("11_mpgtu")
+
+[node name="AnimationPlayer" parent="floating_sphere" index="1"]
+autoplay = "Idle"
+
 [connection signal="body_entered" from="Observer" to="." method="_on_observer_body_entered"]
 [connection signal="body_exited" from="Observer" to="." method="_on_observer_body_exited"]
 
 [editable path="drone/drone"]
+[editable path="floating_sphere"]

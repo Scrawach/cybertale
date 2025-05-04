@@ -41,6 +41,11 @@ func process_state(state: State, delta: float) -> void:
 			_process_chase(delta)
 			pass
 		State.Attack:
+			if target == null:
+				return
+			
+			look_at(target.global_position)
+			
 			pass
 
 func switch_to(state: State) -> void:
@@ -83,7 +88,9 @@ func _process_movement(delta: float) -> void:
 	var next_position := nav_agent.get_next_path_position()
 	global_position = global_position.move_toward(next_position, delta * movement_speed)
 	next_position.y = 0
-	look_at(next_position)
+	
+	if self.position != next_position:
+		look_at(next_position)
 	
 
 func _on_observer_body_entered(body: Node3D) -> void:
