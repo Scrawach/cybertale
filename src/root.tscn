@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c2g8sgf4l5mlb"]
+[gd_scene load_steps=58 format=3 uid="uid://c2g8sgf4l5mlb"]
 
 [ext_resource type="PackedScene" uid="uid://crlg8ydib8anl" path="res://gameplay/hero/hero.tscn" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://btn6jwawira3l" path="res://gameplay/camera/camera_point.tscn" id="2_28aoi"]
@@ -34,6 +34,7 @@
 [ext_resource type="Material" uid="uid://b05gugos0nccs" path="res://gameplay/enemies/virus/projectiles/projectile_death_vfx.tres" id="32_cj3xu"]
 [ext_resource type="Material" uid="uid://berhoo1h2o2ni" path="res://gameplay/enemies/virus/materials/ranged_virus.tres" id="33_ql764"]
 [ext_resource type="Material" uid="uid://d32gt020w0h13" path="res://gameplay/enemies/virus/materials/chasing_virus.tres" id="34_qoqhg"]
+[ext_resource type="PackedScene" uid="uid://dsk1kogc4v1iw" path="res://gameplay/enemies/virus/projectiles/enemy_projectile.tscn" id="35_udg8a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vho56"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -401,6 +402,9 @@ attack_range = 0.0
 [node name="Ranged Virus" parent="Shaders Precompilation" instance=ExtResource("19_24xe2")]
 movement_speed = 0.0
 attack_range = 0.0
+
+[node name="Enemy Projectile" parent="Shaders Precompilation" instance=ExtResource("35_udg8a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0286618)
 
 [editable path="World3D/Camera Point"]
 [editable path="Shaders Precompilation/Slash VFX"]
