@@ -1,5 +1,5 @@
 # Cybertale
-[![Publish](https://github.com/Scrawach/cybertale/actions/workflows/publish.yml/badge.svg)](https://github.com/Scrawach/cybertale/blob/master/.github/workflows/publish.yml)
+[![Publish](https://github.com/Scrawach/cybertale/actions/workflows/publish.yml/badge.svg)](/.github/workflows/publish.yml)
 [![Made with Godot](https://img.shields.io/badge/Made%20with-Godot-478CBF?style=flat&logo=godot%20engine&logoColor=white)](https://godotengine.org)
 [![](https://tokei.rs/b1/github/scrawach/cybertale?category=code)](https://github.com/XAMPPRocky/tokei)
 [![](https://tokei.rs/b1/github/scrawach/cybertale?category=files)](https://github.com/XAMPPRocky/tokei)
