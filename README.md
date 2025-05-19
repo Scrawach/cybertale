@@ -3,7 +3,7 @@
 [![Made with Godot](https://img.shields.io/badge/Made%20with-Godot-478CBF?style=flat&logo=godot%20engine&logoColor=white)](https://godotengine.org)
 ![Publish](https://github.com/Scrawach/cybertale/actions/workflows/publish.yml/badge.svg)
 
-A game made on game jam in 72 hours. It's a small roguelike game with dynamic battles and a boss at the end.
+A game made on game jam in 72 hours. It's a small roguelike game with dynamic battles and a boss at the end. You can play it on [itch page](https://scrawach.itch.io/cybertale).
 
 ![image](promo/icon.gif)
 
