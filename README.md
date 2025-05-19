@@ -1,7 +1,8 @@
 # Cybertale
-
-[![Made with Godot](https://img.shields.io/badge/Made%20with-Godot-478CBF?style=flat&logo=godot%20engine&logoColor=white)](https://godotengine.org)
 ![Publish](https://github.com/Scrawach/cybertale/actions/workflows/publish.yml/badge.svg)
+[![Made with Godot](https://img.shields.io/badge/Made%20with-Godot-478CBF?style=flat&logo=godot%20engine&logoColor=white)](https://godotengine.org)
+![](https://tokei.rs/b1/github/scrawach/cybertale?category=code)
+![](https://tokei.rs/b1/github/scrawach/cybertale?category=files)
 
 A game made on game jam in 72 hours. It's a small roguelike game with dynamic battles and a boss at the end. You can play it on [itch page](https://scrawach.itch.io/cybertale).
 
